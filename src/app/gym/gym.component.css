@@ -1,3 +1,6 @@
-.gym{
-    height: 130vh;
+.wrapper{
+    min-height: 100vh;
+    --tw-bg-opacity: 1;
+    background-color: rgb(51 65 85 / var(--tw-bg-opacity));
+    color:antiquewhite;
 }

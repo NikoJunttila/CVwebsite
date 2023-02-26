@@ -1,0 +1,12 @@
+.header{
+min-height: 50vh;
+} 
+.text{
+    flex-basis: 100%;
+    margin-top: auto;
+margin-bottom: auto;
+text-align: center;
+}
+.img{
+flex-basis: 100%;
+}

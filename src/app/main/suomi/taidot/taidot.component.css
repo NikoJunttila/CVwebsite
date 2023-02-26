@@ -1,0 +1,38 @@
+.skills{
+    min-height: 100vh;
+    height: fit-content;
+  }
+  
+  .material-icons{
+    color: #FFD700;
+  }
+  
+  .container {  display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 0.3fr 1.7fr 1fr;
+      gap: 2px 2px;
+      grid-auto-flow: row;
+      grid-template-areas:
+        "header header"
+        "left right"
+        "irrelevant irrelevant";
+    }
+    
+    .header { grid-area: header; }
+    
+    .irrelevant { grid-area: irrelevant; }
+    
+    .left { grid-area: left; }
+    
+    .right { grid-area: right; }
+    
+    .container2 {
+      display: grid; 
+      grid-template-columns: 1fr 1fr; 
+      grid-template-rows: 1fr; 
+      gap: 0 0; 
+      grid-template-areas: 
+        "left2 right2"; 
+    }
+    .left2 { grid-area: left2; }
+    .right2 { grid-area: right2; }

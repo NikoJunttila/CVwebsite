@@ -1,0 +1,7 @@
+.done{
+    background-color: green;
+    text-decoration: line-through;
+}
+.almostDone{
+    background-color: yellow;
+}

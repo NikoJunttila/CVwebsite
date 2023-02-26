@@ -1,0 +1,100 @@
+<section id="yhteys" class="contact text-white mb-10 ">
+    <div >
+        <h1 class="underline underline-offset-auto text-center text-5xl title-font">Yhteyttä</h1>
+    </div>
+    <section data-aos="zoom-in-up" data-aos-duration="2000"  class=" relative mt-10">
+        <div class="container bg-blue-700 rounded	 px-5 mx-auto flex flex-wrap">
+          <form
+            [formGroup]="form"
+            (ngSubmit)="send()"
+            class=" flex flex-col w-full mt-8"
+          >
+            <h1
+              class="text-blue-400 text-3xl mb-4 font-medium"
+            >
+              Ota Yhteyttä
+            </h1>
+            <div class="relative mb-4">
+              <label for="name" class="leading-7 text-sm text-white">Nimi</label>
+              <input
+                formControlName="name"
+                required
+                type="text"
+                id="name"
+                name="name"
+                class="
+                  w-full
+                  bg-white
+                  rounded
+                  border border-gray-300
+                  text-base
+                  outline-none
+                  text-gray-700
+                  py-1
+                  px-3
+                  leading-8
+                "
+              />
+            </div>
+            <div class="relative mb-4">
+              <label for="email" class="leading-7 text-sm text-white">S-posti</label>
+              <input
+                formControlName="email"
+                type="email"
+                id="email"
+                required
+                name="email"
+                class="
+                  w-full
+                  bg-white
+                  rounded
+                  border border-gray-300
+                  text-base
+                  outline-none
+                  text-gray-700
+                  py-1
+                  px-3
+                  leading-8
+                "
+              />
+            </div>
+            <div class="relative mb-4">
+              <label for="message" class="leading-7 text-sm text-white"
+                >Viesti</label
+              >
+              <textarea
+                formControlName="message"
+                id="message"
+                name="message"
+                class="
+                  w-full
+                  bg-white
+                  rounded
+                  border border-gray-300
+                  h-32
+                  text-base
+                  outline-none
+                  text-blue-800
+                  py-1
+                  px-3
+                  resize-none
+                  leading-6
+                  transition-colors
+                  duration-200
+                  ease-in-out
+                "
+              ></textarea>
+            </div> 
+            <button class="bg-purple-900 rounded-2xl" type="submit">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              Lähetä
+            </button>
+          </form>
+        </div>
+      </section>
+      
+  </section>
+  

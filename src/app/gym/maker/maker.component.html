@@ -1,0 +1,28 @@
+<section class="h-screen bg-gray-800 flex flex-col items-center text-white">
+  <div class="mt-20 ">
+    <ul *ngFor="let exercise of exercises" class="">
+      <li (click)="getName(exercise.name)" class="capitalize">
+        {{ exercise.name }}
+<!--         <button (click)="getName(exercise.name)" class="bg-black">add</button>
+ -->      </li>
+    </ul>
+  </div>
+  <div>
+    <input id="name" [(ngModel)]="personal" placeholder="name">
+    <button (click)="addNew()">add</button>
+  </div>
+  <div class="mt-10">
+    <h2>selected exercises:</h2>
+    <div>
+      <ul *ngFor="let workout of newWorkout">
+        <li>
+          {{ workout.name | uppercase }}
+          <span >Sets: {{ workout.sets }}</span><i (click)="setsPlus(workout)">+</i><i (click)="setsMinus(workout)">-</i>
+          <span >Reps: {{ workout.reps }}</span><i (click)="repsPlus(workout)">+</i><i (click)="repsMinus(workout)">-</i>
+          <span (click)="delete(workout)"> X</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <button routerLink="/gym/lightweight" type="button" (click)="test()">Start workout</button>
+</section>

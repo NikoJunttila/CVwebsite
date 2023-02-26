@@ -1,3 +1,8 @@
+.active1:hover{
+transform: scale(1.25);
+filter: drop-shadow(19px 8px 31px #c3bebe);
+}
+ 
 
 .hero{
   background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) , url("/assets/img/bg2.webp");
@@ -33,6 +38,11 @@ backdrop-filter: blur(222px);
   padding: 5px;
   text-align: center;
   background-blend-mode: multiply;
+}
+@media (max-width:700px){
+  .card{
+    width: 60%;
+  }
 }
 
 span {

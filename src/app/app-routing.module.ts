@@ -7,6 +7,7 @@ const routes: Routes = [
   {path: "", component: MainComponent},
   { path: 'gym', loadChildren: () => import('./gym/gym.module').then(m => m.GymModule) },
   { path: 'cooking', loadChildren: () => import('./cooking/cooking.module').then(m => m.CookingModule) },
+  { path: 'fi', loadChildren: () => import('./main/suomi/suomi.module').then(m => m.SuomiModule) },
   {path: '**', component: NotfoundComponent}
 
 ];
