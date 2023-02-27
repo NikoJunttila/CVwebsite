@@ -7,9 +7,7 @@ import { WorkoutsComponent } from './workouts/workouts.component';
 import { MakerComponent } from './maker/maker.component';
 import { FormsModule } from '@angular/forms';
 import { GymtimeComponent } from './gymtime/gymtime.component';
-/* import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; */
-
-
+import { CustomFilterPipe } from './custom-filter-pipe.pipe';
 
 @NgModule({
   declarations: [
@@ -17,13 +15,13 @@ import { GymtimeComponent } from './gymtime/gymtime.component';
     GymheaderComponent,
     WorkoutsComponent,
     MakerComponent,
-    GymtimeComponent
+    GymtimeComponent,
+    CustomFilterPipe
   ],
   imports: [
     CommonModule,
     GymRoutingModule,
     FormsModule,
-/*     BrowserAnimationsModule, */
-  ]
+    ]
 })
 export class GymModule { }

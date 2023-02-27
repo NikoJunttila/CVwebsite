@@ -1,62 +1,112 @@
 import { Component } from '@angular/core';
-import { Exercises } from './exercises';
+import { Router } from '@angular/router'
+import {
+  exerciseArray,
+  legs,
+  back,
+  chestShoulder,
+  arms,
+  abs,
+} from './exercises';
 import { EXERCISES } from '../workouts';
 
 @Component({
   selector: 'app-maker',
   templateUrl: './maker.component.html',
-  styleUrls: ['./maker.component.css']
+  styleUrls: ['./maker.component.css'],
 })
 export class MakerComponent {
-personal : string = ""
-exercises = Exercises
-newWorkout : EXERCISES[] = []
-test(){
-  localStorage.setItem('workout', JSON.stringify(this.newWorkout));
-  localStorage.setItem('initWorkout', JSON.stringify(this.newWorkout));
-}
-addNew(){
-  let object:EXERCISES = {
-    name:this.personal,
-    sets: 3,
-    reps: 8,
-    setsDone: 0,
-    done: false,
-  }
-this.newWorkout.push(object)
-}
-getName(exercises : string){
-  let object:EXERCISES = {
-    name:exercises,
-    sets: 3,
-    reps: 8,
-    setsDone: 0,
-    done: false,
-  }
-this.newWorkout.push(object)
-}
-setsPlus(exercise:EXERCISES){
-if(exercise.sets !== undefined){
-exercise.sets++
-}
-}
-setsMinus(exercise:EXERCISES){
-  if(exercise.sets !== undefined){
-  exercise.sets--
-  }
-}
-repsMinus(exercise:EXERCISES){
-  if(exercise.reps !== undefined){
-  exercise.reps--
-}}
+  personal: string = '';
+  exercises = exerciseArray;
+  newWorkout: EXERCISES[] = [];
 
-repsPlus(exercise:EXERCISES){
-    if(exercise.reps !== undefined){
-    exercise.reps++
+  constructor(private router: Router) {}
+
+  categories() {
+    const sb = document.getElementById('categories') as HTMLInputElement | null;
+    if (sb) {
+      switch (sb.value) {
+        case 'all':
+          this.exercises = exerciseArray;
+          break;
+        case 'legs':
+          this.exercises = legs;
+          break;
+        case 'back':
+          this.exercises = back;
+          break;
+        case 'chest':
+          this.exercises = chestShoulder;
+          break;
+        case 'arms':
+          this.exercises = arms;
+          break;
+        case 'abs':
+          this.exercises = abs;
+          break;
+      }
+    }
   }
-}
-delete(exercise:EXERCISES){
-let index = this.newWorkout.indexOf(exercise)
-this.newWorkout.splice(index,1)
-}
+ 
+  start() {
+    if(this.newWorkout.length < 1){
+      alert("add exercises before starting")
+    }else {
+    this.router.navigate(['/gym/lightweight']);
+    localStorage.setItem('workout', JSON.stringify(this.newWorkout));
+    localStorage.setItem('initWorkout', JSON.stringify(this.newWorkout));
+  }
+  }
+  addNew() {
+    if(this.personal.length < 1){
+      alert("type something before adding")
+    }
+    else{
+    let object: EXERCISES = {
+      name: this.personal,
+      sets: 3,
+      reps: 8,
+      setsDone: 0,
+      done: false,
+    };
+    this.newWorkout.push(object);
+    this.personal = ""
+  }
+  }
+  getName(exercises: string) {
+    let object: EXERCISES = {
+      name: exercises,
+      sets: 3,
+      reps: 8,
+      setsDone: 0,
+      done: false,
+    };
+    this.newWorkout.push(object);
+    this.personal = ""
+  }
+  setsPlus(exercise: EXERCISES) {
+    if (exercise.sets !== undefined) {
+      exercise.sets++;
+    }
+  }
+  setsMinus(exercise: EXERCISES) {
+    if (exercise.sets !== undefined) {
+      exercise.sets--;
+    }
+  }
+  repsMinus(exercise: EXERCISES) {
+    if (exercise.reps !== undefined) {
+      exercise.reps--;
+    }
+  }
+
+  repsPlus(exercise: EXERCISES) {
+    if (exercise.reps !== undefined) {
+      exercise.reps++;
+    }
+  }
+  delete(exercise: EXERCISES) {
+    let index = this.newWorkout.indexOf(exercise);
+    this.newWorkout.splice(index, 1);
+  }
 }

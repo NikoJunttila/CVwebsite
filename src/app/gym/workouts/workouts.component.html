@@ -3,12 +3,11 @@
    <div *ngFor="let plan of plans" class="grid-ish bg-slate-500">
         <h2 class="">{{plan.name}}</h2>
         <p class="text-sm">{{plan.days}} days/week</p>
-        <p class="">{{plan.description}}</p>
+        <p class="text">{{plan.description}}</p>
         <button type="button" class="glow-on-hover mt-auto mb-3">Show more</button>
     </div>
 </div>
 <div class="single mt-5 flex justify-center items-center">
-<button routerLink="new" class="glow-on-hover" type="button">make your own single workout tracker
-</button>
+<button routerLink="new" class="glow-on-hover" type="button">make your own single workout tracker</button>
 </div>
 </section>

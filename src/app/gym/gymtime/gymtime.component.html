@@ -1,21 +1,59 @@
-<section class="h-screen bg-slate-900 flex justify-center items-center flex-col text-white">
-    <div>
-        <ul *ngFor="let workout of workoutz">
-          <li class="mt-3" *ngIf="!workout.done" [class.almostDone]="0 < workout?.setsDone! && workout?.setsDone! < workout?.sets! " [class.done]="workout?.sets! <= workout?.setsDone!">
-            {{ workout.name | uppercase }}
-            <span >{{ workout.sets }}x</span>
-            <span >{{ workout.reps }}</span>
-            <p>Done: {{workout.setsDone}}/{{workout.sets}}<span (click)="counterPlus(workout)">+</span>
-            <button (click)="setDone(workout)" *ngIf="workout?.sets! <= workout?.setsDone!"> remove</button>
-        </p>
-          </li>
-        </ul>
-      </div>
-      <div class="mt-20">
-       <p>  minutes:{{minutes}} seconds: {{seconds}}
-          <span (click)="addTime()">+</span><span (click)="decreaseTime()">-</span> </p> 
-        <button (click)='startTimer()'>Start</button>
-<button class="" (click)='resetTimer()'>Reset</button>
-      </div>
-    <button class="text-6xl mt-20 " (click)="reset()">reset</button>
+<section
+  class="workoutcontainercontainer bg-slate-900 flex justify-center items-center flex-col text-white"
+>
+  <div class="workoutcontainer text-center">
+    <ul class="ml-3 mr-3" *ngFor="let workout of workoutz">
+      <li
+        class="mt-2 workout"
+        *ngIf="!workout.done"
+        [class.almostDone]="
+          0 < workout?.setsDone! && workout?.setsDone! < workout?.sets!
+        "
+        [class.done]="workout?.sets! <= workout?.setsDone!"
+      >
+        <span class="overlinesoon"
+          >{{ workout.name | uppercase }} {{ workout.sets }}x{{
+            workout.reps
+          }}</span
+        >
+        <span class="overlinesoon"
+          >Done: {{ workout.setsDone }}/{{ workout.sets }}</span
+        ><span
+          class="material-icons-outlined cursor-pointer"
+          (click)="counterPlus(workout)"
+          >add_circle</span
+        >
+        <span
+          class="material-icons-outlined cursor-pointer"
+          (click)="setDone(workout)"
+          *ngIf="workout?.sets! <= workout?.setsDone!"
+          >delete</span
+        >
+      </li>
+    </ul>
+  </div>
+  <div class="timercontainer">
+  <div class="timer">
+    <h3 class="pr-5">{{ minutes }}:{{ seconds }}</h3>
+    <span
+      class="material-icons-outlined cursor-pointer mr-2"
+      (click)="addTime()"
+      >add_circle</span
+    ><span
+      class="material-icons-outlined cursor-pointer"
+      (click)="decreaseTime()"
+      >do_not_disturb_on</span
+    >
+  </div>
+  <div class="mt-1">
+    <span class="material-icons-outlined cursor-pointer mr-2" (click)="startTimer()"
+      >play_circle</span
+    >
+    <span class="material-icons-outlined cursor-pointer" (click)="resetTimer()"
+      >refresh</span
+    >
+  </div>
+</div>
+  <button class="btn-hover color-8 " (click)="reset()">reset workout</button>
+  <button routerLink="/gym/new" class="btn-hover2 color-8 ">go back</button>
 </section>

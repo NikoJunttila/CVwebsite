@@ -7,18 +7,21 @@ import { EXERCISES } from '../workouts';
 })
 export class GymtimeComponent implements OnInit {
  workoutz! : EXERCISES[]
+ timeLeft: number = 180;
+ newTime : number = this.timeLeft;
+ interval : any;
+ minutes : number = Math.floor(this.timeLeft / 60)
+ seconds : any = this.timeLeft % 60
   ngOnInit(): void {
     this.workoutz = JSON.parse(localStorage.getItem('workout') || '{}');
+    this.seconds = this.seconds < 10 ? "0" + this.seconds : this.seconds
   }
   reset(){
+    this.resetTimer()
     this.workoutz = JSON.parse(localStorage.getItem('initWorkout') || '{}');
     localStorage.setItem('workout', JSON.stringify(this.workoutz));
   }
-  timeLeft: number = 180;
-  newTime : number = this.timeLeft;
-  interval : any;
-  minutes : number = Math.floor(this.timeLeft / 60)
-  seconds : any = this.timeLeft % 60
+ 
   startTimer() {
     clearInterval(this.interval);
     this.interval = setInterval(() => {

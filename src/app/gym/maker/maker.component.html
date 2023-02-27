@@ -1,28 +1,62 @@
-<section class="h-screen bg-gray-800 flex flex-col items-center text-white">
-  <div class="mt-20 ">
-    <ul *ngFor="let exercise of exercises" class="">
-      <li (click)="getName(exercise.name)" class="capitalize">
-        {{ exercise.name }}
-<!--         <button (click)="getName(exercise.name)" class="bg-black">add</button>
- -->      </li>
-    </ul>
-  </div>
-  <div>
-    <input id="name" [(ngModel)]="personal" placeholder="name">
-    <button (click)="addNew()">add</button>
-  </div>
-  <div class="mt-10">
-    <h2>selected exercises:</h2>
-    <div>
-      <ul *ngFor="let workout of newWorkout">
-        <li>
-          {{ workout.name | uppercase }}
-          <span >Sets: {{ workout.sets }}</span><i (click)="setsPlus(workout)">+</i><i (click)="setsMinus(workout)">-</i>
-          <span >Reps: {{ workout.reps }}</span><i (click)="repsPlus(workout)">+</i><i (click)="repsMinus(workout)">-</i>
-          <span (click)="delete(workout)"> X</span>
+<section class="derp bg-gray-800 flex flex-col items-center text-white gap-4">
+  <div class="mt-16 holder">
+    <label class="text-lg" for="categories">categories:</label>
+    <select class="w-full mb-3" name="categories" id="categories">
+      <option value="all" (click)="categories()">All</option>
+      <option value="back" (click)="categories()">Back</option>
+      <option value="chest" (click)="categories()">Chest/shoulders</option>
+      <option value="legs" (click)="categories()">Legs</option>
+      <option value="arms" (click)="categories()">Arms</option>
+      <option value="abs" (click)="categories()">Abs</option>
+    </select>
+    <div class="content">
+      <ul *ngFor="let exercise of exercises | customFilter : personal" class="">
+        <li (click)="getName(exercise)" class="capitalize list mt-1 bg-gray-900">
+          {{ exercise }}
         </li>
       </ul>
     </div>
   </div>
-  <button routerLink="/gym/lightweight" type="button" (click)="test()">Start workout</button>
+  <div class="mt-7">
+    <input
+      type="text"
+      id="name"
+      [(ngModel)]="personal"
+      placeholder="filter/add"
+    />
+    <button (click)="addNew()" class="myButton">add</button>
+  </div>
+  <div >
+    <h2 class="text-lg text-center">selected exercises:</h2>
+    <div>
+      <ul class="flex flex-col justify-center items-center" *ngFor="let workout of newWorkout">
+        <li class="selected">
+          <div class="mr-auto"><span>{{ workout.name }} </span></div>
+          <div class="flex"> <span>Sets: {{ workout.sets }}</span>
+          <span (click)="setsPlus(workout)" class="material-icons-outlined buttons">
+            add
+          </span>
+          <span (click)="setsMinus(workout)" class="material-icons-outlined buttons">
+            remove
+          </span>
+        </div>
+        <div class="flex">
+          <span>Reps: {{ workout.reps }}</span>
+          <span (click)="repsPlus(workout)" class="material-icons-outlined buttons">
+            add
+          </span>
+          <span (click)="repsMinus(workout)" class="material-icons-outlined buttons">
+            remove
+          </span>
+        </div>
+          <span (click)="delete(workout)" class="material-icons-outlined buttons">
+            close
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <button class="myButton2 mb-3"   type="button" (click)="start()">
+    Start workout
+  </button>
 </section>
