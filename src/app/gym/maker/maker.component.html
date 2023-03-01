@@ -1,13 +1,13 @@
 <section class="derp bg-gray-800 flex flex-col items-center text-white gap-4">
   <div class="mt-16 holder">
     <label class="text-lg" for="categories">categories:</label>
-    <select class="w-full mb-3" name="categories" id="categories">
-      <option value="all" (click)="categories()">All</option>
-      <option value="back" (click)="categories()">Back</option>
-      <option value="chest" (click)="categories()">Chest/shoulders</option>
-      <option value="legs" (click)="categories()">Legs</option>
-      <option value="arms" (click)="categories()">Arms</option>
-      <option value="abs" (click)="categories()">Abs</option>
+    <select (click)="categories()" class="w-full mb-3 inputColor" name="categories" id="categories">
+      <option value="all" >All</option>
+      <option value="back">Back</option>
+      <option value="chest">Chest/shoulders</option>
+      <option value="legs">Legs</option>
+      <option value="arms">Arms</option>
+      <option value="abs">Abs</option>
     </select>
     <div class="content">
       <ul *ngFor="let exercise of exercises | customFilter : personal" class="">
@@ -19,6 +19,7 @@
   </div>
   <div class="mt-7">
     <input
+      class="inputColor"
       type="text"
       id="name"
       [(ngModel)]="personal"
@@ -50,13 +51,14 @@
           </span>
         </div>
           <span (click)="delete(workout)" class="material-icons-outlined buttons">
-            close
+            delete
           </span>
         </li>
       </ul>
     </div>
   </div>
-  <button class="myButton2 mb-3"   type="button" (click)="start()">
+  <button class="myButton2 mb-2"   type="button" (click)="start()">
     Start workout
   </button>
+  <button routerLink="/gym" class="myButton3">go back</button>
 </section>

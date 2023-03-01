@@ -8,6 +8,9 @@ import { MakerComponent } from './maker/maker.component';
 import { FormsModule } from '@angular/forms';
 import { GymtimeComponent } from './gymtime/gymtime.component';
 import { CustomFilterPipe } from './custom-filter-pipe.pipe';
+import { FullworkoutComponent } from './fullworkout/fullworkout.component';
+import { PlannedGymTimeComponent } from './planned-gym-time/planned-gym-time.component';
+import { InfoComponent } from './info/info.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,10 @@ import { CustomFilterPipe } from './custom-filter-pipe.pipe';
     WorkoutsComponent,
     MakerComponent,
     GymtimeComponent,
-    CustomFilterPipe
+    CustomFilterPipe,
+    FullworkoutComponent,
+    PlannedGymTimeComponent,
+    InfoComponent
   ],
   imports: [
     CommonModule,

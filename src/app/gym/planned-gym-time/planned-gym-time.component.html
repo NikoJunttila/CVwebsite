@@ -1,8 +1,8 @@
-<section
+<section 
   class="workoutcontainercontainer bg-slate-900 flex justify-center items-center flex-col text-white"
 >
   <div class="workoutcontainer text-center">
-    <ul class="ml-3 mr-3" *ngFor="let workout of workoutz">
+    <ul class="ml-3 mr-3" *ngFor="let workout of workoutz?.workout">
       <li
         class="mt-2 workout"
         *ngIf="!workout.done" [@fadeOutOnLeave]
@@ -11,10 +11,9 @@
         "
         [class.done]="workout?.sets! <= workout?.setsDone!"
       >
-        <span routerLink="/gym/info/{{workout.name}}" class="overlinesoon cursor-pointer text-blue-700"
-          >{{ workout.name | uppercase }} {{ workout.sets }}x{{
-            workout.reps
-          }}</span
+        <span routerLink="/gym/info/{{workout.exercise}}" class="overlinesoon cursor-pointer text-blue-700"
+          >{{ workout.exercise | uppercase }} {{workout.sets}}x{{workout.reps}}
+          </span
         >
         <span class=""
           >Done: {{ workout.setsDone }}/{{ workout.sets }}</span
@@ -58,5 +57,5 @@
   </div>
 </div>
   <button class="btn-hover color-8 " (click)="reset()">reset workout</button>
-  <button routerLink="/gym/new" class="btn-hover2 color-8 ">go back</button>
+  <button (click)="goBack()" class="btn-hover2 color-8 ">go back</button>
 </section>

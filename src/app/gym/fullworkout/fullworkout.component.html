@@ -1,0 +1,16 @@
+<section class="coolerthanme text-white flex flex-col items-center">
+    <button class="mt-16 mb-3 mybtn" (click)="goBack()">go back</button>
+    <div class=" text-center size">
+<h1 class="text-5xl mb-3"> {{workout?.name}}</h1>
+<h3>{{workout?.description}}</h3>
+<h5 class="mt-5">click to start a workout</h5>
+<ul  *ngFor="let plan of workout?.plans ">
+    <div routerLink="{{plan.id}}" (click)="setWorkout(plan.id)"  class="card">
+    <h3 class="text-lg">{{plan.day}}</h3>
+    <li *ngFor="let exercise of plan.exercises; let i = index">
+        {{i + 1}}. {{exercise}}
+    </li>
+</div>
+</ul>
+</div>
+</section>

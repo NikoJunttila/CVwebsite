@@ -54,6 +54,9 @@
 .selected > * {
     flex-basis: 25%;
 }
+.inputColor{
+    background:#302c34;
+}
 @media(max-width:700px){
     .selected{
         font-size: 15px;
@@ -89,4 +92,19 @@
 .myButton2:active {
 	position:relative;
 	top:1px;
+}
+.myButton3 {
+	background:linear-gradient(to bottom, #ededed 5%, #bab1ba 100%);
+	background-color:#ededed;
+	border-radius:15px;
+	display:inline-block;
+	cursor:pointer;
+	color:#1d5462;
+	font-size:10px;
+	padding:5px 10px;
+	text-decoration:none;
+}
+.myButton3:hover {
+	background: black;
+    color:whitesmoke;
 }

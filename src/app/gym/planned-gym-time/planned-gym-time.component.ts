@@ -1,31 +1,39 @@
 import { Component, OnInit } from '@angular/core';
-import { EXERCISES } from '../workouts';
+import { ActivatedRoute } from '@angular/router';
+import { rlyDunno } from '../workouts';
+import { Location } from '@angular/common';
 import { fadeInOnEnterAnimation, fadeOutOnLeaveAnimation } from 'angular-animations';
 
 @Component({
-  selector: 'app-gymtime',
-  templateUrl: './gymtime.component.html',
-  styleUrls: ['./gymtime.component.css'],
+  selector: 'app-planned-gym-time',
+  templateUrl: './planned-gym-time.component.html',
+  styleUrls: ['./planned-gym-time.component.css'],
   animations: [
     fadeInOnEnterAnimation(),
     fadeOutOnLeaveAnimation()
   ]
 })
-export class GymtimeComponent implements OnInit {
- playAudio : string = ""
+export class PlannedGymTimeComponent implements OnInit {
+  constructor (private route:ActivatedRoute,private location: Location){}
+  workoutz : rlyDunno | undefined 
+
+
+  ngOnInit(): void {
+     this.workoutz = JSON.parse(sessionStorage.getItem('workout') || '{}');
+    this.seconds = this.seconds < 10 ? "0" + this.seconds : this.seconds
+    this.playAudio = localStorage.getItem("audio") || 'play'
+  }
+  goBack(): void {
+    this.location.back();
+  }
+  playAudio : string = ""
  play : string = "play"
  muteVoice : string= "mute"
- workoutz! : EXERCISES[]
  timeLeft: number = 180;
  newTime : number = this.timeLeft;
  interval : any;
  minutes : number = Math.floor(this.timeLeft / 60)
  seconds : any = this.timeLeft % 60
-  ngOnInit(): void {
-    this.workoutz = JSON.parse(localStorage.getItem('workout') || '{}');
-    this.seconds = this.seconds < 10 ? "0" + this.seconds : this.seconds
-    this.playAudio = localStorage.getItem("audio") || 'play'
-  }
   unMute(){
     localStorage.setItem('audio',"play")
     this.playAudio = "play"
@@ -36,8 +44,8 @@ export class GymtimeComponent implements OnInit {
   }
   reset(){
     this.resetTimer()
-    this.workoutz = JSON.parse(localStorage.getItem('initWorkout') || '{}');
-    localStorage.setItem('workout', JSON.stringify(this.workoutz));
+    this.workoutz = JSON.parse(sessionStorage.getItem('initWorkout') || '{}');
+    sessionStorage.setItem('workout', JSON.stringify(this.workoutz));
   }
  
   startTimer() {
@@ -79,20 +87,20 @@ export class GymtimeComponent implements OnInit {
     this.newTime = this.timeLeft
   }
 
-  counterPlus(workout:EXERCISES){
+   counterPlus(workout:any){
     if(workout.setsDone !== undefined){
       workout.setsDone++
       }
-      localStorage.setItem('workout', JSON.stringify(this.workoutz));
+      sessionStorage.setItem('workout', JSON.stringify(this.workoutz));
       this.resetTimer()
       this.startTimer()
 }
-setDone(workout:EXERCISES){
+setDone(workout:any){
   if(workout.done !== undefined){
     workout.done = true
     }
-    localStorage.setItem('workout', JSON.stringify(this.workoutz));
-}
+    sessionStorage.setItem('workout', JSON.stringify(this.workoutz));
+} 
 audioClips: string[] = [
   'assets/buddy.mp3',
   'assets/lightweight.mp3',

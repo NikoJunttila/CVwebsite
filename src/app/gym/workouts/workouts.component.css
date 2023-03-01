@@ -1,7 +1,7 @@
 .gridder{
 display: grid;
 grid-template-columns: 1fr 1fr 1fr 1fr;
-gap: 10px;
+gap: 5px;
 text-align: center;
 }
 .text {
@@ -17,8 +17,8 @@ text-align: center;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 10px;
-  border-radius: 2em;
+  gap: 5px;
+  border-radius: 15px;
   min-height: 250px;
 } 
 @media (max-width: 1000px){
@@ -31,11 +31,12 @@ text-align: center;
     grid-template-columns: 1fr 1fr; 
   }
   .grid-ish{
-    width: 45vw;
+    width: 47vw;
   }
 }
 .single{
-  min-height: 15vh;
+  min-height: 10vh;
+  margin-top: 10px;
 }
 .glow-on-hover {
   width: 90%;

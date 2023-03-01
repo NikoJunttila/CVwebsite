@@ -14,6 +14,7 @@ border-radius: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
 }
 .timer{
     display: flex;
@@ -25,18 +26,15 @@ border-radius: 10px;
     min-height: 100vh;
 }
 .done{
-    background-color: green;
+    background-color: #005825;
     color: black;
 }
 .done .overlinesoon{
     text-decoration: line-through;
 }
 .almostDone{
-    background-color: rgb(156, 156, 69);
+    background-color: #ffbb00;
     color: black;
-}
-.remove{
-    text-decoration: unset;
 }
 .workoutcontainer{
     margin-top: 60px;
@@ -49,6 +47,11 @@ border-radius: 10px;
     align-items: center;
     justify-content: center;
     gap: 5px;
+}
+@media(max-width:600px){
+    .workout{
+        width: 90vw;
+    }
 }
 .workout > * {
     flex-basis: 33%;
