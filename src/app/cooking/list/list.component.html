@@ -1,0 +1,23 @@
+<section>
+  <div class="mb-3 flex gap-1 justify-center" *ngIf="filter.length >= 1">
+    <span class="tags" *ngFor="let tag of filter">{{tag}}</span>
+  </div>
+  <div class="flex gap-4 flex-wrap justify-center" *ngIf="arrOfany && arrOfany.length > 0;else other_content">
+  <div
+    *ngFor="let meal of arrOfany"
+    class="flex flex-col mb-3 list"
+    routerLink="{{ meal.id }}"
+  >
+    <div class="relative">
+      <img src="{{ meal.img }}" alt="meal"/>
+      <div class="inside">
+      <span class="ml-2"> {{ meal.name }}</span>
+    </div>
+    </div>
+    <div class="ml-1 flex gap-1 items-center mt-2">
+      <button class="tags" *ngFor="let tag of meal.tags">{{ tag }}</button>
+    </div>
+  </div>
+</div>
+  <ng-template #other_content><h1 class="text-center">nothing matches these filters. try to remove some.</h1></ng-template>
+</section>

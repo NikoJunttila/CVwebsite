@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { rlyDunno } from '../workouts';
 import { Location } from '@angular/common';
 import { fadeInOnEnterAnimation, fadeOutOnLeaveAnimation } from 'angular-animations';
-
+import { sounds } from '../sounds';
 @Component({
   selector: 'app-planned-gym-time',
   templateUrl: './planned-gym-time.component.html',
@@ -19,7 +19,7 @@ export class PlannedGymTimeComponent implements OnInit {
 
 
   ngOnInit(): void {
-     this.workoutz = JSON.parse(sessionStorage.getItem('workout') || '{}');
+     this.workoutz = JSON.parse(localStorage.getItem('workout2') || '{}');
     this.seconds = this.seconds < 10 ? "0" + this.seconds : this.seconds
     this.playAudio = localStorage.getItem("audio") || 'play'
   }
@@ -44,8 +44,8 @@ export class PlannedGymTimeComponent implements OnInit {
   }
   reset(){
     this.resetTimer()
-    this.workoutz = JSON.parse(sessionStorage.getItem('initWorkout') || '{}');
-    sessionStorage.setItem('workout', JSON.stringify(this.workoutz));
+    this.workoutz = JSON.parse(localStorage.getItem('initWorkout2') || '{}');
+    localStorage.setItem('workout2', JSON.stringify(this.workoutz));
   }
  
   startTimer() {
@@ -90,21 +90,22 @@ export class PlannedGymTimeComponent implements OnInit {
    counterPlus(workout:any){
     if(workout.setsDone !== undefined){
       workout.setsDone++
-      }
-      sessionStorage.setItem('workout', JSON.stringify(this.workoutz));
+      localStorage.setItem('workout2', JSON.stringify(this.workoutz));
+      if((workout.setsDone === workout.sets)){
       this.resetTimer()
-      this.startTimer()
+      } else {
+        this.resetTimer()
+        this.startTimer()
+      }
+    }
 }
 setDone(workout:any){
   if(workout.done !== undefined){
     workout.done = true
     }
-    sessionStorage.setItem('workout', JSON.stringify(this.workoutz));
+    localStorage.setItem('workout2', JSON.stringify(this.workoutz));
 } 
-audioClips: string[] = [
-  'assets/buddy.mp3',
-  'assets/lightweight.mp3',
-];
+audioClips: string[] = sounds;
 playRandomAudio() {
   const randomIndex = Math.floor(Math.random() * this.audioClips.length);
   const audio = new Audio();

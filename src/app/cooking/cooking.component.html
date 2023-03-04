@@ -1,3 +1,36 @@
-<div class="flex items-center justify-center cooking bg-slate-700">
-    <h1 class="text-white text-8xl">coming soon<sup>tm</sup></h1>
+<div class="cooltext flex flex-col text-white cooking">
+  <div id="navigation" class="mt-16 flex nav mb-2">
+    <div id="filters-div" class="bgColor1 ">
+      <button (click)="filters()" id="filter-button" class="button">
+        <span class="material-icons-outlined pr-2 pointer-events-none"> tune </span>
+      <span class="pointer-events-none">filter</span> 
+      </button>
+      <div id="filter-container" class="filters z-10 ">
+        <form [formGroup]="form" novalidate>
+    <div class="filters__list " *ngFor="let country of countries; let i=index">
+      <input (click)="btnClick()" type="checkbox" formArrayName="selectedCountries" [value]="country.value" (change)="onCheckboxChange($event)" 
+      />
+      {{ country.name}}
+    </div>
+  </form>
+      </div>
+    </div>
+    <div class="flexer bgColor2" routerLink="/cooking">
+    <span class="material-icons-outlined cursor-pointer" >
+      home
+    </span>
+</div>
+<div class="flexer bgColor3" (click)="random()">
+      <span  class="material-icons-outlined cursor-pointer">
+        shuffle
+      </span>
+      <span>random</span>
+</div>
+    <div class="flexer bgColor4">
+      <span class="material-icons-outlined cursor-pointer" routerLink="shopping">
+        shopping_cart
+      </span>
+    </div>
+  </div>
+ <router-outlet ></router-outlet>
 </div>

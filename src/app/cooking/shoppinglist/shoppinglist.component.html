@@ -1,0 +1,36 @@
+<section class="flex justify-center">
+    <div class="w-full"   *ngIf="shoppingList && shoppingList.length > 1 ;else other_content">
+        <div class="flex flex-wrap justify-center">
+        <div class="idk" *ngFor="let list of shoppingList">
+            <h1 class="text-center">{{list.name}}</h1>
+           <li *ngFor="let ingredient of list.ingredients">
+            <input   type="checkbox" id="cbox3" value="third_checkbox"> <label for="cbox3">{{ingredient}} </label><br />
+        </li>
+
+     <!--    <li *ngFor="let ingredient of list.ingredients">
+            {{ingredient}}
+        </li> -->
+    </div>
+</div>
+    <div class="flex">
+        <button (click)="clear()">clear</button>
+        </div>
+</div>
+    <ng-template #other_content>
+        <div class="flex flex-col" *ngIf="shoppingList">
+        <div class="idk " >
+        <h1 class="text-center">{{shoppingList.name}}</h1>
+        <li *ngFor="let ingredient of shoppingList.ingredients">
+            <input   type="checkbox" id="cbox3" value="third_checkbox"> <label for="cbox3">{{ingredient}} </label><br />
+        </li>
+
+      <!--   <li *ngFor="let ingredient of shoppingList.ingredients">
+            {{ingredient}}
+        </li> -->
+    </div>
+    <button (click)="clear()">clear</button>
+</div>
+
+        <span class="text-2xl text-white mt-4" *ngIf="!shoppingList">no items added to shopping list yet</span>
+    </ng-template>
+</section>

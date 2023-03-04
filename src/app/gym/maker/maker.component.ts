@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'
 import {
   exerciseArray,
@@ -15,12 +15,18 @@ import { EXERCISES } from '../workouts';
   templateUrl: './maker.component.html',
   styleUrls: ['./maker.component.css'],
 })
-export class MakerComponent {
+export class MakerComponent implements OnInit{
   personal: string = '';
   exercises = exerciseArray;
   newWorkout: EXERCISES[] = [];
-
+  check : any = []
+  show : boolean = false
   constructor(private router: Router) {}
+
+  ngOnInit(): void {
+    this.check = JSON.parse(localStorage.getItem('workout') || '{}');
+    this.check.length >= 1  ? this.show = true : this.show = false 
+  }
 
   categories() {
     const sb = document.getElementById('categories') as HTMLInputElement | null;

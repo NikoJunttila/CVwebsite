@@ -26,9 +26,6 @@ p{
  background-position: center center;
 }
 @media(max-width:600px){ 
-    .header{
-        padding-top: 60px;
-}
 q{
     font-size: 1.2rem;
     line-height: 1.5rem;

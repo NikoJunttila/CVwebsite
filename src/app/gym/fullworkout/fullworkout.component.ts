@@ -19,8 +19,8 @@ ngOnInit(): void {
 }
 setWorkout(id:number){
 this.gymService.getWorkout(id).subscribe(plan => this.workoutz = plan);
-sessionStorage.setItem('workout', JSON.stringify(this.workoutz));
-sessionStorage.setItem('initWorkout', JSON.stringify(this.workoutz));
+localStorage.setItem('workout2', JSON.stringify(this.workoutz));
+localStorage.setItem('initWorkout2', JSON.stringify(this.workoutz));
 }
 getWorkout():void{
   const id = Number(this.route.snapshot.paramMap.get('id'));

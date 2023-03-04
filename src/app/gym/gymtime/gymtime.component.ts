@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EXERCISES } from '../workouts';
 import { fadeInOnEnterAnimation, fadeOutOnLeaveAnimation } from 'angular-animations';
-
+import { sounds } from '../sounds';
 @Component({
   selector: 'app-gymtime',
   templateUrl: './gymtime.component.html',
@@ -82,10 +82,14 @@ export class GymtimeComponent implements OnInit {
   counterPlus(workout:EXERCISES){
     if(workout.setsDone !== undefined){
       workout.setsDone++
-      }
       localStorage.setItem('workout', JSON.stringify(this.workoutz));
+      if((workout.setsDone === workout.sets)){
       this.resetTimer()
-      this.startTimer()
+      } else {
+        this.resetTimer()
+        this.startTimer()
+      }
+    }
 }
 setDone(workout:EXERCISES){
   if(workout.done !== undefined){
@@ -93,10 +97,7 @@ setDone(workout:EXERCISES){
     }
     localStorage.setItem('workout', JSON.stringify(this.workoutz));
 }
-audioClips: string[] = [
-  'assets/buddy.mp3',
-  'assets/lightweight.mp3',
-];
+audioClips: string[] = sounds;
 playRandomAudio() {
   const randomIndex = Math.floor(Math.random() * this.audioClips.length);
   const audio = new Audio();
