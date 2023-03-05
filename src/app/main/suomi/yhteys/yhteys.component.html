@@ -6,7 +6,7 @@
         <div class="container bg-blue-700 rounded	 px-5 mx-auto flex flex-wrap">
           <form
             [formGroup]="form"
-            (ngSubmit)="send()"
+            (ngSubmit)="sendEmail($event)"
             class=" flex flex-col w-full mt-8"
           >
             <h1
@@ -21,7 +21,7 @@
                 required
                 type="text"
                 id="name"
-                name="name"
+                name="user_name"
                 class="
                   w-full
                   bg-white
@@ -43,7 +43,7 @@
                 type="email"
                 id="email"
                 required
-                name="email"
+                name="user_email"
                 class="
                   w-full
                   bg-white

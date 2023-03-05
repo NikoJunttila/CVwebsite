@@ -18,6 +18,8 @@ import { SidenavComponent } from './main/sidenav/sidenav.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +41,8 @@ import { NotfoundComponent } from './notfound/notfound.component';
     BrowserAnimationsModule,
     MatExpansionModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

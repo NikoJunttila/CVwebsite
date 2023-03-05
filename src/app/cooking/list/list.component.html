@@ -2,10 +2,10 @@
   <div class="mb-3 flex gap-1 justify-center" *ngIf="filter.length >= 1">
     <span class="tags" *ngFor="let tag of filter">{{tag}}</span>
   </div>
-  <div class="flex gap-4 flex-wrap justify-center" *ngIf="arrOfany && arrOfany.length > 0;else other_content">
+  <div class="flex gap-4 flex-wrap justify-center " *ngIf="arrOfany && arrOfany.length > 0;else other_content">
   <div
     *ngFor="let meal of arrOfany"
-    class="flex flex-col mb-3 list"
+    class="flex flex-col mb-3 list cursor-pointer"
     routerLink="{{ meal.id }}"
   >
     <div class="relative">
