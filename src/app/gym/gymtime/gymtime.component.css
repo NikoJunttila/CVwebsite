@@ -1,11 +1,4 @@
-.backBtn{
-font-size: 10px;
-margin-top: 5px;
-background-color: rgb(1, 21, 63);
-color: #4e4376;
-padding: 3px;
-border-radius: 10px;
-}
+
 .timercontainer{
     margin-top: 10px;
     width: 90%; 
@@ -108,4 +101,5 @@ border-radius: 10px;
 .btn-hover2.color-8 {
     background-image: linear-gradient(to right, #29323c, #485563, #2b5876, #4e4376);
     box-shadow: 0 4px 15px 0 rgba(45, 54, 65, 0.75);
+    font-size: 20px;
 }

@@ -6,10 +6,6 @@
            <li *ngFor="let ingredient of list.ingredients">
             <input   type="checkbox" id="cbox3" value="third_checkbox"> <label for="cbox3">{{ingredient}} </label><br />
         </li>
-
-     <!--    <li *ngFor="let ingredient of list.ingredients">
-            {{ingredient}}
-        </li> -->
     </div>
 </div>
     <div class="flex">
@@ -17,16 +13,12 @@
         </div>
 </div>
     <ng-template #other_content>
-        <div class="flex flex-col" *ngIf="shoppingList">
-        <div class="idk " >
+        <div class="flex flex-col items-center" *ngIf="shoppingList">
+        <div class="idk">
         <h1 class="text-center">{{shoppingList.name}}</h1>
         <li *ngFor="let ingredient of shoppingList.ingredients">
             <input   type="checkbox" id="cbox3" value="third_checkbox"> <label for="cbox3">{{ingredient}} </label><br />
         </li>
-
-      <!--   <li *ngFor="let ingredient of shoppingList.ingredients">
-            {{ingredient}}
-        </li> -->
     </div>
     <button (click)="clear()">clear</button>
 </div>

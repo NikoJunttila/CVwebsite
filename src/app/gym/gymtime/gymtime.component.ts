@@ -65,14 +65,14 @@ export class GymtimeComponent implements OnInit {
     this.seconds = this.seconds < 10 ? "0" + this.seconds : this.seconds
   }
   addTime(){
-    this.timeLeft = this.timeLeft + 30
+    this.timeLeft = this.timeLeft + 15
     this.minutes = Math.floor(this.timeLeft / 60)
     this.seconds = this.timeLeft % 60
     this.seconds = this.seconds < 10 ? "0" + this.seconds : this.seconds
     this.newTime = this.timeLeft
   }
   decreaseTime(){
-    this.timeLeft = this.timeLeft - 30
+    this.timeLeft = this.timeLeft - 15
     this.minutes = Math.floor(this.timeLeft / 60)
     this.seconds = this.timeLeft % 60
     this.seconds = this.seconds < 10 ? "0" + this.seconds : this.seconds

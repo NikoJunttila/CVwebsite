@@ -2,7 +2,7 @@ import { quote } from "../workouts"
 export const quotes : quote[] = [
     {text:"Strength does not come from physical capacity. It comes from an indomitable will.",author:"Mahatma Gandhi"},
     {text:"The best way to predict the future is to create it.",author:"Abraham Lincoln"},
-    {text:"Your body can stand almost anything. It’s your mind that you have to convince.",author:"unknown"},
+    {text:"Your body can stand almost anything. It's your mind that you have to convince.",author:"unknown"},
     {text:"Never give up on a dream just because of the time it will take to accomplish it. The time will pass anyway.",author:"Earl Nightingale"},
     {text:"Do something today that your future self will thank you for.",author:"Sean Patrick Flanery"},
     {text:"Push harder than yesterday if you want a different tomorrow.",author:"Russell Simmons"},
@@ -15,6 +15,23 @@ export const quotes : quote[] = [
     {text:"You don't have to be good at it, you just have to do it.",author:"Karine Candice Kong"},
     {text:"Some people want it to happen, some wish it would happen, others make it happen.",author:"Michael Jordan"},
     {text:"The successful warrior is the average man, with laser-like focus.",author:"Bruce Lee"},
-    {text:"No man has the right to be an amateur in the matter of physical training. It is a shame for a man to grow old without seeing the beauty and strength of which his body is capable.",author:"Socrates"}
-
+    {text:"No man has the right to be an amateur in the matter of physical training. It is a shame for a man to grow old without seeing the beauty and strength of which his body is capable.",author:"Socrates"},
+    {text:"The difference between a novice and a master is that a master has failed more times than a novice had tried.",author:"Koro-Sensei"},
+    {text:"If you don't like the hand that fate's dealt you with, fight for a new one.",author:"Naruto Uzumaki"},
+    {text:"You've got two legs and a heartbeat. What's stopping you?”",author:"Inuyasha"},
+    {text:"No amount of talent trumps hard work.",author:"Rin Matsuoka"},
+    {text:"Life is not a game of luck. If you wanna win, work hard.",author:"Sora"},
+    {text:"Don't live your life making up excuses. The one making your choices is yourself!",author:"Mugen"},
+    {text:"When the world shoves you around, you just gotta stand up and shove back. It's not like somebody's gonna save you if you start babbling excuses",author:"Roronoa Zoro"},
+    {text:"I do not fear this new challenge, rather like a true warrior I will rise to meet it.",author:"Vegeta"},
+    {text:"Me personally, I like to work and train.",author:"Goku"},
+    {text:"I got my lifting and as long as I can keep lifting, no matter where I am, everything's okay.",author:"Renton Thurston"},
+    {text:"Strength is the only thing that matters in this world. Everything else is just a delusion for the weak.",author:"Vegeta"},
+    {text:"There's only one certainty in life. A strong man stands above and conquers all!",author:"Vegeta"},
+    {text:"The true power of us human beings is that we can change ourselves on our own",author:"Saitama"},
+    {text:"A dropout will beat a genius through hard work.",author:"Rock Lee"},
+    {text:"My motto is to be stronger than yesterday, if I have to I'll be stronger than half a day ago, even a minute ago!",author:"Rock Lee"},
+    {text:"In society, those who don't have many abilities, tend to complain more.",author:"Kakashi Hatake"},
+    
 ]
+

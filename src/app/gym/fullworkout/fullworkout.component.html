@@ -2,7 +2,7 @@
     <div class="mt-16 text-center size">
 <h1 class="text-5xl mt-2 mb-3"> {{workout?.name}}</h1>
 <h3>{{workout?.description}}</h3>
-<button class="mt-2 mb-1 mybtn" (click)="goBack()">go back</button>
+<button class="mt-2 mb-1 mybtn material-icons-outlined" (click)="goBack()">arrow_back</button>
 <h5 class="mt-5">click to start a workout</h5>
 <ul  *ngFor="let plan of workout?.plans ">
     <div routerLink="{{plan.id}}" (click)="setWorkout(plan.id)"  class="card">

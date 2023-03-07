@@ -1,6 +1,9 @@
 p{
   color:antiquewhite
 }
+.leftTrans{
+  transform: translateX(-10px);
+}
 .resume{
   min-height: 100vh;
   height: fit-content;

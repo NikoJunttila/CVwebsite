@@ -100,8 +100,7 @@
 	display:inline-block;
 	cursor:pointer;
 	color:#1d5462;
-	font-size:10px;
-	padding:5px 10px;
+	padding: 10px 25px;
 	text-decoration:none;
 }
 .myButton3:hover {

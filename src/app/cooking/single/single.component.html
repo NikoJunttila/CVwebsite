@@ -1,5 +1,5 @@
 <section *ngIf="meal;else other_content" class="flex flex-col items-center text text-white" >
-    <button class="myButton mb-3" (click)="goBack()">go back</button>
+    <button class="myButton mb-3 material-icons-outlined" (click)="goBack()">arrow_back</button>
     <h1 class="text-2xl text-center">{{meal.name}}</h1>
     <div class="mb-4">
         <p class="text-xl text-center">time to make:{{meal.time}}</p>
@@ -10,7 +10,7 @@
         </li>
     </div>
     <div class="mb-4">
-        <p class="ml-2 mb-2 text-lg" *ngFor="let how of meal.howTo;index as i">
+        <p class="ml-4 mr-4 mb-2 text-lg" *ngFor="let how of meal.howTo;index as i">
             {{i + 1}}. {{how}}
         </p>
     </div>
