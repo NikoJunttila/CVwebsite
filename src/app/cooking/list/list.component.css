@@ -35,4 +35,5 @@ color: antiquewhite;
 background-color: brown;
 border-radius: 15px;
 padding: 5px;
+pointer-events: none;
 } 

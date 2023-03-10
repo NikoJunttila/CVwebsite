@@ -27,7 +27,7 @@ export class CookingService {
   }
 
   getMeals() : Observable<cooking[]>{
-    const mealz = of(meals)
+    const mealz = of(meals.sort((a,b)=> b.rating - a.rating))
     return mealz;
   }
 

@@ -1,0 +1,33 @@
+<section class="mt-[64px] flex flex-col items-center h-screen">
+<button mat-raised-button color="primary" routerLink="/gym">
+    Home
+</button>
+
+<mat-card class="mt-10">
+    <form [formGroup]="signupForm" (ngSubmit)="signup()">
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Display name</mat-label>
+                <input autocomplete="off" formControlName="displayName" type="text" matInput placeholder="Display Name">
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input formControlName="email" type="email" matInput placeholder="Email">
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field  appearance="outline">
+                <mat-label>Password</mat-label>
+                <input autocomplete="off" formControlName="password" type="password" matInput placeholder="Password">
+            </mat-form-field>
+        </p>
+        <div *ngIf="firebaseErrorMessage != ''" class="error-style">
+            <span>{{ firebaseErrorMessage }}</span>
+        </div>
+
+        <button mat-raised-button color="primary" class="w-full">Create account</button>
+    </form>
+</mat-card>
+</section>

@@ -1,14 +1,28 @@
 <div id="navbar" class="navbar w-screen fixed z-10">
-    <div class="flex-1">
-      <a href="https://github.com/NikoJunttila" class="btn btn-ghost"><img class="w-10 h-10" src="/assets/svg/github.svg" alt="github" /></a>
+  <div class="flex-1 text-gray-400">
+   <!--  <a href="https://github.com/NikoJunttila" class="btn btn-ghost"
+      ><img class="w-10 h-10" src="/assets/svg/github.svg" alt="github"
+    /></a> -->
+    <div class=" cursor-pointer flex" *ngIf="afAuth.user | async;else elseBlock">
+      <button class="material-icons text-3xl px-1" routerLink="/dashboard">account_circle</button>
+      <li class="px-2 cursor-pointer" (click)="logout()"><span class="material-icons text-3xl mt-1">logout</span>
+        <span class="vertical">logout</span></li>
     </div>
-    <div class="flex-none">
-      <ul class="menu menu-horizontal px-1 text-gray-400">
-        <li><a routerLink="">CV</a></li>
-        <li>
-         <a routerLink="gym">Gym</a>
-        </li>
-        <li><a routerLink="cooking">Cooking</a></li>
-      </ul>
-    </div>
+    <ng-template #elseBlock>
+      <div>
+      <li class="px-2 cursor-pointer" routerLink="login"><span class="material-icons text-3xl mt-1">login</span>
+       <span class="vertical">log in</span></li>
+      </div>
+      </ng-template>
+
   </div>
+  <div class="flex-none">
+    <ul class="menu menu-horizontal px-1 text-gray-400">
+      <li><a routerLink="">CV</a></li>
+      <li>
+        <a routerLink="gym">Gym</a>
+      </li>
+      <li><a routerLink="cooking">Cooking</a></li>
+    </ul>
+  </div>
+</div>

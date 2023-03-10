@@ -11,11 +11,12 @@
     <div class="relative">
       <img src="{{ meal.img }}" alt="meal"/>
       <div class="inside">
-      <span class="ml-2"> {{ meal.name }}</span>
+      <span class="ml-2 text-lg"> {{ meal.name }}</span>
     </div>
     </div>
     <div class="ml-1 flex gap-1 items-center mt-2">
-      <button class="tags" *ngFor="let tag of meal.tags">{{ tag }}</button>
+      <span class="material-icons text-yellow-500">star</span><span class="mr-2 text-xl">{{meal.rating}}</span>
+      <span class="tags" *ngFor="let tag of meal.tags">{{ tag }}</span>
     </div>
   </div>
 </div>

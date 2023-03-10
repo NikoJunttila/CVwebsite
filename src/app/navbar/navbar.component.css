@@ -3,6 +3,9 @@
     background-color: #2A303C;
     --tw-bg-opacity: 1;
 }
+li{
+    list-style-type: none;
+}
 li:hover{
     background-color: #030d20;
     border-radius: 50px;
@@ -10,4 +13,13 @@ li:hover{
 img:hover{
     opacity: 0.7;
     transform: scale(1.2);
+}
+.vertical{
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-size: 10px;
+}
+button:hover{
+    background-color: #030d20;
+    border-radius: 50px;
 }

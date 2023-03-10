@@ -1,0 +1,39 @@
+<section class="pt-[60px] flex flex-col items-center h-screen">
+
+    <div>
+<button mat-raised-button color="primary" class="mt-3 w-full" routerLink="/gym">
+    <span class="material-icons">home</span>
+    <span>Home</span>
+</button>
+
+<mat-card class="max-w-2xl pt-2">
+    <form [formGroup]="forgotPasswordForm" (ngSubmit)="retrievePassword()" type="">
+
+        <p>A password-reset email will be sent to...</p>
+        <p>
+            <mat-form-field class="w-full" appearance="outline">
+                <mat-label>Email</mat-label>
+                <input autocomplete="off" formControlName="email" type="email" matInput placeholder="Email">
+            </mat-form-field>
+        </p>
+
+        <div *ngIf="firebaseErrorMessage != ''" class="error-style">
+            <span>{{ firebaseErrorMessage }}</span>
+        </div>
+
+        <button mat-raised-button color="primary" class="w-full" [disabled]="mailSent">Reset my password</button>
+        <div *ngIf="mailSent">
+            <p>An email has been sent!</p>
+            <button mat-raised-button color="primary" routerLink="/signin">
+                <span class="material-icons">home</span>
+                <span>Return Home</span>
+            </button>
+        </div>
+    </form>
+</mat-card>
+
+<div class="progressIndicator" [style.display]="isProgressVisible ? 'inline' : 'none' ">
+    <mat-progress-spinner class=" example-margin" color="primary" mode="indeterminate"></mat-progress-spinner>
+</div>
+</div>
+</section>

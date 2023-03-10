@@ -1,0 +1,31 @@
+<section class="mt-[64px] flex flex-col items-center h-screen">
+<button mat-raised-button color="primary" routerLink="/home">
+    Home
+</button>
+
+<div class="mt-2 bg-inherit">
+    <form [formGroup]="loginForm" (ngSubmit)="loginUser()" type="">
+        <p>
+            <span class="text-sm text-yellow-50">Email</span><br/>
+            <mat-form-field class="bg-white" appearance="outline">
+                  <input  autocomplete="off" formControlName="email" type="email" matInput placeholder="Email">
+            </mat-form-field>
+        </p>
+        <p>
+            <span class="text-sm text-yellow-50">Password</span><br/>
+            <mat-form-field class="bg-white" appearance="outline">
+                <input autocomplete="off" formControlName="password" type="password" matInput placeholder="Password">
+            </mat-form-field>
+        </p>
+        <div *ngIf="firebaseErrorMessage != ''" class="error-style">
+            <span>{{ firebaseErrorMessage }}</span>
+        </div>
+        <div class="">
+        <button mat-raised-button color="primary" class="w-3/6">Login</button>
+   
+        <button type="button" mat-raised-button class="w-3/6" color="primary" routerLink="/signup">Sign up</button> <br/>
+    </div>
+    <button type="button" mat-raised-button class="w-full mt-[2px]" color="primary" routerLink="/lostpass">forgot password?</button>
+</form>
+</div>
+</section>
