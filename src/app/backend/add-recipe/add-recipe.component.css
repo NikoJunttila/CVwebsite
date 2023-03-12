@@ -1,0 +1,36 @@
+section{
+    background-image: url("https://static.vecteezy.com/system/resources/previews/008/287/441/original/background-of-modern-kitchen-room-free-photo.jpg");
+    background-size: cover;
+    color:whitesmoke;
+    font-size: 1rem;
+    min-height: 100vh;
+}
+form{
+    border:1px wheat solid;
+    border-radius: 20px;
+    padding: 1em;
+    background-image: linear-gradient(rgba(19, 19, 19, 0.527),rgba(40, 40, 40, 0.5));
+    max-width: 95%;
+}
+span{
+    color: whitesmoke;
+    font-size: 2rem;
+    cursor: pointer;
+}
+input{
+    color:whitesmoke;
+     background-color: #212121;
+}
+button{
+    background-color: #1A237E;
+    margin-top: 5px;
+    padding: 2px 0;
+}
+.bigger{
+    padding: 10px 0;
+    background-color: darkgreen;
+    margin-top: 1rem;
+}
+.bigger:disabled{
+ background-color: darkred;   
+}

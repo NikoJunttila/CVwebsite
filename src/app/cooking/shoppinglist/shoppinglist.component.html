@@ -4,7 +4,7 @@
         <div class="idk" *ngFor="let list of shoppingList">
             <h1 class="text-center">{{list.name}}</h1>
            <li *ngFor="let ingredient of list.ingredients">
-            <input   type="checkbox" id="cbox3" value="third_checkbox"> <label for="cbox3">{{ingredient}} </label><br />
+            <input   type="checkbox" id="cbox3" value="third_checkbox"> <label for="cbox3"> <span>{{ingredient.amount | number: "1.0-3"}}{{ingredient.what}}</span><span class="ml-2">{{ingredient.name}}</span></label><br />
         </li>
     </div>
 </div>
@@ -17,7 +17,7 @@
         <div class="idk">
         <h1 class="text-center">{{shoppingList.name}}</h1>
         <li *ngFor="let ingredient of shoppingList.ingredients">
-            <input   type="checkbox" id="cbox3" value="third_checkbox"> <label for="cbox3">{{ingredient}} </label><br />
+            <input   type="checkbox" id="cbox3" value="third_checkbox"> <label for="cbox3"><span>{{ingredient.amount | number: "1.0-3"}}{{ingredient.what}}</span><span class="ml-2">{{ingredient.name}}</span></label><br />
         </li>
     </div>
     <button (click)="clear()">clear</button>

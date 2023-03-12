@@ -5,6 +5,9 @@ import { Location } from '@angular/common';
 import { cooking } from '../interfaces';
 import { Subscription } from 'rxjs';
 import { shopping } from '../interfaces';
+import { FormControl } from '@angular/forms';
+
+
 @Component({
   selector: 'app-single',
   templateUrl: './single.component.html',
@@ -20,11 +23,36 @@ added : boolean = false
       }, 50); 
     })
   }
+
 meal : cooking | undefined
+initmeal : any
+kerroin : number | undefined
+
+minus(){
+  if(this.kerroin == 0){
+    return
+  }
+  this.kerroin!--
+  this.calculate()
+}
+plus(){
+  this.kerroin!++
+  this.calculate()
+}
 
 ngOnInit(): void {
     this.getMeal()
+    this.initmeal = JSON.parse(JSON.stringify(this.meal))
+    this.kerroin = this.meal?.portions
 }
+
+calculate(){
+  this.meal?.ingredients.forEach((element:any,index) => {
+    this.meal!.ingredients[index]!.amount =  this.initmeal!.ingredients[index]!.amount * (this.kerroin! / this.initmeal.portions)
+  });
+}
+
+
 goBack(){
   this.location.back()
   setTimeout(() => {

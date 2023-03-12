@@ -4,9 +4,15 @@ export interface cooking {
     name: string;
     id : number;
     rating:number;
-    ingredients: string[];
+    portions: number;
+    ingredients: ingredient[];
     howTo : string[];
     tags : string[];
+}
+interface ingredient{
+    amount : number;
+    name : string;
+    what : string;
 }
 export interface shopping {
     name : string;

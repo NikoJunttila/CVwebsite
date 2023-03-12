@@ -1,4 +1,4 @@
-<section class="h-screen pt-[60px] flex justify-center text-white bg-slate-600">
+<section class="h-screen pt-[60px] flex flex-col items-center text-white bg-slate-600">
     <ul class="mt-2" *ngIf="(user | async)">
         <li>Account Type: {{ (user | async)?.accountType }}</li>
         <li>Display Name: {{ (user | async)?.displayName }}</li>
@@ -7,5 +7,5 @@
         <li>Email (lower): {{ (user | async)?.email_lower }}</li>
         <li>Email Verification Status: {{ (afAuth.user | async)?.emailVerified }}</li>
     </ul>    
-
+    <button *ngIf='(user | async)?.accountType == "admin"' routerLink="/settings">post stuff</button>
 </section>

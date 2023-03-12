@@ -1,20 +1,25 @@
-<section *ngIf="meal;else other_content" class="flex flex-col items-center text text-white" >
+<section *ngIf="meal;else other_content" class="flex justify-center text text-white" >
+    <div class="max-w-6xl flex flex-col items-center justify-center">
     <button class="myButton mb-3 material-icons-outlined" (click)="goBack()">arrow_back</button>
-    <h1 class="text-2xl text-center">{{meal.name}}</h1>
+    <h1 class="biggertext-center">{{meal.name}}</h1>
     <div class="mb-4">
-        <p class="text-xl text-center">time to make:{{meal.time}}</p>
-        <h3 class="text-xl mb-2">ingredients:<button (click)="test()" *ngIf="!added" class="ml-4 myButton paddingNo">add to shopping list</button>
+        <p class=" text-center my-1">time to make:{{meal.time}}</p>
+        <h3 class=" mb-2">ingredients:<button (click)="test()" *ngIf="!added" class="ml-4 myButton paddingNo">add to shopping list</button>
             <span class="ml-2" *ngIf="added">added to list</span></h3>
+            <div class="calculate my-3">
+            <button class="material-icons-outlined" (click)="minus()">remove</button><span class="px-3">portions:{{kerroin}}</span><button class="material-icons-outlined" (click)="plus()">add</button>
+        </div>
         <li class="mb-1" *ngFor="let stuff of meal.ingredients">
-            {{stuff}}
+            <span>{{stuff.amount | number: "1.0-3"}}{{stuff.what}}</span><span class="ml-2">{{stuff.name}}</span>
         </li>
     </div>
     <div class="mb-4">
-        <p class="ml-4 mr-4 mb-2 text-lg" *ngFor="let how of meal.howTo;index as i">
+        <p class="ml-4 mr-4 mb-2" *ngFor="let how of meal.howTo;index as i">
             {{i + 1}}. {{how}}
         </p>
     </div>
     <img src="{{meal.img}}"/>
+</div>
 </section>
 <ng-template #other_content>something went wrong please try again</ng-template>
 

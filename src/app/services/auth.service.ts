@@ -36,7 +36,19 @@ export class AuthService {
                     return { isValid: false, message: error.message };
             });
     }
- 
+    addRecipe(meal:any){
+    
+    this.afs.doc("/recipes/"+ meal.id).set(meal)
+    .then(() => {
+        alert(`added ${meal.name}`)
+    })
+     .catch(error => {
+        console.log(error)
+        alert(error)
+    }) 
+
+    }
+
     signupUser(user: any): Promise<any> {
         return this.afAuth.createUserWithEmailAndPassword(user.email, user.password)
             .then((result) => {

@@ -1,0 +1,41 @@
+<section class="h-screen mt-[64px] flex items-center justify-center flex-col">
+    <form class="flex-col flex" [formGroup]="mealObject" (ngSubmit)="onSubmit()">
+        <label>name:</label><input required placeholder="food name" formControlName="name" />
+        <label>time:</label><input required placeholder="time to make food" formControlName="time" />
+        <label>img:</label><input required placeholder="link to img" formControlName="img" />
+        <label>rating:</label><input required placeholder="rate food" formControlName="rating" numbersOnly type="number" />
+        <label>portions:</label> <input required placeholder="how many portions recipe makes" numbersOnly formControlName="portions" type="number" />
+        <label>ingredients:</label>
+      <ng-container formArrayName="ingredients">
+          <div class="flex gap-2 flex-wrap mt-2" *ngFor="let _ of ingredients.controls; index as i">
+            <ng-container   [formGroupName]="i">
+                <input required formControlName="amount" placeholder="ingredient amount" numbersOnly type="number" />
+                <input required formControlName="what" placeholder="what unit of measure" />
+                <input required formControlName="name" placeholder="ingredient name" />
+                <span class="material-icons" (click)="removeIngredient(i)">delete</span>
+              </ng-container>
+          </div>
+          <button type="button" (click)="addingredient()">add new ingredient</button>
+        </ng-container>
+        <label>tags:</label>
+         <ng-container formArrayName="tags">
+            <div *ngFor="let _ of tags.controls; index as i">
+             <div class="flex gap-2 mt-2"> <input [formControlName]="i" placeholder="tags" /><span (click)="removeTag(i)" class="material-icons">delete</span></div>
+            </div>
+           
+            <button type="button" (click)="addTag()">add new tag</button>
+          </ng-container> 
+          <label>How to:</label>
+          <ng-container formArrayName="howTo">
+            <div *ngFor="let _ of howTo.controls; index as i">
+            <div class="flex mt-2"> <input class="w-full" [formControlName]="i" placeholder="steps to make food" /><span (click)="removeHowTo(i)" class="material-icons">delete</span></div> 
+            </div>
+            <button type="button"  (click)="addHowto()">new line for how to</button>
+           
+          </ng-container>
+          <button [disabled]="!mealObject.valid"  class="bigger">submit</button>
+          <p *ngIf="!mealObject.valid" class="text-xs text-center mt-2 text-red-100">fill everything before submitting</p>
+        </form>
+        {{mealObject.value.id}}
+      
+</section>
