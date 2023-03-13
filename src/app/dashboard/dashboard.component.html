@@ -6,6 +6,8 @@
         <li>Email: {{ (user | async)?.email }}</li>
         <li>Email (lower): {{ (user | async)?.email_lower }}</li>
         <li>Email Verification Status: {{ (afAuth.user | async)?.emailVerified }}</li>
-    </ul>    
-    <button *ngIf='(user | async)?.accountType == "admin"' routerLink="/settings">post stuff</button>
+    </ul>   
+    <div class="flex gap-6 mt-5" *ngIf='(user | async)?.accountType == "admin"'>
+    <button routerLink="/settings/recipe">add recipes</button><button  routerLink="/settings">idk yet</button>
+</div> 
 </section>

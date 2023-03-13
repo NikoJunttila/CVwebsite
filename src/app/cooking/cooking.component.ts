@@ -14,20 +14,16 @@ constructor(private cooking: CookingService, private router: Router,private fb: 
     selectedCountries:  new FormArray([])
    });
 }
-length : number = 0
 
 random(){
-  const index = Math.floor(Math.random() *this.length + 1)
-  this.router.navigate([`cooking/${index}`]);
+  /* const index = Math.floor(Math.random() *this.length + 1)
+  this.router.navigate([`cooking/${index}`]);  */
   this.cooking.sendClickEvent()
 }
 
 ngOnInit(): void {
-  this.getNumber()
 }
-getNumber():void{
-this.cooking.getLenght().subscribe(a => this.length = a)
-}
+
 
 filters(){
 var button = document.getElementById("filter-button") as HTMLElement;

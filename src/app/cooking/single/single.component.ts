@@ -8,23 +8,25 @@ import { shopping } from '../interfaces';
 import { FormControl } from '@angular/forms';
 
 
+
 @Component({
   selector: 'app-single',
   templateUrl: './single.component.html',
   styleUrls: ['./single.component.css']
 })
 export class SingleComponent implements OnInit{
-clickEvent : Subscription;
-added : boolean = false
-  constructor (private route:ActivatedRoute, private cookingService : CookingService,private location: Location ){
-    this.clickEvent = this.cookingService.getClickEvent().subscribe(() => {
+  added : boolean = false
+  constructor (private route:ActivatedRoute, private cookingService : CookingService,private location: Location){
+    /* clickEvent : Subscription;*/
+
+ /*    this.clickEvent = this.cookingService.getClickEvent().subscribe(() => {
       setTimeout(() => {
         this.getMeal()
       }, 50); 
-    })
+    }) */
   }
 
-meal : cooking | undefined
+meal : any | undefined
 initmeal : any
 kerroin : number | undefined
 
@@ -41,13 +43,17 @@ plus(){
 }
 
 ngOnInit(): void {
-    this.getMeal()
-    this.initmeal = JSON.parse(JSON.stringify(this.meal))
-    this.kerroin = this.meal?.portions
+  const id = Number(this.route.snapshot.paramMap.get('id'));
+  this.cookingService.getDataFromFirestore('recipes', `${id}`)
+  .subscribe(data => {
+    this.meal = data;
+    this.initmeal = JSON.parse(JSON.stringify(this.meal))  
+    this.kerroin = this.meal?.portions 
+  })
 }
 
 calculate(){
-  this.meal?.ingredients.forEach((element:any,index) => {
+  this.meal?.ingredients.forEach((element:any,index:any) => {
     this.meal!.ingredients[index]!.amount =  this.initmeal!.ingredients[index]!.amount * (this.kerroin! / this.initmeal.portions)
   });
 }
@@ -56,13 +62,7 @@ calculate(){
 goBack(){
   this.location.back()
   setTimeout(() => {
-    this.getMeal()
   }, 50); 
-}
-
-getMeal():void{
-  const id = Number(this.route.snapshot.paramMap.get('id'));
-  this.cookingService.getMeal(id).subscribe(meal => this.meal = meal);
 }
 
 //shopping list stuff
@@ -89,5 +89,4 @@ else{
   sessionStorage.setItem('shoppinglist', JSON.stringify(object)); 
 } 
 }
-
 }

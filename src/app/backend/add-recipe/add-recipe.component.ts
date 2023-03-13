@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
-import { AuthService } from 'src/app/services/auth.service';
+import { CookingService } from 'src/app/cooking/cooking-service.service';
 
 @Component({
   selector: 'app-add-recipe',
@@ -8,17 +8,17 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./add-recipe.component.css']
 })
 export class AddRecipeComponent {
-  constructor(private fb: FormBuilder, private send:AuthService){}
+  constructor(private fb: FormBuilder, private send:CookingService){}
   mealObject = this.fb.group({
     name: [""],
     img: [""],
     time: [""],
     rating: [4],
-    id: [Math.floor(Math.random() * (99999 - 11111) + 11111 )],
+    id: [],
     portions:[4],
     tags:this.fb.array(["healthy"]),
-    howTo: this.fb.array([]),
-    ingredients: this.fb.array([this.fb.group({amount:[0],what:[""],name:[""]})]) 
+    howTo: this.fb.array(["first"]),
+    ingredients: this.fb.array([this.fb.group({amount:[],what:[""],name:[""]})]) 
   })
   ingredients = this.mealObject.get('ingredients') as FormArray;
   tags = this.mealObject.get('tags') as FormArray;
@@ -49,10 +49,13 @@ export class AddRecipeComponent {
   }
   
   onSubmit(){
-    /* this.send.addRecipe(this.mealObject.value) */
-    console.log("added new recipe")
+    const randomNum : any = Math.floor(Math.random() * (99999 - 11111) + 11111 )
+    this.mealObject.value.id = randomNum
+    this.send.addRecipe(this.mealObject.value)
     this.mealObject.reset()
   }
-  
+  clearThis(){
+    this.mealObject.reset()
+  }
   
 }

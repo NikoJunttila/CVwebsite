@@ -1,4 +1,4 @@
-<section class="h-screen mt-[64px] flex items-center justify-center flex-col">
+<section class="mt-[64px] flex items-center justify-center flex-col">
     <form class="flex-col flex" [formGroup]="mealObject" (ngSubmit)="onSubmit()">
         <label>name:</label><input required placeholder="food name" formControlName="name" />
         <label>time:</label><input required placeholder="time to make food" formControlName="time" />
@@ -37,5 +37,6 @@
           <p *ngIf="!mealObject.valid" class="text-xs text-center mt-2 text-red-100">fill everything before submitting</p>
         </form>
         {{mealObject.value.id}}
+        <button type="button" class="black" (click)="clearThis()">clear</button>
       
 </section>

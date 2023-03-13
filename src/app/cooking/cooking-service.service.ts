@@ -1,13 +1,43 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { cooking } from './interfaces';
-import { meals } from './meals';
+import { AngularFirestore,AngularFirestoreDocument,AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { doc, getDoc } from "firebase/firestore";
+
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class CookingService {
+  constructor(private afs: AngularFirestore){}
+
+
+  
+  addRecipe(meal:any){
+    this.afs.doc("/recipes/"+ meal.id).set(meal)
+    .then(() => {
+        alert(`added ${meal.name}`)
+    })
+     .catch(error => {
+        console.log(error)
+        alert(error)
+    }) 
+    }
+//all recipes
+    getRecipes(): Observable<any[]>{
+      let data : any = [];
+      const collection = this.afs.collection<any[]>('recipes');
+      collection.get().subscribe(snapshot => {
+        snapshot.forEach((res) => {
+          data.push(res.data());
+        });
+      });
+      const mealz = of(data)
+    return mealz;
+    }
+    
 
   private subject = new Subject<any>();
 
@@ -26,25 +56,24 @@ export class CookingService {
     return this.subject2.asObservable()
   }
 
-  getMeals() : Observable<cooking[]>{
-    const mealz = of(meals.sort((a,b)=> b.rating - a.rating))
-    return mealz;
-  }
-
-  getLenght() : Observable<number>{
-    const mealz = of(meals.length)
-    return mealz;
-  }
-
   public myData = new Subject<any>();
-  
-/*   getData() : Observable<any>{
+   
+   /*  getData() : Observable<any>{
     return this.myData.asObservable()
-  } */
+  }   */
 
-  getMeal(id:number): Observable <cooking> {
-    const meal = meals.find(h => h.id === id)!;
-    return of(meal)
-  } 
-  constructor() { }
+  //single meal recipe
+  getDataFromFirestore(collectionName: string, documentId: string): Observable<any> {
+    return this.afs.collection(collectionName).doc(documentId)
+      .snapshotChanges()
+      .pipe(
+        map(doc => {
+          if (doc.payload.exists) {
+            return doc.payload.data();
+          } else {
+            return null;
+          }
+        })
+      );
+  }
 }

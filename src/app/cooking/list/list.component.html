@@ -1,6 +1,10 @@
 <section>
-  <div class="mb-3 flex gap-1 justify-center" *ngIf="filter.length >= 1">
+  <div class="mb-2 flex gap-1">
+    <button *ngIf="show" class="ml-[7%] flex text-base" (click)="sortHigLow()">Sort <span class="material-icons">arrow_upward</span></button>
+    <button *ngIf="!show" class="ml-[7%] flex text-base" (click)="sortLowHigh()">Sort <span class="material-icons">arrow_downward</span></button>
+    <div class="ml-[35%] flex gap-2">
     <span class="tags" *ngFor="let tag of filter">{{tag}}</span>
+  </div>
   </div>
   <div class="flex gap-4 flex-wrap justify-center " *ngIf="arrOfany && arrOfany.length > 0;else other_content">
   <div

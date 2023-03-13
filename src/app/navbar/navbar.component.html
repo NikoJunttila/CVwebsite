@@ -5,12 +5,12 @@
     /></a> -->
     <div class=" cursor-pointer flex" *ngIf="afAuth.user | async;else elseBlock">
       <button class="material-icons text-3xl px-1" routerLink="/dashboard">account_circle</button>
-      <li class="pr-5 pl-2  cursor-pointer flex items-center" (click)="logout()"><span class="material-icons text-3xl">logout</span>
+      <li class="pr-6 pl-1  cursor-pointer flex items-center" (click)="logout()"><span class="material-icons text-3xl">logout</span>
         <span class="vertical">logout</span></li>
     </div>
     <ng-template #elseBlock>
       <div class="">
-      <li class="px-2 cursor-pointer flex items-center" routerLink="login"><span class="material-icons text-3xl">login</span>
+      <li class="pr-6 pl-1 cursor-pointer flex items-center" routerLink="login"><span class="material-icons text-3xl">login</span>
        <span class="vertical">log in</span></li>
       </div>
       </ng-template>

@@ -20,8 +20,8 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
       this.afAuth.authState.subscribe(user => {
-          console.log('Dashboard: user', user);
-
+/*           console.log('Dashboard: user', user.accountType);
+ */
           if (user) {
               let emailLower = user.email?.toLowerCase();
               this.user = this.firestore.collection('users').doc(emailLower).valueChanges();

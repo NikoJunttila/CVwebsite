@@ -1,7 +1,8 @@
 import { Component, OnInit, OnChanges, Input } from '@angular/core';
-import { meals } from '../meals';
 import { cooking } from '../interfaces';
 import { CookingService } from '../cooking-service.service';
+
+
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -16,16 +17,25 @@ export class ListComponent implements OnInit {
       }, 50); 
     })
   }
-
-  list : cooking[] | undefined
-
+ 
+  list : any[] | undefined
+  filter : any
+  arrOfany : any
+  show : boolean = true
   ngOnInit(): void {
-    this.getList()
+     this.getList() 
     this.getFilter()
     this.arrOfany = this.list
-}
-filter : any
-arrOfany : any
+ }
+ sortHigLow(){
+  this.arrOfany.sort((a:any,b:any) => b.rating - a.rating)
+  this.show = false
+ }
+ sortLowHigh(){
+  this.arrOfany.sort((a:any,b:any) => a.rating - b.rating)
+  this.show = true
+ }
+
  test(){
   if(this.list){
     this.arrOfany = []
@@ -35,11 +45,10 @@ arrOfany : any
     this.arrOfany.push(element)
    }
     });
-
 }}
 
   getList():void{
-    this.cookingService.getMeals().subscribe(a => this.list = a)
+    this.cookingService.getRecipes().subscribe(a => this.list = a)
   }
   getFilter():void{
     this.filter = this.cookingService.myData
