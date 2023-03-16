@@ -59,3 +59,10 @@ img{
 	position:relative;
 	top:1px;
 }
+input:checked + label{
+	color:rgb(5, 2, 0);
+    text-decoration: line-through;
+}
+ input{
+	display:none
+} 

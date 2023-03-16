@@ -79,6 +79,24 @@
     .btn-hover:focus {
         outline: none;
     }
+    .color-7 {
+        background: rgb(4,6,43);
+        background: linear-gradient(269deg, rgba(4,6,43,1) 0%, rgba(21,54,37,1) 48%, rgba(3,94,39,1) 100%);
+        box-shadow: 0 4px 15px 0 rgba(36, 96, 224, 0.75);
+        width: 200px;
+        font-size: 16px;
+        font-weight: 600;
+        color: #fff;
+        cursor: pointer;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        height: 55px;
+        text-align:center;
+        border: none;
+        background-size: 300% 100%;
+        border-radius: 20px;
+    }
+ 
     .btn-hover.color-8 {
         background-image: linear-gradient(to right, #29323c, #485563, #2b5876, #4e4376);
         box-shadow: 0 4px 15px 0 rgba(45, 54, 65, 0.75);
@@ -108,4 +126,12 @@
     .btn-hover2.color-8 {
         background-image: linear-gradient(to right, #29323c, #485563, #2b5876, #4e4376);
         box-shadow: 0 4px 15px 0 rgba(45, 54, 65, 0.75);
+    }
+    .color-7:hover{
+        background-position: 100% 0;
+        background: linear-gradient(80deg, rgba(4,6,43,1) 0%, rgba(21,54,37,1) 48%, rgba(3,94,39,1) 100%);
+        font-size: 18px;
+        -o-transition: all .4s ease-in-out;
+        -webkit-transition: all .4s ease-in-out;
+        transition: all .4s ease-in-out;
     }

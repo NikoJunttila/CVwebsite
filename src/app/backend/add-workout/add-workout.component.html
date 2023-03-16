@@ -1,0 +1,53 @@
+<section class="mt-[64px] flex items-center justify-center flex-col">
+        <form class="flex-col flex items-start gap-4" [formGroup]="workout" (ngSubmit)="onSubmit()" >
+            <label>
+              Name:
+              <input required type="text" formControlName="name">
+            </label>
+            
+            <label>
+              Description:
+              <textarea formControlName="description"></textarea>
+            </label>
+            
+            <label>
+              Days:
+              <input required type="text" formControlName="days">
+            </label>
+            
+            <div class="w-full"  formArrayName="plans">
+              <div class="plans mb-5" *ngFor="let plan of plans.controls; let i = index" [formGroupName]="i">
+                <label>
+                  Approximate Time in minutes:<br />
+                  <input required type="number" formControlName="aproxTime">
+                </label>
+                
+                <label>
+                  Day:
+                  <input  type="text" formControlName="day">
+                </label>
+                <div formArrayName="exercises">
+                  <div class="exercises" *ngFor="let exercise of getExercises(plan).controls; let j = index" [formGroupName]="j">
+                    <label>
+                      Exercise:
+                      <input type="text" formControlName="exercise">
+                    </label>
+                    <label>
+                      Sets:
+                      <input type="number" formControlName="sets">
+                    </label>
+                    
+                    <label>
+                      Reps:
+                      <input class="smoll" type="text" formControlName="reps">
+                    </label>
+                    
+                </div>
+            </div>
+            <button type="button"  (click)="addExercise(plan)">add exercise</button>
+              </div>
+            </div>
+            <button type="button" (click)="addPlan()">next day</button>
+            <button  [disabled]="!workout.valid" class="bigger">submit</button>
+          </form>
+</section>

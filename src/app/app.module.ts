@@ -21,6 +21,8 @@ import { environment } from 'src/environments/environment';
 import {AngularFireModule} from "@angular/fire/compat";
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+
 
 
 
@@ -57,6 +59,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireDatabaseModule,
+    AngularFireStorageModule
 
   ],
   providers: [],

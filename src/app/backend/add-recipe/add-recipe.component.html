@@ -20,7 +20,20 @@
         <label>tags:</label>
          <ng-container formArrayName="tags">
             <div *ngFor="let _ of tags.controls; index as i">
-             <div class="flex gap-2 mt-2"> <input [formControlName]="i" placeholder="tags" /><span (click)="removeTag(i)" class="material-icons">delete</span></div>
+             <div class="flex gap-2 mt-2"> 
+<!--               <input [formControlName]="i" placeholder="tags" />
+ -->              <select [formControlName]="i" id="tags">
+                <option selected="selected" value="Mealprep">Mealprep</option>
+                <option value="Lunch">Lunch</option>
+                <option value="Breakfast">Breakfast</option>
+                <option value="Easy">Easy</option>
+                <option value="Healthy">Healthy</option>
+                <option value="Chicken">Chicken</option>
+                <option value="Beef">Beef</option>
+                <option value="Dessert">Dessert</option>
+              </select>
+              <span (click)="removeTag(i)" class="material-icons">delete</span>
+            </div>
             </div>
            
             <button type="button" (click)="addTag()">add new tag</button>
@@ -36,7 +49,6 @@
           <button [disabled]="!mealObject.valid"  class="bigger">submit</button>
           <p *ngIf="!mealObject.valid" class="text-xs text-center mt-2 text-red-100">fill everything before submitting</p>
         </form>
-        {{mealObject.value.id}}
         <button type="button" class="black" (click)="clearThis()">clear</button>
       
 </section>

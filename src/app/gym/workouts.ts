@@ -3,19 +3,24 @@ export interface Workouts {
     description : string;
     days : string;
     id : number;
-    plans? : singleWorkout[];
+    plans : singleWorkout[];
 }
 export interface singleWorkout {
-    id: number;
+    date?: string;
+    aproxTime: number;
     day : string;
-    exercises : string[];
+    exercises : dunno[];
 }
 export interface dunno {
     sets: number;
-    reps?: string;
+    reps: string;
     exercise: string;
-    setsDone?: number;
-    done?: boolean;
+    setsDone: number;
+    done: boolean;
+}
+export interface subWorkout {
+    name: string;
+    workout : dunno[];
 }
 export interface rlyDunno {
     id: number;

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
+import { GymService } from '../gym/gym.service';
 import { AuthService } from '../services/auth.service';
 
 
@@ -14,18 +15,21 @@ import { AuthService } from '../services/auth.service';
 export class DashboardComponent implements OnInit {
   user: Observable<any>;              // Example: store the user's info here (Cloud Firestore: collection is 'users', docId is the user's email, lower case)
 
-  constructor(public afAuth: AngularFireAuth, private firestore: AngularFirestore,private authser:AuthService) {
+  constructor(public afAuth: AngularFireAuth, private firestore: AngularFirestore,private authser:AuthService,private gymService:GymService) {
       this.user = null as any;
   }
-
+  done : any
+  emailLower: any = ''; 
+  test(){
+    console.log(this.emailLower)
+  }
   ngOnInit(): void {
       this.afAuth.authState.subscribe(user => {
-/*           console.log('Dashboard: user', user.accountType);
- */
           if (user) {
-              let emailLower = user.email?.toLowerCase();
-              this.user = this.firestore.collection('users').doc(emailLower).valueChanges();
+              this.emailLower = user.email?.toLowerCase();
+              this.user = this.firestore.collection('users').doc(this.emailLower).valueChanges();
           }
+          this.gymService.getCompletedWorkouts(this.emailLower).subscribe(donez => this.done = donez)
       });
   }
 

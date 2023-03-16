@@ -2,7 +2,7 @@
   <div class="mb-2 flex gap-1">
     <button *ngIf="show" class="ml-[7%] flex text-base" (click)="sortHigLow()">Sort <span class="material-icons">arrow_upward</span></button>
     <button *ngIf="!show" class="ml-[7%] flex text-base" (click)="sortLowHigh()">Sort <span class="material-icons">arrow_downward</span></button>
-    <div class="ml-[35%] flex gap-2">
+    <div *ngIf="filter && filter.length >= 1" class="ml-[35%] flex gap-2">
     <span class="tags" *ngFor="let tag of filter">{{tag}}</span>
   </div>
   </div>

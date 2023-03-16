@@ -24,7 +24,6 @@ canActivate(
               let emailLower = user.email?.toLowerCase();
              const  userAdmin = this.firestore.collection('users').doc(emailLower).valueChanges()
              userAdmin.subscribe((admin:any) => {
-              console.log(admin)
               if(admin.accountType == "admin"){
                 resolve(true)
               }else{  

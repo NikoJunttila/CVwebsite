@@ -1,0 +1,12 @@
+<div class="dropzone" dropzone (hovered)="toggleHover($event)" (dropped)="onDrop($event)" [class.hovering]="isHovering">
+    <h3> Drag & Drop files here</h3>
+    <div>
+    </div>
+</div>
+<div *ngIf="files.length > 0">
+    Uploads
+    <hr>
+</div>
+<div *ngFor="let file of files">
+    <app-uploadtask [file]="file"></app-uploadtask>
+</div>

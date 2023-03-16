@@ -16,7 +16,7 @@ export class AddRecipeComponent {
     rating: [4],
     id: [],
     portions:[4],
-    tags:this.fb.array(["healthy"]),
+    tags:this.fb.array([""]),
     howTo: this.fb.array(["first"]),
     ingredients: this.fb.array([this.fb.group({amount:[],what:[""],name:[""]})]) 
   })
@@ -49,10 +49,10 @@ export class AddRecipeComponent {
   }
   
   onSubmit(){
-    const randomNum : any = Math.floor(Math.random() * (99999 - 11111) + 11111 )
+     const randomNum : any = Math.floor(Math.random() * (99999 - 11111) + 11111 )
     this.mealObject.value.id = randomNum
     this.send.addRecipe(this.mealObject.value)
-    this.mealObject.reset()
+    this.mealObject.reset() 
   }
   clearThis(){
     this.mealObject.reset()

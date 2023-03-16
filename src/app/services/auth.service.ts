@@ -2,16 +2,23 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { AngularFirestore,AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+     userFull: Observable<any>; 
+    
   userLoggedIn: boolean;      // other components can check on this variable for the login status of the user
 
     constructor(private router: Router, private afAuth: AngularFireAuth,private afs: AngularFirestore) {
         this.userLoggedIn = false;
+        this.userFull = null as any;
 
         this.afAuth.onAuthStateChanged((user) => {              // set up a subscription to always know the login status of the user
             if (user) {
@@ -21,6 +28,7 @@ export class AuthService {
             }
         });
     }
+
 
     loginUser(email: string, password: string): Promise<any> {
         return this.afAuth.signInWithEmailAndPassword(email, password)
@@ -49,7 +57,8 @@ export class AuthService {
                         displayName: user.displayName,
                         displayName_lower: user.displayName.toLowerCase(),
                         email: user.email,
-                        email_lower: emailLower
+                        email_lower: emailLower,
+                        completedWorkouts:[]
                     });
 
                     result.user!.sendEmailVerification();                    // immediately send the user a verification email

@@ -1,5 +1,6 @@
 import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import { cooking } from '../interfaces';
+import { meals } from '../meals';
 import { CookingService } from '../cooking-service.service';
 
 
@@ -19,7 +20,7 @@ export class ListComponent implements OnInit {
   }
  
   list : any[] | undefined
-  filter : any
+  filter : any = []
   arrOfany : any
   show : boolean = true
   ngOnInit(): void {

@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit,HostListener, OnDestroy} from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { CookingService } from '../cooking-service.service';
 import { Location } from '@angular/common';
@@ -14,17 +14,13 @@ import { FormControl } from '@angular/forms';
   templateUrl: './single.component.html',
   styleUrls: ['./single.component.css']
 })
-export class SingleComponent implements OnInit{
-  added : boolean = false
-  constructor (private route:ActivatedRoute, private cookingService : CookingService,private location: Location){
-    /* clickEvent : Subscription;*/
+export class SingleComponent implements OnInit,OnDestroy
+{
+  private subscription!: Subscription;
 
- /*    this.clickEvent = this.cookingService.getClickEvent().subscribe(() => {
-      setTimeout(() => {
-        this.getMeal()
-      }, 50); 
-    }) */
-  }
+  added : boolean = false
+
+  constructor (private route:ActivatedRoute, private cookingService : CookingService,private location: Location){}
 
 meal : any | undefined
 initmeal : any
@@ -44,7 +40,7 @@ plus(){
 
 ngOnInit(): void {
   const id = Number(this.route.snapshot.paramMap.get('id'));
-  this.cookingService.getDataFromFirestore('recipes', `${id}`)
+  this.subscription = this.cookingService.getDataFromFirestore('recipes', `${id}`)
   .subscribe(data => {
     this.meal = data;
     this.initmeal = JSON.parse(JSON.stringify(this.meal))  
@@ -64,6 +60,8 @@ goBack(){
   setTimeout(() => {
   }, 50); 
 }
+
+
 
 //shopping list stuff
 test(){
@@ -88,5 +86,11 @@ test(){
 else{
   sessionStorage.setItem('shoppinglist', JSON.stringify(object)); 
 } 
+}
+ngOnDestroy(): void {
+  if (this.subscription){
+    this.subscription.unsubscribe()
+    console.log("unsubbed!")
+  }
 }
 }

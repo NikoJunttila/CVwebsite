@@ -39,3 +39,7 @@ button{
     padding: 0.5em;
     border-radius: 10px;
 }
+select{
+    background-color: #212121;
+
+}

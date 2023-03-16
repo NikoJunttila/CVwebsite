@@ -36,3 +36,9 @@
   }
   .left2 { grid-area: left2; }
   .right2 { grid-area: right2; }
+
+   @media(max-width:400px){
+    span{
+      font-size: 20px;
+    }
+   }

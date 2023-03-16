@@ -5,10 +5,10 @@
 <button class="mt-2 mb-1 mybtn material-icons-outlined" (click)="goBack()">arrow_back</button>
 <h5 class="mt-5">click to start a workout</h5>
 <ul  *ngFor="let plan of workout?.plans ">
-    <div routerLink="{{plan.id}}" (click)="setWorkout(plan.id)"  class="card">
+    <div routerLink="Workout time" (click)="setWorkout(plan)"  class="card">
     <h3 class="text-lg">{{plan.day}}</h3>
     <li *ngFor="let exercise of plan.exercises; let i = index">
-        {{i + 1}}. {{exercise}}
+        {{i + 1}}. {{exercise.exercise}}
     </li>
 </div>
 </ul>

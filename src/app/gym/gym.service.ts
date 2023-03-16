@@ -1,32 +1,97 @@
 import { Injectable } from '@angular/core';
 import { Workouts } from './workouts';
-import { Plans } from './workouts/mock-plans';
 import { Observable, of } from 'rxjs';
 import { rlyDunno } from './workouts';
-import { gymWorkout } from './fullworkout/showWorkout';
+import { map } from 'rxjs/operators';
 import { guide } from './workouts';
 import { info } from './info/exercises';
+
+import { AngularFirestore,AngularFirestoreDocument,AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+/* import { doc, getDoc } from "firebase/firestore";*/
+import * as firebase from 'firebase/app';
+import 'firebase/firestore';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class GymService {
+  constructor(private afs: AngularFirestore){}
 
-  getPlans() : Observable<Workouts[]>{
-    const plans = of(Plans)
-    return plans;
-  }
-  getPlan(id:number): Observable <Workouts> {
-    const workout = Plans.find(h => h.id === id)!;
-    return of(workout)
-  } 
-  getWorkout(id:number): Observable <rlyDunno> {
-    const workout = gymWorkout.find(h => h.id === id)!;
-    return of(workout)
-  } 
+  addWorkout(workout:any){ 
+    this.afs.doc("/workouts/"+ workout.id).set(workout)
+    .then(() => {
+        alert(`added ${workout.name}`)
+    })
+     .catch(error => {
+        console.log(error)
+        alert(error)
+    }) 
+    }
+//all workouts
+    getWorkouts(): Observable<any[]>{
+      let data : any = [];
+      const collection = this.afs.collection<any[]>('workouts');
+      collection.get().subscribe(snapshot => {
+        snapshot.forEach((res) => {
+          data.push(res.data());
+        });
+      });
+      const workouts = of(data)
+    return workouts;
+    }
+    //single
+    getWorkoutFromFirestore(collectionName: string, documentId: string): Observable<any> {
+      return this.afs.collection(collectionName).doc(documentId)
+        .get()
+        .pipe(
+          map(doc => {
+            if (doc.exists) {
+              return doc.data();
+            } else {
+              return null;
+            }
+          })
+        );
+    }
+    //constant stream of data. not good here
+   /*  getWorkoutFromFirestore(collectionName: string, documentId: string): Observable<any> {
+      return this.afs.collection(collectionName).doc(documentId)
+        .snapshotChanges()
+        .pipe(
+          map(doc => {
+            if (doc.payload.exists) {
+              return doc.payload.data();
+            } else {
+              return null;
+            }
+          })
+        );
+    } */
+
+
+    //add completed workouts
+     addCompletedWorkout(emailLower: string, workout: any) {
+      const randomNum = Math.floor(Math.random()* (999999 - 111111) + 111111 )
+      this.afs.collection('users').doc(emailLower).collection('completedWorkouts').doc(`${randomNum}`).set(workout);
+    } 
+ //all completed exercises
+    getCompletedWorkouts(emailLower:string): Observable<any[]>{
+      let data : any = [];
+      const collection = this.afs.collection<any[]>('users').doc(emailLower).collection('completedWorkouts')
+      collection.get().subscribe(snapshot => {
+        snapshot.forEach((res) => {
+          data.push(res.data());
+        });
+      });
+      const workouts = of(data)
+    return workouts;
+    }
+ 
+ 
+   //info for exercise 
   getExercise(name:string): Observable <guide> {
     const exercise = info.find(h => h.name.toLowerCase() === name.toLowerCase())!;
     return of(exercise)
   } 
-  constructor() { }
 }

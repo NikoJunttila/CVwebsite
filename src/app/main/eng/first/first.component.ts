@@ -9,7 +9,7 @@ export class FirstComponent implements OnInit {
   text : string = "Fullstack web dev"
   letters : string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
   interval : any = null
-  value : string = "Fullstack web dev"
+  value : string = "Full stack web dev"
   random = Math.floor(Math.random()* 26)
   
   ngOnInit(): void {
