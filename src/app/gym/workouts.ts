@@ -6,7 +6,8 @@ export interface Workouts {
     plans : singleWorkout[];
 }
 export interface singleWorkout {
-    date?: string;
+    notes? : string;
+    date: any;
     aproxTime: number;
     day : string;
     exercises : dunno[];
@@ -17,6 +18,8 @@ export interface dunno {
     exercise: string;
     setsDone: number;
     done: boolean;
+    weight?: number;
+    editing?:boolean;
 }
 export interface subWorkout {
     name: string;

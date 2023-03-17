@@ -30,7 +30,7 @@
   <div >
     <h2 class="text-lg text-center">selected exercises:</h2>
     <div>
-      <ul class="flex flex-col justify-center items-center" *ngFor="let workout of newWorkout">
+      <ul class="flex flex-col justify-center items-center" *ngFor="let workout of fullWorkout.exercises">
         <li class="selected">
           <div class="mr-auto"><span>{{ workout.name }} </span></div>
           <div class="flex"> <span>Sets: {{ workout.sets }}</span>

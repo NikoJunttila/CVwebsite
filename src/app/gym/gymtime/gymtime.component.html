@@ -1,4 +1,84 @@
-<section
+<section 
+  class="workoutcontainercontainer bg-slate-900 flex justify-center items-center flex-col text-white"
+>  <div class="workoutcontainer text-center">
+    <ul class="ml-3 mr-3" *ngFor="let workout of workoutz?.exercises;index as i">
+<div class="relative" *ngIf="!workout.editing; else editing">
+      <li
+        
+        class="mt-2 workout"
+        *ngIf="!workout.done" [@fadeOutOnLeave]
+        [class.almostDone]="
+          0 < workout?.setsDone! && workout?.setsDone! < workout?.sets!
+        "
+        [class.done]="workout?.sets! <= workout?.setsDone!"
+      >
+        <span routerLink="/gym/info/{{workout.exercise}}" class="overlinesoon cursor-pointer text-blue-700"
+          >{{ workout.exercise | uppercase }} {{workout.sets}}x{{workout.reps}} <span *ngIf="workout.weight">{{workout.weight}}kg</span>
+          </span>
+        <span
+          >Done: {{ workout.setsDone }}/{{ workout.sets }}</span
+        ><span
+          class="material-icons-outlined cursor-pointer"
+          (click)="counterPlus(workout)"
+          *ngIf="workout?.sets! > workout?.setsDone!"
+          >add_circle</span
+        >
+        <span
+          class="material-icons-outlined cursor-pointer"
+          (click)="setDone(workout)"
+          *ngIf="workout?.sets! <= workout?.setsDone!"
+          >delete</span
+        >
+        <span (click)="onExerciseEdit(i)" class="absolute right-2 material-icons-outlined cursor-pointer">edit</span>
+
+      </li>
+
+    </div>
+    <ng-template #editing>
+      <div  class="editBox relative">
+      <input type="text" [(ngModel)]="workout.exercise" />
+      <span>sets: <input type="number" [(ngModel)]="workout.sets" /></span>
+      <span>weight: <input type="number" [(ngModel)]="workout.weight"/> kg</span>
+      <span (click)="onExerciseSave(i)" class="absolute right-2 material-icons-outlined cursor-pointer">save</span>
+    </div>
+    </ng-template>
+    </ul>
+  </div>
+  <div >
+    <div class="flex justify-center mt-3"><span>add notes or extra work done today</span>
+      <button type="button" class="material-icons-outlined ml-2 text-[#00695C]" (click)="testeri()">note_add</button>
+    </div>
+    <textarea class="mt-2 bg-slate-700 border border-dashed border-slate-400" *ngIf="showTextArea" placeholder="notes" rows="3" cols="40"[(ngModel)]="workoutz!.notes"> </textarea><br>
+  </div>
+  <div class="timercontainer">
+  <div class="timer">
+    <h3 class="pr-5"><span *ngIf="playAudio === play" (click)="mute()" class="material-icons-outlined cursor-pointer mr-3">volume_up</span>
+      <span *ngIf="playAudio === muteVoice" (click)="unMute()" class="material-icons-outlined cursor-pointer mr-3">volume_off</span>
+      {{ minutes }}:{{ seconds }}</h3>
+    <span
+      class="material-icons-outlined cursor-pointer mr-2"
+      (click)="addTime()"
+      >add_circle</span
+    ><span
+      class="material-icons-outlined cursor-pointer"
+      (click)="decreaseTime()"
+      >do_not_disturb_on</span
+    >
+  </div>
+  <div class="mt-1">
+    <span class="material-icons-outlined cursor-pointer mr-2" (click)="startTimer()"
+      >play_circle</span
+    >
+    <span class="material-icons-outlined cursor-pointer" (click)="resetTimer()"
+      >refresh</span
+    >
+  </div>
+</div>
+<button *ngIf="userLower.length > 1 && showAdd"  class="color-7 " (click)="setAsCompleted()">Save workout</button>
+  <button class="btn-hover color-8 " (click)="reset()">reset workout</button>
+  <button (click)="goBack()" class="btn-hover2 color-8 material-icons-outlined">arrow_back</button>
+</section>
+<!-- <section
   class="workoutcontainercontainer bg-slate-900 flex justify-center items-center flex-col text-white"
 >
   <div class="workoutcontainer text-center">
@@ -60,3 +140,4 @@
   <button class="btn-hover color-8 " (click)="reset()">reset workout</button>
   <button routerLink="/gym/new" class="btn-hover2 color-8 material-icons-outlined">arrow_back</button>
 </section>
+ -->

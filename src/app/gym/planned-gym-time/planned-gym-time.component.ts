@@ -25,43 +25,48 @@ export class PlannedGymTimeComponent implements OnInit {
   workoutz : singleWorkout | undefined 
   userLower : string = ""
   showAdd : boolean = false
-
-
+  showTextArea : boolean = false
+testeri(){
+  this.showTextArea = !this.showTextArea
+}
+testeri2(){
+console.log(this.workoutz?.notes)
+}
+  onExerciseEdit(index: number) {
+    this.workoutz!.exercises[index]!.editing = true;
+  }
+  onExerciseSave(index: number) {
+    this.workoutz!.exercises[index]!.editing = false;
+    localStorage.setItem('workout2', JSON.stringify(this.workoutz));
+  }
 
   setAsCompleted(){
     const date = new Date();
-    let day = date.getDate();
-    let month = date.getMonth() + 1
-    let year = date.getFullYear()
-    // This arrangement can be altered based on how we want the date's format to appear.
-    let currentDate = `${day}-${month}-${year}`
     if (this.workoutz != undefined){
-    this.workoutz.date = currentDate
+    this.workoutz.date = date
   }
     this.gymService.addCompletedWorkout(this.userLower,this.workoutz)
     alert(`added to ${this.userLower}`)
     this.reset()
+    this.showAdd = false
   }
 
   loopReps(){
-    if(this.userLower.length > 1){
     let total : number = 0
     this.workoutz?.exercises?.forEach((element:any) => {
       total += element.sets - element.setsDone
     })
-    if(total < 2){
+    if(total < 1){
       this.showAdd = true
     }
-  }
   }
 
 
   ngOnInit(): void {
-     this.workoutz = JSON.parse(localStorage.getItem('workout2') || '{}');
+    this.workoutz = JSON.parse(localStorage.getItem('workout2') || '{}');
     this.seconds = this.seconds < 10 ? "0" + this.seconds : this.seconds
     this.playAudio = localStorage.getItem("audio") || 'play'
-
-
+    this.loopReps()
      this.afAuth.authState.subscribe((user: any) => {
       if (user) {
         let emailLower = user.email?.toLowerCase();
@@ -71,8 +76,8 @@ export class PlannedGymTimeComponent implements OnInit {
      })
       } 
   })
-
   }
+
   goBack(): void {
     this.location.back();
   }
@@ -96,6 +101,7 @@ export class PlannedGymTimeComponent implements OnInit {
     this.resetTimer()
     this.workoutz = JSON.parse(localStorage.getItem('initWorkout2') || '{}');
     localStorage.setItem('workout2', JSON.stringify(this.workoutz));
+    this.showAdd = false
   }
  
   startTimer() {

@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service'
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Location } from '@angular/common';
+
 
 
 @Component({
@@ -14,7 +16,7 @@ export class LoginComponent {
   loginForm: FormGroup;
   firebaseErrorMessage: string;
 
-  constructor(private authService: AuthService, private router: Router, private afAuth: AngularFireAuth) {
+  constructor(private authService: AuthService, private router: Router, private afAuth: AngularFireAuth,private location:Location) {
       this.loginForm = new FormGroup({
           'email': new FormControl('', [Validators.required, Validators.email]),
           'password': new FormControl('', Validators.required)
@@ -32,7 +34,7 @@ export class LoginComponent {
       this.authService.loginUser(this.loginForm.value.email, this.loginForm.value.password).then((result) => {
           if (result == null) {                               // null is success, false means there was an error
               console.log('logging in...');
-              this.router.navigate(['/gym']);                // when the user is logged in, navigate them to dashboard
+              this.location.back();                // when the user is logged in, navigate them back
           }
           else if (result.isValid == false) {
               console.log('login error', result);

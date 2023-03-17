@@ -1,33 +1,62 @@
-<section class="pt-[60px] flex flex-col items-center text-white bg-slate-600">
-    <ul class="mt-2" *ngIf="(user | async)">
-        <li>Account Type: {{ (user | async)?.accountType }}</li>
-        <li>Display Name: {{ (user | async)?.displayName }}</li>
-        <li>Display Name (lower): {{ (user | async)?.displayName_lower }}</li>
-        <li>Email: {{ (user | async)?.email }}</li>
-        <li>Email (lower): {{ (user | async)?.email_lower }}</li>
-        <li>Email Verification Status: {{ (afAuth.user | async)?.emailVerified }}</li>
-    </ul>   
-    <div class="flex gap-6 mt-5" *ngIf='(user | async)?.accountType == "admin"'>
+<section class="pt-[60px] flex flex-col text-white">
+  <!--  <div class="flex gap-6 mt-5" *ngIf='(user | async)?.accountType == "admin"'>
     <button routerLink="/settings/recipe">add recipes</button>
     <button routerLink="/settings/workout">add workout</button>
     <button  routerLink="/settings">idk yet</button>
-</div> 
-    <div>
-        *extremely incomplete atm*<br />
-        done workouts:
-        <div *ngFor="let workout of done; index as i">
-            <h2>{{workout.name}}</h2>
-            <h3>{{workout.date}}</h3>
-            <div>
-            <h3>{{workout.time}}</h3>
-            <ul>
-                <li *ngFor="let exercise of workout.exercises">
-                    {{exercise.exercise}}reps:{{exercise.reps}} sets:{{exercise.setsDone}}
-                </li>
-            </ul>
+</div>  -->
+<div class="flex mt-2 justify-center">
+    <h1>{{(user | async)?.displayName}}</h1>
+</div>
+  <div class="flex mt-3 ml-2 justify-center ">
+    <div class="holder">
+      <h1>workouts done :</h1>
+      <div class="pb-2" *ngIf="timeSpent! > 0">
+     <span>total time spent aprox: {{ timeSpent }} minutes</span>
+     <p class="text-xs">items marked with ** have notes</p>
+     <div class="flex items-center">
+    sort:<span (click)="sortLatestFirst()" class="material-icons-outlined cursor-pointer">
+        arrow_upward
+        </span><span (click)="sortOldestFirst()" class="material-icons-outlined cursor-pointer">
+            arrow_downward
+            </span>
         </div>
-        </div>
+</div>
+     
+      <div class="content">
+        <li
+          class="list-none cursor-pointer"
+          *ngFor="let workout of done; index as i"
+        >
+          <span (click)="showFull(i)">
+            <div class="flex h-full">
+              <span class="bg-blue-900 mr-1 w-[2ch] text-center"
+                >{{ i + 1 }}.</span
+              >
+               <span> {{ workout.day }} {{ workout.date.toDate() | date:'d/M/yy'  }}<span *ngIf="workout.notes">**</span></span>
+           </div>
+          </span>
+        </li>
+      </div>    </div>
+    <div class="ml-4 bg-[#1A237E] full" *ngIf="workoutToShow">
+      <div class="pb-2">
+        <h3>{{ workoutToShow.day }}</h3>
+        <h3>{{ workoutToShow.date.toDate() | date:'d MMM, y, h:mm:ss a' }}</h3>
+        <h3>aprox: {{ workoutToShow.aproxTime }} minutes</h3>
+      </div>
+      <li class="" *ngFor="let exercise of workoutToShow.exercises">
+        <span class="mr-1 ml-1"> {{ exercise.exercise }} <span *ngIf="exercise.weight">{{exercise.weight}}kg</span></span>
+        {{ exercise.setsDone }}x{{ exercise.reps }}
+      </li>
+      <span class="ml-1" *ngIf="workoutToShow.notes">{{workoutToShow.notes}}</span>
     </div>
-
-<button (click)="test()">testiii</button>
+  </div>
 </section>
+
+<!-- <div>
+    <h3>{{workout.time}}</h3>
+    <ul>
+        <li *ngFor="let exercise of workout.exercises">
+          <span class="mr-1"> {{exercise.exercise}}</span>  {{exercise.setsDone}}x{{exercise.reps}}
+        </li>
+    </ul>
+</div> -->

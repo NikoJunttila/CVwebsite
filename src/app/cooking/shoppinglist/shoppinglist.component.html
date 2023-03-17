@@ -3,9 +3,17 @@
         <div class="flex flex-wrap justify-center">
         <div class="idk" *ngFor="let list of shoppingList">
             <h1 class="text-center">{{list.name}}</h1>
-           <li *ngFor="let ingredient of list.ingredients">
-            <input   type="checkbox" id="cbox3" value="third_checkbox"> <label for="cbox3"> <span>{{ingredient.amount | number: "1.0-3"}}{{ingredient.what}}</span><span class="ml-2">{{ingredient.name}}</span></label><br />
-        </li>
+            <div class="flex" *ngFor="let ingredient of list.ingredients">
+                <input
+                  type="checkbox"
+                  id="{{ ingredient.name }}"
+                  name="ingredients"
+                  value="{{ ingredient.name }}"
+                />
+                <label class="cursor-pointer" for="{{ ingredient.name }}">
+                 <li>{{ingredient.amount | number: "1.0-3"}}{{ingredient.what}}<span class="ml-3">{{ ingredient.name }}</span></li></label
+              >
+                </div> 
     </div>
 </div>
     <div class="flex">
@@ -16,9 +24,20 @@
         <div class="flex flex-col items-center" *ngIf="shoppingList">
         <div class="idk">
         <h1 class="text-center">{{shoppingList.name}}</h1>
-        <li *ngFor="let ingredient of shoppingList.ingredients">
+        <div class="flex" *ngFor="let ingredient of shoppingList.ingredients">
+            <input
+              type="checkbox"
+              id="{{ ingredient.name }}"
+              name="ingredients"
+              value="{{ ingredient.name }}"
+            />
+            <label class="cursor-pointer" for="{{ ingredient.name }}">
+             <li>{{ingredient.amount | number: "1.0-3"}}{{ingredient.what}}<span class="ml-3">{{ ingredient.name }}</span></li></label
+          >
+            </div> 
+       <!--  <li *ngFor="let ingredient of shoppingList.ingredients">
             <input   type="checkbox" id="cbox3" value="third_checkbox"> <label for="cbox3"><span>{{ingredient.amount | number: "1.0-3"}}{{ingredient.what}}</span><span class="ml-2">{{ingredient.name}}</span></label><br />
-        </li>
+        </li> -->
     </div>
     <button (click)="clear()">clear</button>
 </div>

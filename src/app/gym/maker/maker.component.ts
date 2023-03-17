@@ -21,11 +21,19 @@ export class MakerComponent implements OnInit{
   newWorkout: EXERCISES[] = [];
   check : any = []
   show : boolean = false
+
   constructor(private router: Router) {}
+
+  fullWorkout : any = {
+    aproxTime: 60,
+    day: "custom",
+    date: new Date(),
+    exercises: []
+  }
 
   ngOnInit(): void {
     this.check = JSON.parse(localStorage.getItem('workout') || '{}');
-    this.check.length >= 1  ? this.show = true : this.show = false 
+    this.check.exercises.length >= 1  ? this.show = true : this.show = false 
   }
 
   categories() {
@@ -55,12 +63,12 @@ export class MakerComponent implements OnInit{
   }
  
   start() {
-    if(this.newWorkout.length < 1){
+    if(this.fullWorkout.exercises.length < 1){
       alert("add exercises before starting")
     }else {
     this.router.navigate(['/gym/lightweight']);
-    localStorage.setItem('workout', JSON.stringify(this.newWorkout));
-    localStorage.setItem('initWorkout', JSON.stringify(this.newWorkout));
+    localStorage.setItem('workout', JSON.stringify(this.fullWorkout));
+    localStorage.setItem('initWorkout', JSON.stringify(this.fullWorkout));
   }
   }
   addNew() {
@@ -68,26 +76,28 @@ export class MakerComponent implements OnInit{
       alert("type something before adding")
     }
     else{
-    let object: EXERCISES = {
-      name: this.personal,
+    let object: any = {
+      exercise: this.personal,
       sets: 3,
       reps: 8,
       setsDone: 0,
       done: false,
     };
-    this.newWorkout.push(object);
+    this.fullWorkout.exercises.push(object)
+/*     this.newWorkout.push(object); */
     this.personal = ""
   }
   }
   getName(exercises: string) {
-    let object: EXERCISES = {
-      name: exercises,
+    let object: any = {
+      exercise: exercises,
       sets: 3,
       reps: 8,
       setsDone: 0,
       done: false,
     };
-    this.newWorkout.push(object);
+    /* this.newWorkout.push(object); */
+    this.fullWorkout.exercises.push(object)
     this.personal = ""
   }
   setsPlus(exercise: EXERCISES) {
@@ -112,7 +122,7 @@ export class MakerComponent implements OnInit{
     }
   }
   delete(exercise: EXERCISES) {
-    let index = this.newWorkout.indexOf(exercise);
-    this.newWorkout.splice(index, 1);
+    let index = this.fullWorkout.exercises.indexOf(exercise);
+    this.fullWorkout.exercises.splice(index, 1);
   }
 }

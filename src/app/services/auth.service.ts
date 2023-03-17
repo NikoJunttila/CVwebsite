@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AngularFirestore,AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Location } from '@angular/common';
 
 
 
@@ -16,7 +17,7 @@ export class AuthService {
     
   userLoggedIn: boolean;      // other components can check on this variable for the login status of the user
 
-    constructor(private router: Router, private afAuth: AngularFireAuth,private afs: AngularFirestore) {
+    constructor(private router: Router, private afAuth: AngularFireAuth,private afs: AngularFirestore,private location:Location) {
         this.userLoggedIn = false;
         this.userFull = null as any;
 
@@ -34,7 +35,7 @@ export class AuthService {
         return this.afAuth.signInWithEmailAndPassword(email, password)
             .then(() => {
                 console.log('Auth Service: loginUser: success');
-                // this.router.navigate(['/dashboard']);
+                this.location.back()
             })
             .catch(error => {
                 console.log('Auth Service: login error...');

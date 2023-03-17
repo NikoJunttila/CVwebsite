@@ -10,4 +10,40 @@ button:hover{
 }
 section{
     min-height: 100vh;
+    background: rgb(0,0,0);
+    background: linear-gradient(306deg, rgba(0,0,0,1) 0%, rgba(0,75,97,1) 50%, rgba(93,4,13,1) 100%);
+}
+h1{
+ font-size: 1.5rem;
+ font-style: bold;
+}
+h3{
+font-size: 1.2rem;
+text-align: center;
+}
+li{
+list-style-type: none;
+font-size: 1rem;
+background:#311B92;
+}
+li:nth-child(even) {
+background:#4A148C;
+}
+.full{
+    border: 2px #880E4F solid;
+    border-radius: 10px;
+    height: fit-content;
+    overflow: hidden;
+    width: 50%;
+    max-width: 600px;
+}
+.holder{
+    max-height: 80vh;
+}
+.content{
+    max-height: 100%;
+    width: 100%;
+    overflow: auto;
+    border-radius: 5px;
+    border: 1px #880E4F solid;
 }
