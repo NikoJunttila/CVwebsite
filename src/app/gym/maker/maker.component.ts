@@ -27,13 +27,16 @@ export class MakerComponent implements OnInit{
   fullWorkout : any = {
     aproxTime: 60,
     day: "custom",
-    date: new Date(),
     exercises: []
   }
 
   ngOnInit(): void {
     this.check = JSON.parse(localStorage.getItem('workout') || '{}');
-    this.check.exercises.length >= 1  ? this.show = true : this.show = false 
+    if(Object.keys(this.check).length === 0){
+      this.show = false
+    }else{
+      this.show = true 
+    }
   }
 
   categories() {
@@ -69,6 +72,7 @@ export class MakerComponent implements OnInit{
     this.router.navigate(['/gym/lightweight']);
     localStorage.setItem('workout', JSON.stringify(this.fullWorkout));
     localStorage.setItem('initWorkout', JSON.stringify(this.fullWorkout));
+    sessionStorage.removeItem("myDate2")
   }
   }
   addNew() {

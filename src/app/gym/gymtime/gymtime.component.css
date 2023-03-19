@@ -7,7 +7,6 @@
     border-radius: 10px;
     }
     .timercontainer{
-        margin-top: 10px;
         width: 90%; 
         max-width: 500px;
         border: 2px solid rgb(72, 71, 71);
@@ -53,13 +52,17 @@
     }
     .editBox{
         display: flex;
-        align-items: center;
+        align-items:center;
         max-width: 95vw;
+        min-height: 70px;
         border: 1px solid rgb(72, 71, 71);
-        padding: 5px 5px;
+        padding: 5px;
         gap: 3px;
         min-height:50px;
         justify-content: flex-start;
+    }
+    input{
+        background-color: #29323c;
     }
     input[type=text]{
         max-width: 18ch;
@@ -105,6 +108,10 @@
     
     .btn-hover:focus {
         outline: none;
+    }
+    textarea{
+        max-width: 90vw;
+        background-color: #29323c;
     }
     .color-7 {
         background: rgb(4,6,43);

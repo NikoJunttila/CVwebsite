@@ -1,5 +1,6 @@
 import { Component,HostListener } from '@angular/core';
 
+
 @Component({
   selector: 'app-eng',
   templateUrl: './eng.component.html',
@@ -20,5 +21,5 @@ export class EngComponent {
     }
     this.prevScrollPos = currentScrollPos;
     }
- 
+
 }

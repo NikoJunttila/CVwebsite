@@ -6,12 +6,13 @@
     <button class="myButton mb-3 material-icons-outlined" (click)="goBack()">
       arrow_back
     </button>
-    <h1 class="biggertext-center">
+    <div class=" flex flex-col items-center">
+    <h1 class="bigger text-center">
       {{ meal.name
-      }}<span class="material-icons text-yellow-500 ml-5 translate-y-1"
-        >star</span
-      ><span class="mr-2 text-xl">{{ meal.rating }}</span>
-    </h1>
+      }} </h1>
+    <div>  <span class="material-icons text-yellow-500 ml-5 translate-y-1"
+        >star</span><span class="mr-2 text-xl">{{ meal.rating }}</span></div>
+   
     <div class="mb-4">
       <p class="text-center my-1">time to make:{{ meal.time }}</p>
       <h3 class="mb-2">
@@ -29,6 +30,7 @@
         ><span class="px-3">portions:{{ kerroin }}</span
         ><button class="material-icons-outlined" (click)="plus()">add</button>
       </div>
+    </div>
       <fieldset class="ml-4 mb-4">
         <div *ngFor="let stuff of meal.ingredients">
             <input
@@ -38,7 +40,7 @@
               value="{{ stuff.name }}"
             />
             <label class="cursor-pointer" for="{{ stuff.name }}">
-             <li>{{stuff.amount | number: "1.0-3"}}{{stuff.what}}<span class="ml-3">{{ stuff.name }}</span></li></label
+             <li>{{stuff.amount | number: "1.0-3"}} {{stuff.what}}<span class="ml-3">{{ stuff.name }}</span></li></label
           >
         </div>
       </fieldset>
@@ -62,4 +64,9 @@
     <img src="{{ meal.img }}" />
   </div>
 </section>
-<ng-template #other_content>something went wrong or loading</ng-template>
+<ng-template #other_content>
+  <div class="loading-container">
+    <div class="loading"></div>
+    <div id="loading-text">loading</div>
+</div>
+</ng-template>

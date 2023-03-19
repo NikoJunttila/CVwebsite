@@ -1,5 +1,5 @@
 <section class="mt-[64px] flex flex-col items-center h-screen">
-<button mat-raised-button color="primary" routerLink="/home">
+<button mat-raised-button color="primary" routerLink="/gym">
     Home
 </button>
 
@@ -7,13 +7,13 @@
     <form [formGroup]="loginForm" (ngSubmit)="loginUser()" type="">
         <p>
             <span class="text-sm text-yellow-50">Email</span><br/>
-            <mat-form-field class="bg-white" appearance="outline">
+            <mat-form-field class="bg-white w-full" appearance="outline">
                   <input  autocomplete="off" formControlName="email" type="email" matInput placeholder="Email">
             </mat-form-field>
         </p>
         <p>
             <span class="text-sm text-yellow-50">Password</span><br/>
-            <mat-form-field class="bg-white" appearance="outline">
+            <mat-form-field class="bg-white w-full" appearance="outline">
                 <input autocomplete="off" formControlName="password" type="password" matInput placeholder="Password">
             </mat-form-field>
         </p>
@@ -25,6 +25,9 @@
    
         <button type="button" mat-raised-button class="w-3/6" color="primary" routerLink="/signup">Sign up</button> <br/>
     </div>
+   <div class="google flex h-[50px] cursor-pointer justify-center items-center flex-col text-white rounded bg-[#792b18] mt-1" (click)="googleLogin()"><span>google login</span>
+    <img src="https://workspace.google.com/static/img/products/png/gmail.png?cache=f50ecb6" width="25px" />
+</div>
     <button type="button" mat-raised-button class="w-full mt-[2px]" color="primary" routerLink="/lostpass">forgot password?</button>
 </form>
 </div>

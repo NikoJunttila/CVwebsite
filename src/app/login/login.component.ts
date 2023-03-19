@@ -24,7 +24,9 @@ export class LoginComponent {
 
       this.firebaseErrorMessage = '';
   }
-
+  googleLogin(){
+    this.authService.googleLogin()
+  }
 
 
   loginUser() {

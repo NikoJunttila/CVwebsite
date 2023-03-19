@@ -1,3 +1,9 @@
 section{
     background:linear-gradient(317deg, rgba(128, 32, 0, 1) 0%, rgba(30, 32, 110, 1) 100%);
 }
+img{
+    max-height: 25px;
+}
+.google:hover{
+    background-color: #2f0d04;
+}

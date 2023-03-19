@@ -30,6 +30,8 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
 import {MatInputModule} from "@angular/material/input";
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatMenuModule} from '@angular/material/menu';
+
 
 
 
@@ -54,6 +56,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     ReactiveFormsModule,
     MatButtonModule,
     MatCardModule,
+    MatMenuModule,
     MatProgressSpinnerModule,
     MatInputModule,
     AngularFireModule.initializeApp(environment.firebase),

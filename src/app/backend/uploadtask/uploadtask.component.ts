@@ -41,7 +41,7 @@ export class UploadtaskComponent implements OnInit{
           finalize(async () => {                                      // after the observable completes, get the file's download URL
               this.downloadURL = await ref.getDownloadURL().toPromise();
               console.log(this.downloadURL)
-              this.db.collection('files').doc(uniqueSafeName).set({
+              this.db.collection('profileImgFiles').doc(uniqueSafeName).set({
                   storagePath: path,
                   downloadURL: this.downloadURL,
                   originalName: this.file?.name,

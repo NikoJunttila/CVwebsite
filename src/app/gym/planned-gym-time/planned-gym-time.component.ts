@@ -26,11 +26,10 @@ export class PlannedGymTimeComponent implements OnInit {
   userLower : string = ""
   showAdd : boolean = false
   showTextArea : boolean = false
+  startedTotalTimer : boolean = false
+
 testeri(){
   this.showTextArea = !this.showTextArea
-}
-testeri2(){
-console.log(this.workoutz?.notes)
 }
   onExerciseEdit(index: number) {
     this.workoutz!.exercises[index]!.editing = true;
@@ -41,14 +40,23 @@ console.log(this.workoutz?.notes)
   }
 
   setAsCompleted(){
-    const date = new Date();
+    const date : any = new Date();
     if (this.workoutz != undefined){
     this.workoutz.date = date
   }
-    this.gymService.addCompletedWorkout(this.userLower,this.workoutz)
+  const startedTime : any = new Date(JSON.parse(sessionStorage.getItem('myDate2')|| "{}"));
+  const diffInMs = Math.abs(startedTime - date)
+  const diffInMinutes = Math.floor(diffInMs / 60000)
+  console.log(diffInMinutes)
+    if(15 <= diffInMinutes && diffInMinutes < 200){
+      this.workoutz!.aproxTime = diffInMinutes + 10
+    }
+     this.gymService.addCompletedWorkout(this.userLower,this.workoutz)
     alert(`added to ${this.userLower}`)
     this.reset()
+    this.showTextArea = false
     this.showAdd = false
+    this.startedTotalTimer = false
   }
 
   loopReps(){
@@ -63,6 +71,10 @@ console.log(this.workoutz?.notes)
 
 
   ngOnInit(): void {
+    const check = JSON.parse(sessionStorage.getItem('myDate2') || '{}');
+    if(Object.keys(check).length !== 0){
+      this.startedTotalTimer = true
+    }
     this.workoutz = JSON.parse(localStorage.getItem('workout2') || '{}');
     this.seconds = this.seconds < 10 ? "0" + this.seconds : this.seconds
     this.playAudio = localStorage.getItem("audio") || 'play'
@@ -144,6 +156,12 @@ console.log(this.workoutz?.notes)
   }
 
    counterPlus(workout:any){
+    if(!this.startedTotalTimer){
+      const currentDate = new Date();
+      sessionStorage.setItem('myDate2', JSON.stringify(currentDate));
+      this.startedTotalTimer = true
+      console.log("started total time")
+    }
     if(workout.setsDone !== undefined){
       workout.setsDone++
       localStorage.setItem('workout2', JSON.stringify(this.workoutz));

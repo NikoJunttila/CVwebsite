@@ -27,12 +27,13 @@
     />
     <button (click)="addNew()" class="myButton">add</button>
   </div>
-  <div >
+  <div class="flex flex-col items-center">
+    <span>Day: <input type="text" class="w-[10ch] bg-slate-700" [(ngModel)]="fullWorkout.day"/></span>
     <h2 class="text-lg text-center">selected exercises:</h2>
     <div>
       <ul class="flex flex-col justify-center items-center" *ngFor="let workout of fullWorkout.exercises">
         <li class="selected">
-          <div class="mr-auto"><span>{{ workout.name }} </span></div>
+          <div class="mr-auto"><span>{{ workout.exercise }} </span></div>
           <div class="flex"> <span>Sets: {{ workout.sets }}</span>
           <span (click)="setsPlus(workout)" class="material-icons-outlined buttons">
             add

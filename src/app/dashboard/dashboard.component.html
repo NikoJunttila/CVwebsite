@@ -1,11 +1,21 @@
 <section class="pt-[60px] flex flex-col text-white">
-  <!--  <div class="flex gap-6 mt-5" *ngIf='(user | async)?.accountType == "admin"'>
-    <button routerLink="/settings/recipe">add recipes</button>
-    <button routerLink="/settings/workout">add workout</button>
-    <button  routerLink="/settings">idk yet</button>
-</div>  -->
-<div class="flex mt-2 justify-center">
+ 
+<div class="flex mt-2 items-center flex-col">
+  <button (click)="goBack()" class="material-icons-outlined py-3 px-8 btn-gradient-2">arrow_back</button>
     <h1>{{(user | async)?.displayName}}</h1>
+   <!--  <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+<mat-menu #menu="matMenu" > -->
+  <div class="dropdown dropdown-bottom">
+    <label tabindex="0" class="btn m-1">Change profile img</label>
+    <div id="movepls" tabindex="0" class="dropdown-content card card-compact p-2 holder bg-[#350883]  text-primary-content">
+        <div  class="contentIMGS">
+          <div class="card" *ngFor="let image of profImages">
+            <img class="menuImg" alt="profImg" [src]="image.downloadURL" (click)="updateProfileImage(image.downloadURL)"/>
+          </div>
+        </div>
+    </div>
+  </div>
+    <img  [src]="imgURL" />
 </div>
   <div class="flex mt-3 ml-2 justify-center ">
     <div class="holder">
@@ -37,26 +47,22 @@
           </span>
         </li>
       </div>    </div>
-    <div class="ml-4 bg-[#1A237E] full" *ngIf="workoutToShow">
+    <div class="ml-2 mr-1 bg-[#1A237E] full" *ngIf="workoutToShow">
       <div class="pb-2">
         <h3>{{ workoutToShow.day }}</h3>
         <h3>{{ workoutToShow.date.toDate() | date:'d MMM, y, h:mm:ss a' }}</h3>
         <h3>aprox: {{ workoutToShow.aproxTime }} minutes</h3>
       </div>
       <li class="" *ngFor="let exercise of workoutToShow.exercises">
-        <span class="mr-1 ml-1"> {{ exercise.exercise }} <span *ngIf="exercise.weight">{{exercise.weight}}kg</span></span>
-        {{ exercise.setsDone }}x{{ exercise.reps }}
+       <div class="ml-1"> <span class="mr-1"> {{ exercise.exercise }} <span *ngIf="exercise.weight">{{exercise.weight}}kg</span></span>
+        {{ exercise.setsDone }}x{{ exercise.reps }}</div>
       </li>
-      <span class="ml-1" *ngIf="workoutToShow.notes">{{workoutToShow.notes}}</span>
+      <div class="pb-1 pt-1 text-center bg-[#006064]" *ngIf="workoutToShow.notes">{{workoutToShow.notes}}</div>
     </div>
   </div>
+  <div class="flex gap-6 mt-5" *ngIf='(user | async)?.accountType == "admin"'>
+    <button routerLink="/settings/recipe">add recipes</button>
+    <button routerLink="/settings/workout">add workout</button>
+    <button  routerLink="/settings">idk yet</button>
+</div>  
 </section>
-
-<!-- <div>
-    <h3>{{workout.time}}</h3>
-    <ul>
-        <li *ngFor="let exercise of workout.exercises">
-          <span class="mr-1"> {{exercise.exercise}}</span>  {{exercise.setsDone}}x{{exercise.reps}}
-        </li>
-    </ul>
-</div> -->

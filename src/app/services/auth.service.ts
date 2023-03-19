@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
-import { AngularFirestore,AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+import { AngularFirestore,AngularFirestoreDocument,AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Location } from '@angular/common';
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import * as firebase from 'firebase/app';
+import 'firebase/firestore';
+
 
 
 
@@ -31,6 +35,7 @@ export class AuthService {
     }
 
 
+
     loginUser(email: string, password: string): Promise<any> {
         return this.afAuth.signInWithEmailAndPassword(email, password)
             .then(() => {
@@ -47,6 +52,51 @@ export class AuthService {
     }
 
 
+    googleLogin(){
+        const provider = new GoogleAuthProvider();
+        const auth = getAuth();
+signInWithPopup(auth, provider)
+  .then(async(result) => {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential!.accessToken;
+    // The signed-in user info.
+    const user = result.user;
+    let emailLower = user.email!.toLowerCase();
+    const userRef : any = this.afs.doc('/users/' + emailLower)  
+    this.afs.doc(`users/${emailLower}`).get().subscribe(docSnapshot => {
+        if (docSnapshot.exists) {
+          // Document exists, do something
+          console.log('Welcome back');
+        } else {
+            console.log("new acc")
+            const data = {
+                accountType: 'normie',
+                displayName: user?.displayName,
+                email: user.email,
+                email_lower: emailLower,
+                photoURL: user.photoURL
+            }
+            userRef.set(data, {merge:true})
+        }
+      });
+    this.location.back()
+       // IdP data available using getAdditionalUserInfo(result)
+    // ...
+  }).catch((error) => {
+    console.log(error)
+    // Handle Errors here.
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // The email of the user's account used.
+    const email = error.customData.email;
+    // The AuthCredential type that was used.
+    const credential = GoogleAuthProvider.credentialFromError(error);
+    // ...
+  });
+    }
+
+
     signupUser(user: any): Promise<any> {
         return this.afAuth.createUserWithEmailAndPassword(user.email, user.password)
             .then((result) => {
@@ -59,7 +109,7 @@ export class AuthService {
                         displayName_lower: user.displayName.toLowerCase(),
                         email: user.email,
                         email_lower: emailLower,
-                        completedWorkouts:[]
+                        photoURL: "https://firebasestorage.googleapis.com/v0/b/portfolio-5756d.appspot.com/o/uploads%2F1679212379254_1367902251612x612.jpg?alt=media&token=d8828d33-d1ad-45aa-bbf7-2063923e7f6c"
                     });
 
                     result.user!.sendEmailVerification();                    // immediately send the user a verification email
