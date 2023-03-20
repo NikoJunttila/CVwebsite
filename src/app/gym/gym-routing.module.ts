@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { FullworkoutUseraddedComponent } from './fullworkout-useradded/fullworkout-useradded.component';
 import { FullworkoutComponent } from './fullworkout/fullworkout.component';
 import { GymComponent } from './gym.component';
 import { GymtimeComponent } from './gymtime/gymtime.component';
@@ -13,7 +14,8 @@ const routes: Routes = [
   {path:"lightweight",component: GymtimeComponent},
   {path:"desc/:id", component: FullworkoutComponent},
   {path:"desc/:id/:id",component: PlannedGymTimeComponent},
-  {path:"info/:name",component: InfoComponent}
+  {path:"info/:name",component: InfoComponent},
+  {path:"personal/:id",component:FullworkoutUseraddedComponent}
 
 ];
 

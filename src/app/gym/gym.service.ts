@@ -28,6 +28,30 @@ export class GymService {
         alert(error)
     }) 
     }
+addWorkoutForNormies(workout:any,emailLower:string){
+  this.afs.collection('users').doc(emailLower).collection('addedWorkouts').doc(`${workout.id}`).set(workout);
+  this.afs.doc("/workoutsPersonal/"+ workout.id).set(workout)
+  .then(() => {
+      alert(`added ${workout.name}`)
+  })
+   .catch(error => {
+      console.log(error)
+      alert(error)
+  }) 
+}
+
+getPersonalWorkouts(userEmail : string): Observable<any[]>{
+  let data : any = [];
+  const collection = this.afs.collection<any[]>('users').doc(userEmail).collection("addedWorkouts");
+  collection.get().subscribe(snapshot => {
+    snapshot.forEach((res) => {
+      data.push(res.data());
+    });
+  });
+  const workouts = of(data)
+return workouts;
+}
+
 //all workouts
     getWorkouts(): Observable<any[]>{
       let data : any = [];
@@ -54,6 +78,7 @@ export class GymService {
           })
         );
     }
+    
     //constant stream of data. not good here
    /*  getWorkoutFromFirestore(collectionName: string, documentId: string): Observable<any> {
       return this.afs.collection(collectionName).doc(documentId)

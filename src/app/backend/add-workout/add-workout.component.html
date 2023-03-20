@@ -1,53 +1,99 @@
-<section class="mt-[64px] flex items-center justify-center flex-col">
-        <form class="flex-col flex items-start gap-4" [formGroup]="workout" (ngSubmit)="onSubmit()" >
-            <label>
-              Name:
-              <input required type="text" formControlName="name">
+<section class="mt-[64px] bg-gray-800 flex flex-col justify-center items-center text-white gap-4">
+        <form class="flex-col flex justify-center items-center gap-4" [formGroup]="workout" (ngSubmit)="onSubmit()" >
+          <div class="flex flex-col border-4 border-dotted border-slate-700">
+           <label>
+            workout name:
             </label>
-            
+            <input required type="text" formControlName="name">
             <label>
               Description:
-              <textarea formControlName="description"></textarea>
             </label>
-            
+            <textarea class="inputColor" formControlName="description"></textarea>
             <label>
-              Days:
-              <input required type="text" formControlName="days">
+              how many days per week:
             </label>
+            <input required type="text" formControlName="days">
+          </div>
             
-            <div class="w-full"  formArrayName="plans">
-              <div class="plans mb-5" *ngFor="let plan of plans.controls; let i = index" [formGroupName]="i">
+            <div class="flex-col flex justify-center items-center"  formArrayName="plans">
+              <div class="flex-col flex justify-center items-center" *ngFor="let plan of plans.controls; let i = index" [formGroupName]="i">
+                <h2 class="mb-2">{{i+1}}. day</h2>
                 <label>
                   Approximate Time in minutes:<br />
                   <input required type="number" formControlName="aproxTime">
                 </label>
-                
-                <label>
+                <label class="mt-3">
                   Day:
-                  <input  type="text" formControlName="day">
+                  <input placeholder="what muscles are trained."  type="text" formControlName="day">
                 </label>
+                <div class="flex columsOnMiddle">
+                  <div>
+                <div class="max-w-[45vw] mr-4">
+                  <label class="text-lg" for="categories">categories:</label>
+                  <select (click)="categories(i)" class="w-full mb-3 inputColor" name="categories" id="categories{{i}}">
+                    <option value="all" >All</option>
+                    <option value="back">Back</option>
+                    <option value="chest">Chest/shoulders</option>
+                    <option value="legs">Legs</option>
+                    <option value="arms">Arms</option>
+                    <option value="abs">Abs</option>
+                  </select>
+                  <div class="content">
+                    <ul *ngFor="let exercise of exercises" class="">
+                      <li (click)="getName(plan,exercise)" class="capitalize list mt-1 bg-gray-900">
+                        {{ exercise }}
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="mt-2">
+                    <input
+                      class="inputColor"
+                      type="text"
+                    id="name{{i}}"
+                      placeholder="add" />
+                    <button type="button" (click)="addExerciseNew(plan,i)" class="btn-gradient-2 ml-1 px-1">add</button>
+                  </div>
+                </div>
+                
+                
+              </div>
+                <div class="flex flex-col items-center max-w-[40vw]">
+                  <h2 class="text-lg text-center">selected exercises:</h2>
+                  <div>
                 <div formArrayName="exercises">
-                  <div class="exercises" *ngFor="let exercise of getExercises(plan).controls; let j = index" [formGroupName]="j">
-                    <label>
-                      Exercise:
-                      <input type="text" formControlName="exercise">
-                    </label>
-                    <label>
-                      Sets:
-                      <input type="number" formControlName="sets">
-                    </label>
-                    
-                    <label>
-                      Reps:
-                      <input class="smoll" type="text" formControlName="reps">
-                    </label>
-                    
+                  <div class="w-fit " *ngFor="let exercise of getExercises(plan).controls; let j = index" [formGroupName]="j">
+                          <li class="selected ">
+                            <label>
+                              Exercise:
+                              <input type="text" formControlName="exercise">
+                            </label>
+                            <div>
+                           <label>
+                              Sets:
+                            </label>
+                            <input type="number" formControlName="sets"><br />
+                            <label>
+                              Reps:
+                            </label> 
+                            <input type="text" formControlName="reps">
+                          </div>
+                          </li>
+                      </div>
+                    </div>
+                  </div>          
                 </div>
             </div>
-            <button type="button"  (click)="addExercise(plan)">add exercise</button>
+            <button type="button" class="my-4 btn-gradient-2 p-3"  (click)="addExercise(plan)">add exercise</button>
               </div>
             </div>
-            <button type="button" (click)="addPlan()">next day</button>
-            <button  [disabled]="!workout.valid" class="bigger">submit</button>
+            <button type="button" class="btn-gradient-2 p-3" (click)="addPlan()">next day</button>
+            <button type="submit" [disabled]="!workout.valid" class="bigger">submit</button>
+            <div class="flex gap-6 mt-5" *ngIf='(user | async)?.accountType == "admin"'>
+              <button (click)="onAdminSubmit()" type="button">admin secret share all workout button</button>
+            </div>
           </form>
 </section>
+
+  <!--      <span (click)="delete(workout)" class="material-icons-outlined buttons">
+                              delete
+                            </span> -->

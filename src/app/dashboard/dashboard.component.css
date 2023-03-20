@@ -23,8 +23,8 @@ border: 2px green dotted;
     background: linear-gradient(rgb(103, 5, 13), rgb(20, 9, 119)) padding-box,
                 linear-gradient(to right, rgb(172, 18, 18), darkorchid) border-box;
     border-radius: 50em;
-    border: 4px solid transparent;
-    filter: drop-shadow(16px 9px 18px #692626);
+    border: 2px solid transparent;
+    filter: drop-shadow(16px 9px 10px #692626);
 }
 button:hover{
     background-color: rgb(9, 9, 44);
@@ -100,4 +100,19 @@ img{
         grid-template-columns: 1fr 1fr 1fr 1fr;
         
     }
+}
+input[type="file"] {
+    display: none;
+}
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 3px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #880E4F;
+}
+.custom-file-upload:hover{
+    background-color: rgb(9, 9, 44);
+    opacity: 0.8;
 }

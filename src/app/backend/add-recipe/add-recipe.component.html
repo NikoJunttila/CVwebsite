@@ -2,7 +2,10 @@
     <form class="flex-col flex" [formGroup]="mealObject" (ngSubmit)="onSubmit()">
         <label>name:</label><input required placeholder="food name" formControlName="name" />
         <label>time:</label><input required placeholder="time to make food" formControlName="time" />
-        <label>img:</label><input required placeholder="link to img" formControlName="img" />
+      <div class="flex my-1">  <label>img:</label><input class="w-[33%] mr-5" required placeholder="link to img" formControlName="img" /> 
+        <span class="text-xs pointer-events-none">or</span>
+        <input type="file" class="w-[33%] ml-5" (change)="uploadFile($event)">
+      </div>
         <label>rating:</label><input required placeholder="rate food" formControlName="rating" numbersOnly type="number" />
         <label>portions:</label> <input required placeholder="how many portions recipe makes" numbersOnly formControlName="portions" type="number" />
         <label>ingredients:</label>

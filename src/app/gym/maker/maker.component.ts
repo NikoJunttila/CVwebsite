@@ -88,7 +88,6 @@ export class MakerComponent implements OnInit{
       done: false,
     };
     this.fullWorkout.exercises.push(object)
-/*     this.newWorkout.push(object); */
     this.personal = ""
   }
   }

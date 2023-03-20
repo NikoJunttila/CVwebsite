@@ -11,6 +11,7 @@ import { CustomFilterPipe } from './custom-filter-pipe.pipe';
 import { FullworkoutComponent } from './fullworkout/fullworkout.component';
 import { PlannedGymTimeComponent } from './planned-gym-time/planned-gym-time.component';
 import { InfoComponent } from './info/info.component';
+import { FullworkoutUseraddedComponent } from './fullworkout-useradded/fullworkout-useradded.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { InfoComponent } from './info/info.component';
     CustomFilterPipe,
     FullworkoutComponent,
     PlannedGymTimeComponent,
-    InfoComponent
+    InfoComponent,
+    FullworkoutUseraddedComponent
   ],
   imports: [
     CommonModule,

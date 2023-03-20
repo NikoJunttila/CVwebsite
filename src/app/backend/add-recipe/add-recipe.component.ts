@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
 import { CookingService } from 'src/app/cooking/cooking-service.service';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { finalize } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-add-recipe',
@@ -8,7 +12,7 @@ import { CookingService } from 'src/app/cooking/cooking-service.service';
   styleUrls: ['./add-recipe.component.css']
 })
 export class AddRecipeComponent {
-  constructor(private fb: FormBuilder, private send:CookingService){}
+  constructor(private fb: FormBuilder, private send:CookingService, private afs:AngularFirestore, private storage:AngularFireStorage){}
   mealObject = this.fb.group({
     name: [""],
     img: [""],
@@ -57,5 +61,27 @@ export class AddRecipeComponent {
   clearThis(){
     this.mealObject.reset()
   }
-  
+  imageUrl: string =""
+
+  uploadFile(event:any) {
+    const file = event.target.files[0];
+    let safeName = file.name?.replace(/([^a-z0-9.]+)/gi, '');   // file name stripped of spaces and special chars
+    let timestamp = Date.now();
+    const uniqueSafeName = timestamp + '_' + safeName;
+    const filePath = 'uploads/' + uniqueSafeName;                       // Firebase storage path
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, file);
+
+    task.snapshotChanges().pipe(
+      finalize(() => {
+        fileRef.getDownloadURL().subscribe(url => {
+          this.imageUrl = url;
+          this.mealObject.patchValue({
+            img:url
+          })
+          console.log(url)
+        });
+      })
+    ).subscribe();
+  }
 }

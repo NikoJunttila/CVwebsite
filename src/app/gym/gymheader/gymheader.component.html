@@ -2,6 +2,16 @@
     <div class="text">
         <p>free and effective workouts so you don't need to spend money on personal trainers</p>
     <p>I have close to a decade of experience from gym training and can recommend these workouts</p>
+    <div class="dropdown">
+        <label tabindex="0" class="btn bg-blue-900 m-1">feedback</label>
+        <div tabindex="0" class="dropdown-content card card-compact w-64 p-2 shadow bg-blue-900 text-primary-content">
+          <div class="card-body text-black">
+            <textarea id="feedback" class="textarea textarea-primary"
+             placeholder="ideas for new functions for example or complaints"></textarea>
+            <button (click)="addFeedback()" class="border-2 border-solid border-cyan-200 p-2 rounded-md bg-[#303F9F] hover:bg-[#1A237E]">send</button>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="img flex justify-center items-center">
         <div class="text-2xl ml-2 mr-2 text-white">

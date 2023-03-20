@@ -21,7 +21,10 @@ text-align: center;
   border-radius: 15px;
   min-height: 250px;
   overflow: hidden;
-} 
+}
+.grid-ish:hover{
+  background-color:#616161 ;
+}
 @media (max-width: 1000px){
   .gridder{
     grid-template-columns: 1fr 1fr 1fr; 

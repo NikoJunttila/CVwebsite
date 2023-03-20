@@ -3,4 +3,5 @@
 background: linear-gradient(180deg, rgba(29,24,116,1) 16%, rgba(89,25,144,1) 38%, rgba(66,18,107,1) 59%, rgba(21,90,105,1) 80%);
 overflow-x: hidden;
  max-width: 100vw;
+ z-index: -2;
 }

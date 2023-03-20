@@ -2,10 +2,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import {singleWorkout} from "../gym/workouts"
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
-import { Observable, of } from 'rxjs';
+import { Observable, of,finalize } from 'rxjs';
 import { GymService } from '../gym/gym.service';
 import { AuthService } from '../services/auth.service';
 import { DatePipe,Location } from '@angular/common';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 
 
@@ -22,15 +23,19 @@ export class DashboardComponent implements OnInit, OnDestroy {
   
 
   constructor(public afAuth: AngularFireAuth, private datePipe: DatePipe, private location:Location,
-    private firestore: AngularFirestore,private authser:AuthService,private gymService:GymService) {
+    private firestore: AngularFirestore,private authser:AuthService,private gymService:GymService, private storage:AngularFireStorage) {
       this.user = null as any;
   }
-  done : any
+  done : any = []
   emailLower: any = ''; 
   workoutToShow : singleWorkout |undefined
   timeSpent : number | undefined
   imgURL : string = ""
   profImages : any[] = []
+
+  test(){
+    console.log(this.done)
+  }
 
   goBack(){
     this.location.back()
@@ -109,6 +114,31 @@ aproxTimeAtGym(){
 }
 ngOnDestroy(): void {
     this.subscribtions.unsubscribe()
+}
+uploadFile(event:any) {
+  const file = event.target.files[0];
+  let safeName = file.name?.replace(/([^a-z0-9.]+)/gi, '');   // file name stripped of spaces and special chars
+  let timestamp = Date.now();
+  const uniqueSafeName = timestamp + '_' + safeName;
+  const filePath = 'uploads/' + uniqueSafeName;                       // Firebase storage path
+  const fileRef = this.storage.ref(filePath);
+  const task = this.storage.upload(filePath, file);
+
+  task.snapshotChanges().pipe(
+    finalize(() => {
+      fileRef.getDownloadURL().subscribe((url:any) => {
+        const subscribeImg : any = this.user.subscribe(user => {
+          if (user) {
+              // Update the photoURL field in Firestore
+             this.firestore.doc(`users/${this.emailLower}`).update({
+              photoURL: url
+            });
+            subscribeImg.unsubscribe();
+          }
+        });
+      });
+    })
+  ).subscribe();
 }
 
 }

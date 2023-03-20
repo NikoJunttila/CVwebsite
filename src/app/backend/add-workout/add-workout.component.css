@@ -1,12 +1,9 @@
 section{
 /*     background-image: url("https://e0.pxfuel.com/wallpapers/266/233/desktop-wallpaper-black-and-white-hall-rod-gym-fitness-for-section-%D1%81%D0%BF%D0%BE%D1%80%D1%82-gym-black.jpg");
- */    background-size: cover;
- background-color: black;
-    color:whitesmoke;
-    font-size: 1rem;
+ */ overflow: hidden;
     min-height: 100vh;
 }
-input{
+ input{
     color:whitesmoke;
      background-color: #212121;
 }
@@ -19,103 +16,73 @@ input{
 .bigger:disabled{
  background-color: darkred;   
 }
-
-form {
-    border: 3px royalblue solid;
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    box-sizing: border-box;
-  }
-  
-  form label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  
-  form input[type=text],
-  form textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    background-color: #212121;
-  }
-  
-  form select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    background-color: #fff;
-  }
-  
-  form button {
-    background-color: #4CAF50;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  form .form-group {
-    margin-bottom: 20px;
-  }
-  
-  form .form-group label {
-    margin-bottom: 10px;
-    font-weight: bold;
-  }
-  
-  form .form-group input[type=text] {
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    margin-top: 5px;
-  }
-  
-  form .form-group select {
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    margin-top: 5px;
-  }
-  
-  form .form-group button {
-    padding: 5px 10px;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  form .form-group button:hover {
-    background-color: #3e8e41;
-  }
-  .plans{
-    border: 2px rgb(255, 149, 0) solid;
-  }
-  .exercises{
-    margin: 5px 5px;
-    border: 2px rgb(65, 2, 2) solid
-  }
   .smoll{
     max-width: 10ch;
     height: 1ch;
+} 
+.content{
+    height: 224px;
+    width: 260px;
+    overflow: auto;
+}
+.list{
+    border: #e1e2ed;
+    border-radius: 20px;
+    text-align: center;
+}
+.list:hover{
+    background: rgb(0,0,0);
+    color: whitesmoke;
+}
+.selected{
+    --tw-bg-opacity: 1;
+    background-color: rgb(17 24 39 / var(--tw-bg-opacity));
+    margin-top: 5px;
+    min-height: 40px;
+    text-align: center;
+    border-radius: 10px;
+    width: fit-content;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+    gap: 2px;
+}
+
+.inputColor{
+    background:#302c34;
+}
+.selected:hover{
+    background: rgb(0,0,0);
+
+    color: whitesmoke;
+}
+.buttons{
+    cursor:pointer;
+}
+.buttons:hover{
+    color: rgb(70, 94, 250);
+}
+@media(max-width:600px){
+  .columsOnMiddle{
+    flex-direction: column;
   }
+}
+.btn-gradient-2 {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(255, 255, 255);
+  font-size: 1rem;
+  cursor: pointer;
+  background: linear-gradient(rgb(103, 5, 13), rgb(20, 9, 119)) padding-box,
+              linear-gradient(to right, rgb(172, 18, 18), darkorchid) border-box;
+  border-radius: 50em;
+  border: 1px solid transparent;
+}
+button:hover{
+opacity: 0.7;
+}

@@ -1,10 +1,11 @@
-<section class="pt-[60px] flex flex-col text-white">
+<section class="pt-[60px] flex flex-col text-white pb-12">
  
 <div class="flex mt-2 items-center flex-col">
   <button (click)="goBack()" class="material-icons-outlined py-3 px-8 btn-gradient-2">arrow_back</button>
     <h1>{{(user | async)?.displayName}}</h1>
    <!--  <button mat-button [matMenuTriggerFor]="menu">Menu</button>
 <mat-menu #menu="matMenu" > -->
+<div class="flex mb-3">
   <div class="dropdown dropdown-bottom">
     <label tabindex="0" class="btn m-1">Change profile img</label>
     <div id="movepls" tabindex="0" class="dropdown-content card card-compact p-2 holder bg-[#350883]  text-primary-content">
@@ -15,11 +16,20 @@
         </div>
     </div>
   </div>
+  <label for="file-upload" class="custom-file-upload ">
+    <span class="material-icons-outlined translate-y-2">
+      cloud_upload 
+      </span> <span> custom Upload</span>
+</label>
+<input id="file-upload" type="file" class="" (change)="uploadFile($event)">
+</div>
     <img  [src]="imgURL" />
+    <button routerLink="/settings/workout" class="mt-2 border-2 border-solid border-cyan-400 rounded px-2">add new workout</button>
 </div>
   <div class="flex mt-3 ml-2 justify-center ">
     <div class="holder">
-      <h1>workouts done :</h1>
+      <h1 (click)="test()">workouts done :</h1>
+      <h3 *ngIf="done.length == 0">you haven't saved any workouts yet.<br />once you do they will show here</h3>
       <div class="pb-2" *ngIf="timeSpent! > 0">
      <span>total time spent aprox: {{ timeSpent }} minutes</span>
      <p class="text-xs">items marked with ** have notes</p>
@@ -31,7 +41,6 @@
             </span>
         </div>
 </div>
-     
       <div class="content">
         <li
           class="list-none cursor-pointer"

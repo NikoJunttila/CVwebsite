@@ -1,0 +1,28 @@
+.coolerthanme{
+    min-height: 100vh;
+    --tw-bg-opacity: 1;
+    background-color: rgb(51 65 85 / var(--tw-bg-opacity));
+    color:antiquewhite;
+}
+.size{
+    max-width: 95%;
+}
+ul{
+    border: 2px solid rgb(0, 0, 0);
+    margin-top: 10px;
+    background-color: rgb(0, 0, 37);
+    cursor: pointer;
+    color: antiquewhite;
+    border-radius: 5px;
+}
+ul:hover{
+    background-color: rgb(0, 0, 0);
+}
+.mybtn{
+    background: #111;
+    border-radius: 5px;
+    padding: 7px 20px;
+}
+.mybtn:hover{
+    background-color: rgb(43, 2, 2);
+}

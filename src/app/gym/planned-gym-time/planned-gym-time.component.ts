@@ -48,15 +48,17 @@ testeri(){
   const diffInMs = Math.abs(startedTime - date)
   const diffInMinutes = Math.floor(diffInMs / 60000)
   console.log(diffInMinutes)
-    if(15 <= diffInMinutes && diffInMinutes < 200){
+    if(15 <= diffInMinutes && diffInMinutes < 240){
+      console.log("time worked")
       this.workoutz!.aproxTime = diffInMinutes + 10
-    }
+    } else console.log("time didnt work git gud")
      this.gymService.addCompletedWorkout(this.userLower,this.workoutz)
-    alert(`added to ${this.userLower}`)
+    alert(`saved workout`)
     this.reset()
     this.showTextArea = false
     this.showAdd = false
     this.startedTotalTimer = false
+    sessionStorage.removeItem("myDate2")
   }
 
   loopReps(){
