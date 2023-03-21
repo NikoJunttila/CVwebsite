@@ -20,7 +20,9 @@ constructor(private gymService: GymService,public afAuth: AngularFireAuth){}
 
 ngOnInit(): void {
  this.subscription = this.gymService.getWorkouts()
-  .subscribe(plans => this.plans = plans)
+  .subscribe(plans =>{
+   this.plans = plans }
+   )
   this.subscription2 =  this.afAuth.authState.subscribe(user => {
     if (user) {
       const emailLower = user.email?.toLowerCase() as string;
@@ -30,6 +32,9 @@ ngOnInit(): void {
         }
       })
     }})
+  setTimeout(() => {
+    this.plans.sort((a:any, b:any) => a.sort - b.sort) 
+  }, 500);
 }
 test(){
   console.log(this.userPlans)

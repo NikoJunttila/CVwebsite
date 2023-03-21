@@ -31,6 +31,7 @@ import {MatCardModule} from "@angular/material/card";
 import {MatInputModule} from "@angular/material/input";
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatMenuModule} from '@angular/material/menu';
+import { MessageComponentComponent } from './message-component/message-component.component';
 
 
 
@@ -45,7 +46,8 @@ import {MatMenuModule} from '@angular/material/menu';
     LoginComponent,
     SignupComponent,
     DashboardComponent,
-    LostpassComponent
+    LostpassComponent,
+    MessageComponentComponent
   ],
   imports: [
     BrowserModule,

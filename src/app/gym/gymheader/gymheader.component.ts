@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { quote } from '../workouts';
 import { quotes } from './quotes';
 import { AngularFirestore,AngularFirestoreDocument,AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { MessageService } from 'src/app/services/message.service';
 
 @Component({
   selector: 'app-gymheader',
@@ -10,7 +11,7 @@ import { AngularFirestore,AngularFirestoreDocument,AngularFirestoreCollection } 
 })
 export class GymheaderComponent implements OnInit {
 quote : quote | undefined
-constructor(private afs:AngularFirestore){}
+constructor(private afs:AngularFirestore, private messageService:MessageService){}
 
 ngOnInit(): void {
     this.random()
@@ -31,9 +32,8 @@ async addFeedback(){
     feedback: inputValue
   }).then(() => {
     inputElement.value = ""
-    alert(`thx for feedback <3`)
+    this.messageService.add("thx for feedback :>","success")
   }).catch(error => {
     console.log(error)
-    alert(error)
-  })
+    this.messageService.add(error,"error")  })
 }}

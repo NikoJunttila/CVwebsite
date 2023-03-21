@@ -16,7 +16,7 @@ export class LoginComponent {
   loginForm: FormGroup;
   firebaseErrorMessage: string;
 
-  constructor(private authService: AuthService, private router: Router, private afAuth: AngularFireAuth,private location:Location) {
+  constructor(private authService: AuthService, private afAuth: AngularFireAuth) {
       this.loginForm = new FormGroup({
           'email': new FormControl('', [Validators.required, Validators.email]),
           'password': new FormControl('', Validators.required)
@@ -28,15 +28,13 @@ export class LoginComponent {
     this.authService.googleLogin()
   }
 
-
   loginUser() {
       if (this.loginForm.invalid)
           return;
 
       this.authService.loginUser(this.loginForm.value.email, this.loginForm.value.password).then((result) => {
           if (result == null) {                               // null is success, false means there was an error
-              console.log('logging in...');
-              this.location.back();                // when the user is logged in, navigate them back
+              console.log('logging in...');              // when the user is logged in, navigate them back
           }
           else if (result.isValid == false) {
               console.log('login error', result);

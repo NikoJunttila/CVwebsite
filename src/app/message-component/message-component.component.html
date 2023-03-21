@@ -1,0 +1,8 @@
+<div id="messageDiv" *ngIf="messages.length > 0" >
+    <div class="z-10 absolute message slide-in-top text-center flex justify-center items-center rounded" [ngClass]="{ 'success': message.type === 'success', 'error': message.type === 'error' }" *ngFor="let message of messages">
+    <button class="absolute top-0 right-0 material-icons" (click)="clear()">close</button>
+    <li class="list-none"
+    *ngFor="let message of messages">{{ message.message }}
+</li>
+</div>
+</div>

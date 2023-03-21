@@ -7,7 +7,7 @@ import { GymService } from '../gym/gym.service';
 import { AuthService } from '../services/auth.service';
 import { DatePipe,Location } from '@angular/common';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-
+import { MessageService } from '../services/message.service';
 
 
 @Component({
@@ -23,7 +23,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
   
 
   constructor(public afAuth: AngularFireAuth, private datePipe: DatePipe, private location:Location,
-    private firestore: AngularFirestore,private authser:AuthService,private gymService:GymService, private storage:AngularFireStorage) {
+    private firestore: AngularFirestore,private authser:AuthService,private gymService:GymService, private storage:AngularFireStorage,
+    private messageService:MessageService
+    ) {
       this.user = null as any;
   }
   done : any = []
@@ -32,10 +34,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   timeSpent : number | undefined
   imgURL : string = ""
   profImages : any[] = []
-
-  test(){
-    console.log(this.done)
-  }
 
   goBack(){
     this.location.back()
@@ -75,12 +73,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   updateProfileImage(newImage: string) {
+  
   const subscribeImg : any = this.user.subscribe(user => {
       if (user) {
           // Update the photoURL field in Firestore
          this.firestore.doc(`users/${this.emailLower}`).update({
           photoURL: newImage
         });
+        this.messageService.add("updated profile pic","success")
         subscribeImg.unsubscribe();
       }
     });
@@ -96,7 +96,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     const images = of(data)
      return images
    }
-
 
 
 sortLatestFirst(){

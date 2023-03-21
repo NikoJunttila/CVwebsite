@@ -157,10 +157,14 @@ h3{
        
       .arrow-next{
           right:-5px;
-
         }
       
     }
+    @media (max-width: 400px){
+      .smaller{
+        font-size: 0.8rem;
+      }
+    } 
 
 
 /*Select every element*/

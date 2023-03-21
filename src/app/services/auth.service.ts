@@ -8,6 +8,7 @@ import { Location } from '@angular/common';
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
+import { MessageService } from './message.service';
 
 
 
@@ -21,7 +22,8 @@ export class AuthService {
     
   userLoggedIn: boolean;      // other components can check on this variable for the login status of the user
 
-    constructor(private router: Router, private afAuth: AngularFireAuth,private afs: AngularFirestore,private location:Location) {
+    constructor(private router: Router, private afAuth: AngularFireAuth,private afs: AngularFirestore,private location:Location,
+        private messageService:MessageService) {
         this.userLoggedIn = false;
         this.userFull = null as any;
 
@@ -39,7 +41,7 @@ export class AuthService {
     loginUser(email: string, password: string): Promise<any> {
         return this.afAuth.signInWithEmailAndPassword(email, password)
             .then(() => {
-                console.log('Auth Service: loginUser: success');
+                this.messageService.add("welcome back summoner", "success")
                 this.location.back()
             })
             .catch(error => {
@@ -67,9 +69,9 @@ signInWithPopup(auth, provider)
     this.afs.doc(`users/${emailLower}`).get().subscribe(docSnapshot => {
         if (docSnapshot.exists) {
           // Document exists, do something
-          console.log('Welcome back');
+          this.messageService.add('Welcome back',"success")
         } else {
-            console.log("new acc")
+            this.messageService.add('Hi :)',"success")
             const data = {
                 accountType: 'normie',
                 displayName: user?.displayName,
@@ -84,6 +86,8 @@ signInWithPopup(auth, provider)
        // IdP data available using getAdditionalUserInfo(result)
     // ...
   }).catch((error) => {
+    this.messageService.add(error,"error")
+
     console.log(error)
     // Handle Errors here.
     const errorCode = error.code;
@@ -111,10 +115,12 @@ signInWithPopup(auth, provider)
                         email_lower: emailLower,
                         photoURL: "https://firebasestorage.googleapis.com/v0/b/portfolio-5756d.appspot.com/o/uploads%2F1679212379254_1367902251612x612.jpg?alt=media&token=d8828d33-d1ad-45aa-bbf7-2063923e7f6c"
                     });
-
+                    this.messageService.add("have fun time using this app","success")
                     result.user!.sendEmailVerification();                    // immediately send the user a verification email
             })
             .catch(error => {
+                this.messageService.add('signup error',"error")
+
                 console.log('Auth Service: signup error', error);
                 if (error.code)
                     return { isValid: false, message: error.message };

@@ -7,6 +7,7 @@ import { sounds } from '../sounds';
 import { GymService } from '../gym.service';
 import { AngularFirestore,AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { MessageService } from 'src/app/services/message.service';
 @Component({
   selector: 'app-gymtime',
   templateUrl: './gymtime.component.html',
@@ -17,7 +18,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
   ]
 })
 export class GymtimeComponent implements OnInit {
-  constructor (private route:ActivatedRoute,private location: Location,private gymService:GymService,
+  constructor (private route:ActivatedRoute,private location: Location,private gymService:GymService,private messageService:MessageService,
     private afAuth: AngularFireAuth, private afs: AngularFirestore){
   }
   workoutz : singleWorkout | undefined 
@@ -52,7 +53,7 @@ export class GymtimeComponent implements OnInit {
     }
 
     this.gymService.addCompletedWorkout(this.userLower,this.workoutz)
-    alert(`added to ${this.userLower}`)
+    this.messageService.add("saved","success")
     this.reset()
     this.showAdd = false
     this.showTextArea = false

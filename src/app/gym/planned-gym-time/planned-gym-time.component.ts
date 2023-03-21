@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { singleWorkout } from '../workouts';
 import { Location } from '@angular/common';
@@ -7,7 +7,7 @@ import { sounds } from '../sounds';
 import { GymService } from '../gym.service';
 import { AngularFirestore,AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-
+import { MessageService } from 'src/app/services/message.service';
 @Component({
   selector: 'app-planned-gym-time',
   templateUrl: './planned-gym-time.component.html',
@@ -17,9 +17,9 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
     fadeOutOnLeaveAnimation()
   ]
 })
-export class PlannedGymTimeComponent implements OnInit {
+export class PlannedGymTimeComponent implements OnInit, OnDestroy {
 
-  constructor (private route:ActivatedRoute,private location: Location,private gymService:GymService,
+  constructor (private route:ActivatedRoute,private location: Location,private gymService:GymService, private messageService:MessageService,
     private afAuth: AngularFireAuth, private afs: AngularFirestore){
   }
   workoutz : singleWorkout | undefined 
@@ -51,9 +51,9 @@ testeri(){
     if(15 <= diffInMinutes && diffInMinutes < 240){
       console.log("time worked")
       this.workoutz!.aproxTime = diffInMinutes + 10
-    } else console.log("time didnt work git gud")
+    }
      this.gymService.addCompletedWorkout(this.userLower,this.workoutz)
-    alert(`saved workout`)
+     this.messageService.add("saved workout","success")
     this.reset()
     this.showTextArea = false
     this.showAdd = false
@@ -188,5 +188,8 @@ playRandomAudio() {
   const audio = new Audio();
   audio.src = this.audioClips[randomIndex];
   audio.play();
+}
+ngOnDestroy(): void {
+    this.resetTimer()
 }
 }

@@ -1,1 +1,1 @@
-live version: https://portfolio-5756d.web.app/
+live version: www.junttila.dev

@@ -83,6 +83,7 @@ img{
     max-width: 90vw;
     max-height: 400px;
 }
+
 @media only screen and (max-width: 750px){
     .contentIMGS{
         grid-template-columns: 1fr 1fr;
@@ -115,4 +116,9 @@ input[type="file"] {
 .custom-file-upload:hover{
     background-color: rgb(9, 9, 44);
     opacity: 0.8;
+}
+@media only screen and (max-width: 500px){
+    #movepls{
+        transform: translate(5%,0);
+    }
 }
