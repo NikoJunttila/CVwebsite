@@ -23,6 +23,10 @@ this.quote = quotes[randomIndex];
 async addFeedback(){
   let inputElement = document.getElementById("feedback") as any;
   let inputValue = inputElement.value;    
+  if(inputValue.length < 5){
+    this.messageService.add("feedback needs to be more than 5 characters :<","error")
+    return false
+  }
   const feedBackObject = {
   date: new Date(),
   feedback: inputValue

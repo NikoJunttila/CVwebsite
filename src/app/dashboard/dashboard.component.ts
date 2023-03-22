@@ -30,17 +30,23 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
   done : any = []
   emailLower: any = ''; 
-  workoutToShow : singleWorkout |undefined
+  workoutToShow : singleWorkout | undefined
   timeSpent : number | undefined
   imgURL : string = ""
   profImages : any[] = []
-
+  prevIndex : number = -1
   goBack(){
     this.location.back()
   }
 
   showFull(index:number){
+    if(this.prevIndex == index){
+      this.workoutToShow = undefined
+      this.prevIndex = -1
+    } else {
+    this.prevIndex = index
     this.workoutToShow = this.done[index]
+  }
   }
   ngOnInit(): void {
     this.subscribtions =  this.afAuth.authState.subscribe(user => {
