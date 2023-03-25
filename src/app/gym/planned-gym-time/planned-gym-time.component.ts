@@ -28,6 +28,14 @@ export class PlannedGymTimeComponent implements OnInit, OnDestroy {
   showTextArea : boolean = false
   startedTotalTimer : boolean = false
 
+optionalStartTime(){
+  const currentDate = new Date();
+  sessionStorage.setItem('myDate2', JSON.stringify(currentDate));
+  this.startedTotalTimer = true
+  console.log("started total time")
+  this.messageService.add("train hard 💪","success")
+}
+
 testeri(){
   this.showTextArea = !this.showTextArea
 }

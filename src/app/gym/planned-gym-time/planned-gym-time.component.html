@@ -1,6 +1,20 @@
 <section 
   class="workoutcontainercontainer bg-slate-900 flex justify-center items-center flex-col text-white"
 >  <div class="workoutcontainer text-center">
+  <div *ngIf="userLower.length > 1 && !startedTotalTimer">
+  <button   class="color-7" (click)="optionalStartTime()" >Start workout timer </button>
+  <div class="dropdown dropdown-end">
+    <label tabindex="0" class="btn btn-circle btn-ghost btn-xs text-info">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-4 h-4 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+    </label>
+    <div tabindex="0" class="card compact dropdown-content shadow bg-base-100 rounded-box w-64">
+      <div class="card-body bg-[#210b56] border-2 border-solid border-red-500">
+        <h2>Start workout here if you want accurate time else just continue with exercises and
+          it will automatically start and add 10min for warm up time.</h2>
+      </div>
+    </div>
+  </div>
+  </div>
     <ul class="ml-3 mr-3" *ngFor="let workout of workoutz?.exercises;index as i">
 <div class="relative" *ngIf="!workout.editing; else editing">
       <li
@@ -78,7 +92,7 @@
     >
   </div>
 </div>
-<button *ngIf="userLower.length > 1 && showAdd"  class="color-7 " (click)="setAsCompleted()">Save workout</button>
+<button *ngIf="userLower.length > 1 && showAdd"  class="color-7" (click)="setAsCompleted()">Save workout</button>
   <button class="btn-hover color-8 " (click)="reset()">reset workout</button>
   <button (click)="goBack()" class="btn-hover2 color-8 material-icons-outlined">arrow_back</button>
   <p class="text-xs text-center mt-1" *ngIf="userLower.length < 2"> btw: if you login you can save workouts and track your progress better</p>
