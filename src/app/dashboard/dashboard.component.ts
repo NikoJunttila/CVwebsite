@@ -32,6 +32,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
   emailLower: any = ''; 
   workoutToShow : singleWorkout | undefined
   timeSpent : number | undefined
+  timeSpentHours : number | undefined
+  timeSpentMinutes : number | undefined
+  avg : number = 0
+
   imgURL : string = ""
   profImages : any[] = []
   prevIndex : number = -1
@@ -115,7 +119,11 @@ aproxTimeAtGym(){
   this.done.forEach((element:any) => {
    total +=  element.aproxTime
   }); 
-  this.timeSpent = total
+  this.avg = Math.floor(total/this.done.length) 
+  const hours = Math.floor(total / 60) 
+  const minutes = total % 60
+  this.timeSpentHours = hours
+  this.timeSpentMinutes = minutes
 }
 ngOnDestroy(): void {
     this.subscribtions.unsubscribe()

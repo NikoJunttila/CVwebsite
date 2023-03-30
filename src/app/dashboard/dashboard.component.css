@@ -24,7 +24,7 @@ border: 2px green dotted;
                 linear-gradient(to right, rgb(172, 18, 18), darkorchid) border-box;
     border-radius: 50em;
     border: 2px solid transparent;
-    filter: drop-shadow(16px 9px 10px #692626);
+    filter: drop-shadow(5px 1px 15px #692626);
 }
 button:hover{
     background-color: rgb(9, 9, 44);

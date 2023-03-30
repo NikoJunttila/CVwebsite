@@ -64,7 +64,8 @@ import { MessageComponentComponent } from './message-component/message-component
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireDatabaseModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+
 
   ],
   providers: [],

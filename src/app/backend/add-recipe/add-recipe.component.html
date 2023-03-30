@@ -13,7 +13,7 @@
           <div class="flex gap-2 flex-wrap mt-2" *ngFor="let _ of ingredients.controls; index as i">
             <ng-container   [formGroupName]="i">
                 <input required formControlName="amount" placeholder="ingredient amount" numbersOnly type="number" />
-                <input required formControlName="what" placeholder="what unit of measure" />
+                <input required formControlName="what" placeholder="what measure unit" />
                 <input required formControlName="name" placeholder="ingredient name" />
                 <span class="material-icons" (click)="removeIngredient(i)">delete</span>
               </ng-container>
@@ -26,14 +26,15 @@
              <div class="flex gap-2 mt-2"> 
 <!--               <input [formControlName]="i" placeholder="tags" />
  -->              <select [formControlName]="i" id="tags">
-                <option selected="selected" value="Mealprep">mealprep</option>
-                <option value="Lunch">lunch</option>
-                <option value="Breakfast">breakfast</option>
-                <option value="Easy">easy</option>
-                <option value="Healthy">healthy</option>
-                <option value="Chicken">chicken</option>
-                <option value="Beef">beef</option>
-                <option value="Dessert">dessert</option>
+                <option selected="selected" value="mealprep">mealprep</option>
+                <option value="lunch">lunch</option>
+                <option value="breakfast">breakfast</option>
+                <option value="easy">easy</option>
+                <option value="healthy">healthy</option>
+                <option value="chicken">chicken</option>
+                <option value="beef">beef</option>
+                <option value="dessert">dessert</option>
+                <option value="snack">snack</option>
               </select>
               <span (click)="removeTag(i)" class="material-icons">delete</span>
             </div>

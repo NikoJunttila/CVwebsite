@@ -3,8 +3,6 @@
 <div class="flex mt-2 items-center flex-col">
   <button (click)="goBack()" class="material-icons-outlined py-3 px-8 btn-gradient-2">arrow_back</button>
     <h1>{{(user | async)?.displayName}}</h1>
-   <!--  <button mat-button [matMenuTriggerFor]="menu">Menu</button>
-<mat-menu #menu="matMenu" > -->
 <div class="flex mb-3">
   <div class="dropdown dropdown-bottom">
     <label tabindex="0" class="btn m-1">Change profile img</label>
@@ -24,26 +22,28 @@
 <input id="file-upload" type="file" class="" (change)="uploadFile($event)">
 </div>
     <img  [src]="imgURL" />
-    <button routerLink="/settings/workout" class="mt-2 border-2 border-solid border-cyan-400 rounded px-2">add new workout</button>
 </div>
   <div class="flex mt-3 ml-2 justify-center ">
     <div class="holder">
-      <h1 >workouts done :</h1>
-      <h3 *ngIf="done.length == 0">you haven't saved any workouts yet.<br />once you do they will show here</h3>
-      <div class="pb-2" *ngIf="timeSpent! > 0">
-     <span>total time spent aprox: {{ timeSpent }} minutes
+      <div class="flex justify-center items-center">
+      <h1 >workouts done :</h1> 
       <div class="dropdown dropdown-end">
-      <label tabindex="0" class="btn btn-circle btn-ghost btn-xs text-info">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-4 h-4 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-      </label>
-      <div tabindex="0" class="card compact dropdown-content shadow bg-base-100 rounded-box w-64">
-        <div class="card-body bg-[#512DA8] border-2 border-solid border-red-500">
-          <p>
-            Timer might not work correctly depending on your browser. Works on atleast chrome/firefox
-          </p>
+        <label tabindex="0" class="btn btn-circle btn-ghost btn-xs text-info">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-4 h-4 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        </label>
+        <div tabindex="0" class="card compact dropdown-content shadow bg-base-100 rounded-box w-64">
+          <div class="card-body bg-[#512DA8] border-2 border-solid border-red-500">
+            <p>
+              Timer might not work correctly depending on your browser. Works on atleast chrome/firefox
+            </p>
+          </div>
         </div>
       </div>
-    </div></span>
+    </div>
+      <h3 *ngIf="done.length == 0">you haven't saved any workouts yet.<br />once you do they will show here</h3>
+      <div class="pb-2">
+     <span>total time spent aprox:<br />{{timeSpentHours}} hours {{ timeSpentMinutes }} minutes </span>
+     <p>Avg time: {{avg}} minutes</p>
      <p class="text-xs">items marked with ** have notes</p>
      <div class="flex items-center">
     sort:<span (click)="sortLatestFirst()" class="material-icons-outlined cursor-pointer">
@@ -81,6 +81,9 @@
       <div class="pb-1 pt-1 text-center bg-[#006064]" *ngIf="workoutToShow.notes">{{workoutToShow.notes}}</div>
     </div>
   </div>
+  <div class="w-full grid place-items-center">
+  <button routerLink="/settings/workout" class="mt-2 border-2 border-solid border-cyan-400 w-5/6 max-w-[600px] rounded px-2">Create new workout</button>
+</div>
   <div class="flex gap-6 mt-5" *ngIf='(user | async)?.accountType == "admin"'>
     <button routerLink="/settings/recipe">add recipes</button>
     <button  routerLink="/settings">idk yet</button>

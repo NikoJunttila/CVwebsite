@@ -59,6 +59,7 @@ onDocumentClick(event: MouseEvent) {
     { name: 'chicken', value: 'chicken' },
     { name: 'beef', value: 'beef' },
     { name: 'dessert', value: 'dessert' },
+    { name: 'snack', value: 'snack' },
   ];
 selected : any = []
   onCheckboxChange(event: any) {
