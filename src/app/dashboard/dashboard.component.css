@@ -61,7 +61,7 @@ background:#4A148C;
 }
 .holder{
     max-height: 70vh;
-    width: fit-content;
+    width: 48%;
 }
 .content{
     max-height: 100%;

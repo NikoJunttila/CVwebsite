@@ -8,6 +8,8 @@ import { AuthService } from '../services/auth.service';
 import { DatePipe,Location } from '@angular/common';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { MessageService } from '../services/message.service';
+import { tap } from 'rxjs/operators';
+
 
 
 @Component({
@@ -57,29 +59,31 @@ export class DashboardComponent implements OnInit, OnDestroy {
           if (user) {
             this.emailLower = user.email?.toLowerCase();
             this.user = this.firestore.collection('users').doc(this.emailLower).valueChanges();
-          }
-          this.gymService.getCompletedWorkouts(this.emailLower).subscribe(donez => 
-            this.done = donez
-          )
-          setTimeout(() => {
-            this.aproxTimeAtGym()
-            this.sortLatestFirst()
             this.user.subscribe(
               data => {
                 this.imgURL = data.photoURL
-              },
-              error => {
-                console.error(error);
-              },
-              () => {
-                console.log('Observable complete');
-              }
-            );
-          }, 700);
+              })
+          }
+          this.gymService.getCompletedWorkouts(this.emailLower).pipe(
+            tap(donez => {
+              this.done = donez;
+            })
+          ).subscribe(() => {
+
+            this.runAfterDoneSet();
+          });
+
         });
+
         this.getProfImgs().subscribe(imgs => {
           this.profImages = imgs
         })
+  }
+  runAfterDoneSet() {
+setTimeout(() => {
+  this.aproxTimeAtGym();
+  this.sortLatestFirst();
+}, 1000);
   }
 
   updateProfileImage(newImage: string) {

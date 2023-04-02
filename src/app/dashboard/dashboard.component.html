@@ -23,52 +23,55 @@
 </div>
     <img  [src]="imgURL" />
 </div>
-  <div class="flex mt-3 ml-2 justify-center ">
-    <div class="holder">
-      <div class="flex justify-center items-center">
-      <h1 >workouts done :</h1> 
-      <div class="dropdown dropdown-end">
-        <label tabindex="0" class="btn btn-circle btn-ghost btn-xs text-info">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-4 h-4 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-        </label>
-        <div tabindex="0" class="card compact dropdown-content shadow bg-base-100 rounded-box w-64">
-          <div class="card-body bg-[#512DA8] border-2 border-solid border-red-500">
-            <p>
-              Timer might not work correctly depending on your browser. Works on atleast chrome/firefox
-            </p>
-          </div>
-        </div>
+<div class="flex mt-3 ml-2 justify-center ">
+  <h1 >workouts done :</h1> 
+  <div class="dropdown dropdown-end translate-y-2">
+    <label tabindex="0" class="btn btn-circle btn-ghost btn-xs text-info">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-4 h-4 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+    </label>
+    <div tabindex="0" class="card compact dropdown-content shadow bg-base-100 rounded-box w-64">
+      <div class="card-body bg-[#512DA8] border-2 border-solid border-red-500">
+        <p>
+          Timer might not work correctly depending on your browser. Works on atleast chrome/firefox
+        </p>
       </div>
     </div>
-      <h3 *ngIf="done.length == 0">you haven't saved any workouts yet.<br />once you do they will show here</h3>
-      <div class="pb-2">
-     <span>total time spent aprox:<br />{{timeSpentHours}} hours {{ timeSpentMinutes }} minutes </span>
-     <p>Avg time: {{avg}} minutes</p>
-     <p class="text-xs">items marked with ** have notes</p>
-     <div class="flex items-center">
-    sort:<span (click)="sortLatestFirst()" class="material-icons-outlined cursor-pointer">
-        arrow_upward
-        </span><span (click)="sortOldestFirst()" class="material-icons-outlined cursor-pointer">
-            arrow_downward
-            </span>
-        </div>
+  </div>
 </div>
+<div class="pb-2 text-center">
+    <h3 *ngIf="done.length === 0">you haven't saved any workouts yet.<br />once you do they will show here</h3>
+ <span>total time spent aprox:<br />{{timeSpentHours}} hours {{ timeSpentMinutes }} minutes </span>
+ <p>Avg time: {{avg}} minutes</p>
+</div>
+<div class="flex">
+<div class="holder ml-1">
+  <div class="flex items-center">
+    <p class="text-xs mb-1 pr-2">items marked with ** have notes</p>
+    <div class="flex justify-center items-center">
+    sort:<span (click)="sortLatestFirst()" class="material-icons-outlined cursor-pointer">
+      arrow_upward
+     </span><span (click)="sortOldestFirst()" class="material-icons-outlined cursor-pointer">
+       arrow_downward
+     </span>
+    </div>
+   </div>
       <div class="content">
         <li
           class="list-none cursor-pointer"
           *ngFor="let workout of done; index as i"
         >
           <span (click)="showFull(i)">
-            <div class="flex h-full">
-              <span class="bg-blue-900 mr-1 w-[2ch] text-center"
+            <div class="flex h-full hover:bg-[#2c765255]">
+              <span class="bg-blue-900 w-[3ch] min-w-[3ch] text-center border-[1px] border-solid border-gray-800"
                 >{{ i + 1 }}.</span
               >
-               <span> {{ workout.day }} {{ workout.date.toDate() | date:'d/M/yy'  }}<span *ngIf="workout.notes">**</span></span>
+               <span class="ml-1"> {{ workout.day }} {{ workout.date.toDate() | date:'d/M/yy'  }}<span *ngIf="workout.notes">**</span></span>
            </div>
           </span>
         </li>
-      </div>    </div>
-    <div class="ml-2 mr-1 bg-[#1A237E] full" *ngIf="workoutToShow">
+      </div> 
+    </div>  
+    <div class="ml-2 mr-1 mt-10 bg-[#1A237E] full" *ngIf="workoutToShow">
       <div class="pb-2">
         <h3>{{ workoutToShow.day }}</h3>
         <h3>{{ workoutToShow.date.toDate() | date:'d MMM, y, h:mm:ss a' }}</h3>
@@ -81,11 +84,12 @@
       <div class="pb-1 pt-1 text-center bg-[#006064]" *ngIf="workoutToShow.notes">{{workoutToShow.notes}}</div>
     </div>
   </div>
-  <div class="w-full grid place-items-center">
+  <div class="w-full grid place-items-center mt-12">
   <button routerLink="/settings/workout" class="mt-2 border-2 border-solid border-cyan-400 w-5/6 max-w-[600px] rounded px-2">Create new workout</button>
 </div>
   <div class="flex gap-6 mt-5" *ngIf='(user | async)?.accountType == "admin"'>
     <button routerLink="/settings/recipe">add recipes</button>
     <button  routerLink="/settings">idk yet</button>
+    <button (click)="runAfterDoneSet()">test</button>
 </div>  
 </section>
