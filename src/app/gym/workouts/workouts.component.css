@@ -23,8 +23,8 @@ text-align: center;
   overflow: hidden;
 }
 .grid-ish:hover{
-  background: rgb(63,94,251);
-  background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(107,30,45,1) 100%);
+  background: rgb(7, 15, 56);
+ 
 }
 @media (max-width: 1000px){
   .gridder{

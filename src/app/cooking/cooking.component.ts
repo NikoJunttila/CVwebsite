@@ -74,7 +74,9 @@ selected : any = []
       selectedCountries.removeAt(index);
       this.selected = selectedCountries
     }
-    this.cooking.myData = selectedCountries.value
+    this.cooking.add(selectedCountries.value)
+    //this.cooking.myData = selectedCountries.value
+
  }
   public btnClick():void {
     this.cooking.sendClickEvent2()

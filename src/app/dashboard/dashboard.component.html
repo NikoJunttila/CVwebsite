@@ -43,7 +43,7 @@
  <span>total time spent aprox:<br />{{timeSpentHours}} hours {{ timeSpentMinutes }} minutes </span>
  <p>Avg time: {{avg}} minutes</p>
 </div>
-<div class="flex">
+<div class="flex justify-center">
 <div class="holder ml-1">
   <div class="flex items-center">
     <p class="text-xs mb-1 pr-2">items marked with ** have notes</p>
@@ -61,8 +61,8 @@
           *ngFor="let workout of done; index as i"
         >
           <span (click)="showFull(i)">
-            <div class="flex h-full hover:bg-[#2c765255]">
-              <span class="bg-blue-900 w-[3ch] min-w-[3ch] text-center border-[1px] border-solid border-gray-800"
+            <div class="flex h-full hover:bg-[#2c765255] borderStuff">
+              <span class="bg-blue-900 w-[3ch] min-w-[3ch] text-center"
                 >{{ i + 1 }}.</span
               >
                <span class="ml-1"> {{ workout.day }} {{ workout.date.toDate() | date:'d/M/yy'  }}<span *ngIf="workout.notes">**</span></span>
@@ -84,7 +84,7 @@
       <div class="pb-1 pt-1 text-center bg-[#006064]" *ngIf="workoutToShow.notes">{{workoutToShow.notes}}</div>
     </div>
   </div>
-  <div class="w-full grid place-items-center mt-12">
+  <div class="w-full grid place-items-center mt-4">
   <button routerLink="/settings/workout" class="mt-2 border-2 border-solid border-cyan-400 w-5/6 max-w-[600px] rounded px-2">Create new workout</button>
 </div>
   <div class="flex gap-6 mt-5" *ngIf='(user | async)?.accountType == "admin"'>

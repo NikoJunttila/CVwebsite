@@ -5,6 +5,9 @@
 /*     max-width: 60px;
     max-height: 60px; */
 }
+.borderStuff{
+    border-bottom: 1px solid black;
+}
 .menuImg:hover{
 border: 2px green dotted;
 }
@@ -62,6 +65,7 @@ background:#4A148C;
 .holder{
     max-height: 70vh;
     width: 48%;
+    overflow: hidden;
 }
 .content{
     max-height: 100%;

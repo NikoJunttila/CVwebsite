@@ -12,8 +12,16 @@ import { doc, getDoc } from "firebase/firestore";
 })
 export class CookingService {
   constructor(private afs: AngularFirestore){}
+  private filters: any[] = [];
 
+  add(filter: string[]) {
+    this.filters = filter;
+    console.log(filter)
+  }
 
+  getFilters(): string[] {
+    return this.filters;
+  }
   
   addRecipe(meal:any){
     this.afs.doc("/recipes/"+ meal.id).set(meal)

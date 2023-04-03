@@ -11,12 +11,12 @@ import { CookingService } from '../cooking-service.service';
 })
 export class ListComponent implements OnInit {
   constructor(private cookingService : CookingService){
-    this.cookingService.getClickEvent2().subscribe(() => {
+       this.cookingService.getClickEvent2().subscribe(() => {
       setTimeout(() => {
-        this.filter = cookingService.myData
-        this.test()
+        this.filter = this.cookingService.getFilters()
+        this.filterz()
       }, 50); 
-    })
+    }) 
   }
  
   list : any[] | undefined
@@ -25,8 +25,9 @@ export class ListComponent implements OnInit {
   show : boolean = true
   ngOnInit(): void {
      this.getList() 
-    this.getFilter()
-    this.arrOfany = this.list
+     this.arrOfany = this.list
+     this.getFilter()
+     
  }
  sortHigLow(){
   this.arrOfany.sort((a:any,b:any) => b.rating - a.rating)
@@ -37,7 +38,7 @@ export class ListComponent implements OnInit {
   this.show = true
  }
 
- test(){
+ filterz(){
   if(this.list){
     this.arrOfany = []
     this.list.forEach(element => {
@@ -51,8 +52,13 @@ export class ListComponent implements OnInit {
   getList():void{
     this.cookingService.getRecipes().subscribe(a => this.list = a)
   }
-  getFilter():void{
-    this.filter = this.cookingService.myData
+ async getFilter():Promise<void>{
+    this.filter = await this.cookingService.getFilters()
+     if(this.filter.length > 0){
+      setTimeout(() => {
+        this.filterz()
+      }, 300);
+    } 
   }
 
 }
