@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, Input } from '@angular/core';
+import { Component, OnInit, HostListener, Input, OnDestroy } from '@angular/core';
 import { CookingService } from './cooking-service.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
@@ -8,7 +8,7 @@ import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
   templateUrl: './cooking.component.html',
   styleUrls: ['./cooking.component.css']
 })
-export class CookingComponent implements OnInit {
+export class CookingComponent implements OnInit, OnDestroy {
 constructor(private cooking: CookingService, private router: Router,private fb: FormBuilder){
   this.form = fb.group({
     selectedCountries:  new FormArray([])
@@ -94,7 +94,9 @@ selected : any = []
      //or document.querySelector('body').scrollTo(0,0)
 
  }
-
+ngOnDestroy(): void {
+    this.cooking.clear()
+}
 
 }
 

@@ -60,6 +60,7 @@ return workouts;
         snapshot.forEach((res) => {
           data.push(res.data());
         });
+        data.sort((a:any, b:any) => a.sort - b.sort) 
       });
       const workouts = of(data)
     return workouts;
@@ -108,6 +109,7 @@ return workouts;
         snapshot.forEach((res) => {
           data.push(res.data());
         });
+        data.sort((a:any, b:any) => b.date - a.date)
       });
       const workouts = of(data)
     return workouts;

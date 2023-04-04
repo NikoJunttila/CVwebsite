@@ -79,10 +79,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
           this.profImages = imgs
         })
   }
+  
   runAfterDoneSet() {
 setTimeout(() => {
   this.aproxTimeAtGym();
-  this.sortLatestFirst();
 }, 1000);
   }
 

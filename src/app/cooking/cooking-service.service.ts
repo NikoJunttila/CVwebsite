@@ -22,7 +22,10 @@ export class CookingService {
   getFilters(): string[] {
     return this.filters;
   }
-  
+  clear() {
+    this.filters.length = 0
+  }
+
   addRecipe(meal:any){
     this.afs.doc("/recipes/"+ meal.id).set(meal)
     .then(() => {

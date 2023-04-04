@@ -22,10 +22,7 @@ ngOnInit(): void {
  this.subscription = this.gymService.getWorkouts()
   .subscribe(plans =>{
    this.plans = plans
-   setTimeout(() => {
-    this.plans.sort((a:any, b:any) => a.sort - b.sort) 
-  }, 500); 
-}
+  }
    )
   this.subscription2 =  this.afAuth.authState.subscribe(user => {
     if (user) {

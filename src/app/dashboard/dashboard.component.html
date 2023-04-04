@@ -6,7 +6,7 @@
 <div class="flex mb-3">
   <div class="dropdown dropdown-bottom">
     <label tabindex="0" class="btn m-1">Change profile img</label>
-    <div id="movepls" tabindex="0" class="dropdown-content card card-compact p-2 holder bg-[#350883]  text-primary-content">
+    <div id="movepls" tabindex="0" class="dropdown-content card card-compact max-h-[70vh] p-2 bg-[#350883]  text-primary-content">
         <div  class="contentIMGS">
           <div class="card" *ngFor="let image of profImages">
             <img class="menuImg" alt="profImg" [src]="image.downloadURL" (click)="updateProfileImage(image.downloadURL)"/>
