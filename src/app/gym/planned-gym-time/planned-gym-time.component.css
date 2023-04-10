@@ -65,9 +65,7 @@
         background-color: #29323c;
     }
     input[type=text]{
-        max-width: 18ch;
-        height: 100%;
-        font-size: 1rem;
+        max-width: 5ch;
     }
     input[type=number]{
         max-width: 5ch;

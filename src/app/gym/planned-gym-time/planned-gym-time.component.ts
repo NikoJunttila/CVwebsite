@@ -32,7 +32,6 @@ optionalStartTime(){
   const currentDate = new Date();
   sessionStorage.setItem('myDate2', JSON.stringify(currentDate));
   this.startedTotalTimer = true
-  console.log("started total time")
   this.messageService.add("train hard 💪","success")
 }
 
@@ -55,9 +54,7 @@ testeri(){
   const startedTime : any = new Date(JSON.parse(sessionStorage.getItem('myDate2')|| "{}"));
   const diffInMs = Math.abs(startedTime - date)
   const diffInMinutes = Math.floor(diffInMs / 60000)
-  console.log(diffInMinutes)
-    if(15 <= diffInMinutes && diffInMinutes < 240){
-      console.log("time worked")
+    if(20 <= diffInMinutes && diffInMinutes < 240){
       this.workoutz!.aproxTime = diffInMinutes + 10
     }
      this.gymService.addCompletedWorkout(this.userLower,this.workoutz)
@@ -155,22 +152,26 @@ testeri(){
     this.minutes = Math.floor(this.timeLeft / 60)
     this.seconds = this.timeLeft % 60
     this.seconds = this.seconds < 10 ? "0" + this.seconds : this.seconds
-    this.newTime = this.timeLeft
-  }
+    this.newTime = this.roundToNearest15(this.timeLeft)
+    if(this.timeLeft > 300){
+      this.messageService.add("one might aswell set alarm if ur gonna rest more than 5 minutes","error")
+    }
+    }
   decreaseTime(){
     this.timeLeft = this.timeLeft - 15
     this.minutes = Math.floor(this.timeLeft / 60)
     this.seconds = this.timeLeft % 60
     this.seconds = this.seconds < 10 ? "0" + this.seconds : this.seconds
-    this.newTime = this.timeLeft
+    this.newTime = this.roundToNearest15(this.timeLeft)
   }
-
+    roundToNearest15(number:number) {
+    return Math.ceil(number/15) * 15;
+  } 
    counterPlus(workout:any){
     if(!this.startedTotalTimer){
       const currentDate = new Date();
       sessionStorage.setItem('myDate2', JSON.stringify(currentDate));
       this.startedTotalTimer = true
-      console.log("started total time")
     }
     if(workout.setsDone !== undefined){
       workout.setsDone++

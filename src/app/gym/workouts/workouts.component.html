@@ -1,19 +1,27 @@
 <section class="pb-4">
-    <div class="gridder ml-2 mt-5">
+    <div *ngIf="plans.length > 1; else other_content" class="gridder ml-2 mt-5">
         <div *ngFor="let plan of userPlans" class="grid-ish bg-[#1A237E]">
             <h3>you've added this</h3>
             <h2 class="">{{plan.name}}</h2>
             <p class="text-sm">{{plan.days}} days/week</p>
             <p class="text">{{plan.description}}</p>
             <button type="button" routerLink="personal/{{plan.id}}" class="glow-on-hover mt-auto mb-2">Show more</button>
-        </div>
+        </div>     
    <div *ngFor="let plan of plans" class="grid-ish bg-slate-600">
         <h2 class="">{{plan.name}}</h2>
         <p class="text-sm">{{plan.days}} days/week</p>
         <p class="text">{{plan.description}}</p>
         <button type="button" routerLink="desc/{{plan.id}}" class="glow-on-hover mt-auto mb-2">Show more</button>
     </div>
+
+   
 </div>
+<ng-template #other_content>
+    <div class="loading-container">
+      <div class="loading"></div>
+      <div id="loading-text">loading</div>
+  </div>
+  </ng-template>
 <div class="single flex justify-center items-center">
 <button routerLink="new" class="glow-on-hover" type="button">make your own single workout tracker</button>
 </div>

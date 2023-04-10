@@ -78,7 +78,6 @@ test(){
   sessionStorage.setItem('shoppinglist', JSON.stringify(arrOfObj))
   }
  else if(shopping){
-  console.log("2")
   arrOfObj.push(shopping)
   arrOfObj.push(object)
   sessionStorage.setItem('shoppinglist', JSON.stringify(arrOfObj)); 
@@ -90,7 +89,6 @@ else{
 ngOnDestroy(): void {
   if (this.subscription){
     this.subscription.unsubscribe()
-    console.log("unsubbed!")
   }
 }
 }

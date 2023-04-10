@@ -52,9 +52,11 @@
     </div>
     <ng-template #editing>
       <div  class="editBox">
-        <textarea rows="2" cols="12" [(ngModel)]="workout.exercise"></textarea>
-     <!--  <input type="text" [(ngModel)]="workout.exercise" /> -->
+        <textarea class="min-h-full" cols="14" [(ngModel)]="workout.exercise"></textarea>
+     <div class="grid">
+     <span class="text-base">reps: <input type="text" [(ngModel)]="workout.reps" /></span>
       <span class="text-base">sets: <input type="number" [(ngModel)]="workout.sets" /></span>
+    </div>
       <span class="text-base">weight(kg): <input type="number" placeholder="100" [(ngModel)]="workout.weight"/></span>
       <button (click)="onExerciseSave(i)" class="mr-auto material-icons-outlined cursor-pointer">save</button>
     </div>

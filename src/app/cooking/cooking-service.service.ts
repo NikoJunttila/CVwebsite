@@ -16,7 +16,6 @@ export class CookingService {
 
   add(filter: string[]) {
     this.filters = filter;
-    console.log(filter)
   }
 
   getFilters(): string[] {

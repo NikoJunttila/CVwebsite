@@ -1,7 +1,9 @@
-import { Component, OnInit, OnChanges, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, OnDestroy } from '@angular/core';
 import { cooking } from '../interfaces';
 import { meals } from '../meals';
 import { CookingService } from '../cooking-service.service';
+import { Subscription } from 'rxjs';
+
 
 
 @Component({
@@ -9,7 +11,7 @@ import { CookingService } from '../cooking-service.service';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })
-export class ListComponent implements OnInit {
+export class ListComponent implements OnInit, OnDestroy {
   constructor(private cookingService : CookingService){
        this.cookingService.getClickEvent2().subscribe(() => {
       setTimeout(() => {
@@ -18,13 +20,14 @@ export class ListComponent implements OnInit {
       }, 50); 
     }) 
   }
- 
+  private subscription!: Subscription;
+
   list : any[] | undefined
   filter : any = []
   arrOfany : any
   show : boolean = true
   ngOnInit(): void {
-     this.getList() 
+   this.getList() 
      this.arrOfany = this.list
      this.getFilter()
      
@@ -50,7 +53,7 @@ export class ListComponent implements OnInit {
 }}
 
   getList():void{
-    this.cookingService.getRecipes().subscribe(a => this.list = a)
+    this.subscription =   this.cookingService.getRecipes().subscribe(a => this.list = a)
   }
  async getFilter():Promise<void>{
     this.filter = await this.cookingService.getFilters()
@@ -60,5 +63,10 @@ export class ListComponent implements OnInit {
       }, 300);
     } 
   }
-
+ ngOnDestroy(): void {
+    if (this.subscription){
+    this.subscription.unsubscribe()
+  } 
+ } 
 }
+

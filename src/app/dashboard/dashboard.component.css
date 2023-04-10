@@ -65,12 +65,12 @@ background:#4A148C;
 .holder{
     max-height: 70vh;
     width: 48%;
-    overflow: hidden;
-}
+/*    overflow: hidden;
+ */}
 .content{
-    max-height: 100%;
-    width: 100%;
-    overflow: auto;
+     max-height: 90%;
+/*     width: 100%; */
+     overflow: auto; 
     border-radius: 5px;
     border: 1px #880E4F solid;
 }
