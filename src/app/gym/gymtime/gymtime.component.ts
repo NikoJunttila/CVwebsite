@@ -18,7 +18,8 @@ import { MessageService } from 'src/app/services/message.service';
   ]
 })
 export class GymtimeComponent implements OnInit {
-  constructor (private route:ActivatedRoute,private location: Location,private gymService:GymService,private messageService:MessageService,
+ 
+  constructor (private route:ActivatedRoute,private location: Location,private gymService:GymService, private messageService:MessageService,
     private afAuth: AngularFireAuth, private afs: AngularFirestore){
   }
   workoutz : singleWorkout | undefined 
@@ -27,7 +28,16 @@ export class GymtimeComponent implements OnInit {
   showTextArea : boolean = false
   startedTotalTimer : boolean = false
 
+optionalStartTime(){
+  const currentDate = new Date();
+  localStorage.setItem('myDate2', JSON.stringify(currentDate));
+  this.startedTotalTimer = true
+  this.messageService.add("train hard 💪","success")
+}
 
+testeri(){
+  this.showTextArea = !this.showTextArea
+}
   onExerciseEdit(index: number) {
     this.workoutz!.exercises[index]!.editing = true;
   }
@@ -35,28 +45,25 @@ export class GymtimeComponent implements OnInit {
     this.workoutz!.exercises[index]!.editing = false;
     localStorage.setItem('workout', JSON.stringify(this.workoutz));
   }
-  testeri(){
-    this.showTextArea = !this.showTextArea
-  }
+
   setAsCompleted(){
     const date : any = new Date();
     if (this.workoutz != undefined){
     this.workoutz.date = date
   }
-
-  const startedTime : any = new Date(JSON.parse(sessionStorage.getItem('myDate2')|| "{}"));
+  const startedTime : any = new Date(JSON.parse(localStorage.getItem('myDate2')|| "{}"));
   const diffInMs = Math.abs(startedTime - date)
   const diffInMinutes = Math.floor(diffInMs / 60000)
-  console.log(diffInMinutes)
-    if(15 <= diffInMinutes && diffInMinutes < 200){
+    if(20 <= diffInMinutes && diffInMinutes < 240){
       this.workoutz!.aproxTime = diffInMinutes + 10
     }
-
-    this.gymService.addCompletedWorkout(this.userLower,this.workoutz)
-    this.messageService.add("saved","success")
+     this.gymService.addCompletedWorkout(this.userLower,this.workoutz)
+     this.messageService.add("saved workout","success")
     this.reset()
-    this.showAdd = false
     this.showTextArea = false
+    this.showAdd = false
+    this.startedTotalTimer = false
+    localStorage.removeItem("myDate2")
   }
 
   loopReps(){
@@ -71,7 +78,7 @@ export class GymtimeComponent implements OnInit {
 
 
   ngOnInit(): void {
-    const check = JSON.parse(sessionStorage.getItem('myDate2') || '{}');
+    const check = JSON.parse(localStorage.getItem('myDate2') || '{}');
     if(Object.keys(check).length !== 0){
       this.startedTotalTimer = true
     }
@@ -145,24 +152,27 @@ export class GymtimeComponent implements OnInit {
     this.minutes = Math.floor(this.timeLeft / 60)
     this.seconds = this.timeLeft % 60
     this.seconds = this.seconds < 10 ? "0" + this.seconds : this.seconds
-    this.newTime = this.timeLeft
-  }
+    this.newTime = this.roundToNearest15(this.timeLeft)
+    if(this.timeLeft > 300){
+      this.messageService.add("one might aswell set alarm if ur gonna rest more than 5 minutes","error")
+    }
+    }
   decreaseTime(){
     this.timeLeft = this.timeLeft - 15
     this.minutes = Math.floor(this.timeLeft / 60)
     this.seconds = this.timeLeft % 60
     this.seconds = this.seconds < 10 ? "0" + this.seconds : this.seconds
-    this.newTime = this.timeLeft
+    this.newTime = this.roundToNearest15(this.timeLeft)
   }
-
+    roundToNearest15(number:number) {
+    return Math.ceil(number/15) * 15;
+  } 
    counterPlus(workout:any){
     if(!this.startedTotalTimer){
       const currentDate = new Date();
-      sessionStorage.setItem('myDate2', JSON.stringify(currentDate));
+      localStorage.setItem('myDate2', JSON.stringify(currentDate));
       this.startedTotalTimer = true
-      console.log("started total time")
     }
-
     if(workout.setsDone !== undefined){
       workout.setsDone++
       localStorage.setItem('workout', JSON.stringify(this.workoutz));
@@ -187,5 +197,8 @@ playRandomAudio() {
   const audio = new Audio();
   audio.src = this.audioClips[randomIndex];
   audio.play();
+}
+ngOnDestroy(): void {
+    this.resetTimer()
 }
 }

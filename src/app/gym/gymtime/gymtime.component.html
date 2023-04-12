@@ -1,6 +1,20 @@
 <section 
   class="workoutcontainercontainer bg-slate-900 flex justify-center items-center flex-col text-white"
 >  <div class="workoutcontainer text-center">
+  <div *ngIf="userLower.length > 1 && !startedTotalTimer">
+  <button   class="color-7" (click)="optionalStartTime()" >Start workout timer </button>
+  <div class="dropdown dropdown-end">
+    <label tabindex="0" class="btn btn-circle btn-ghost btn-xs text-info">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-4 h-4 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+    </label>
+    <div tabindex="0" class="card compact dropdown-content shadow bg-base-100 rounded-box w-64">
+      <div class="card-body bg-[#210b56] border-2 border-solid border-red-500">
+        <h2>Start workout here if you want accurate time else just continue with exercises and
+          it will automatically start and add 10min for warm up time.</h2>
+      </div>
+    </div>
+  </div>
+  </div>
     <ul class="ml-3 mr-3" *ngFor="let workout of workoutz?.exercises;index as i">
 <div class="relative" *ngIf="!workout.editing; else editing">
       <li
@@ -19,17 +33,17 @@
           >Done: {{ workout.setsDone }}/{{ workout.sets }}</span
         >
         <div class="flex justify-end">
-        <span
+        <button
           class="material-icons-outlined cursor-pointer mr-5"
           (click)="counterPlus(workout)"
           *ngIf="workout?.sets! > workout?.setsDone!"
-          >add_circle</span
+          >add_circle</button
         >
-        <span
+        <button
           class="material-icons-outlined cursor-pointer mr-5"
           (click)="setDone(workout)"
           *ngIf="workout?.sets! <= workout?.setsDone!"
-          >delete</span
+          >delete</button
         >
         <button (click)="onExerciseEdit(i)" class="material-icons-outlined cursor-pointer">edit</button>
       </div>
@@ -38,9 +52,11 @@
     </div>
     <ng-template #editing>
       <div  class="editBox">
-        <textarea rows="2" cols="12" [(ngModel)]="workout.exercise"></textarea>
-     <!--  <input type="text" [(ngModel)]="workout.exercise" /> -->
+        <textarea class="min-h-full" cols="14" [(ngModel)]="workout.exercise"></textarea>
+     <div class="grid">
+     <span class="text-base">reps: <input type="text" [(ngModel)]="workout.reps" /></span>
       <span class="text-base">sets: <input type="number" [(ngModel)]="workout.sets" /></span>
+    </div>
       <span class="text-base">weight(kg): <input type="number" placeholder="100" [(ngModel)]="workout.weight"/></span>
       <button (click)="onExerciseSave(i)" class="mr-auto material-icons-outlined cursor-pointer">save</button>
     </div>
@@ -49,7 +65,7 @@
   </div>
   <div class="flex flex-col items-center mt-1 mb-1">
     <div class="flex justify-center">
-      <span>add notes or extra work done today</span>
+      <span>add notes or extra training done today</span>
       <button type="button" class="material-icons-outlined ml-2 text-[#00695C]" (click)="testeri()">note_add</button>
     </div>
     <textarea class=" border border-dashed border-slate-400" *ngIf="showTextArea" placeholder="notes" rows="3" cols="40"[(ngModel)]="workoutz!.notes"> </textarea><br>
@@ -78,7 +94,7 @@
     >
   </div>
 </div>
-<button *ngIf="userLower.length > 1 && showAdd"  class="color-7 " (click)="setAsCompleted()">Save workout</button>
+<button *ngIf="userLower.length > 1 && showAdd"  class="color-7" (click)="setAsCompleted()">Save workout</button>
   <button class="btn-hover color-8 " (click)="reset()">reset workout</button>
   <button (click)="goBack()" class="btn-hover2 color-8 material-icons-outlined">arrow_back</button>
   <p class="text-xs text-center mt-1" *ngIf="userLower.length < 2"> btw: if you login you can save workouts and track your progress better</p>

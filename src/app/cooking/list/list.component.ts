@@ -27,10 +27,8 @@ export class ListComponent implements OnInit, OnDestroy {
   arrOfany : any
   show : boolean = true
   ngOnInit(): void {
-   this.getList() 
-     this.arrOfany = this.list
-     this.getFilter()
-     
+      this.getList() 
+     this.getFilter() 
  }
  sortHigLow(){
   this.arrOfany.sort((a:any,b:any) => b.rating - a.rating)
@@ -53,7 +51,10 @@ export class ListComponent implements OnInit, OnDestroy {
 }}
 
   getList():void{
-    this.subscription =   this.cookingService.getRecipes().subscribe(a => this.list = a)
+    this.subscription =   this.cookingService.getRecipes().subscribe(a => {
+      this.list = a
+      this.arrOfany = a
+    })
   }
  async getFilter():Promise<void>{
     this.filter = await this.cookingService.getFilters()

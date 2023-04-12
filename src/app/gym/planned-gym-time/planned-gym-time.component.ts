@@ -30,7 +30,7 @@ export class PlannedGymTimeComponent implements OnInit, OnDestroy {
 
 optionalStartTime(){
   const currentDate = new Date();
-  sessionStorage.setItem('myDate2', JSON.stringify(currentDate));
+  localStorage.setItem('myDate2', JSON.stringify(currentDate));
   this.startedTotalTimer = true
   this.messageService.add("train hard 💪","success")
 }
@@ -51,7 +51,7 @@ testeri(){
     if (this.workoutz != undefined){
     this.workoutz.date = date
   }
-  const startedTime : any = new Date(JSON.parse(sessionStorage.getItem('myDate2')|| "{}"));
+  const startedTime : any = new Date(JSON.parse(localStorage.getItem('myDate2')|| "{}"));
   const diffInMs = Math.abs(startedTime - date)
   const diffInMinutes = Math.floor(diffInMs / 60000)
     if(20 <= diffInMinutes && diffInMinutes < 240){
@@ -63,7 +63,7 @@ testeri(){
     this.showTextArea = false
     this.showAdd = false
     this.startedTotalTimer = false
-    sessionStorage.removeItem("myDate2")
+    localStorage.removeItem("myDate2")
   }
 
   loopReps(){
@@ -78,7 +78,7 @@ testeri(){
 
 
   ngOnInit(): void {
-    const check = JSON.parse(sessionStorage.getItem('myDate2') || '{}');
+    const check = JSON.parse(localStorage.getItem('myDate2') || '{}');
     if(Object.keys(check).length !== 0){
       this.startedTotalTimer = true
     }
@@ -170,7 +170,7 @@ testeri(){
    counterPlus(workout:any){
     if(!this.startedTotalTimer){
       const currentDate = new Date();
-      sessionStorage.setItem('myDate2', JSON.stringify(currentDate));
+      localStorage.setItem('myDate2', JSON.stringify(currentDate));
       this.startedTotalTimer = true
     }
     if(workout.setsDone !== undefined){

@@ -7,7 +7,6 @@ import { guide } from './workouts';
 import { info } from './info/exercises';
 
 import { AngularFirestore,AngularFirestoreDocument,AngularFirestoreCollection } from '@angular/fire/compat/firestore';
-/* import { doc, getDoc } from "firebase/firestore";*/
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
 
@@ -16,6 +15,8 @@ import 'firebase/firestore';
   providedIn: 'root'
 })
 export class GymService {
+
+  private cachedWorkouts: any[] = [];
   constructor(private afs: AngularFirestore){}
 
   addWorkout(workout:any){ 
@@ -53,7 +54,7 @@ return workouts;
 }
 
 //all workouts
-    getWorkouts(): Observable<any[]>{
+/*     getWorkouts(): Observable<any[]>{
       let data : any = [];
       const collection = this.afs.collection<any[]>('workouts');
       collection.get().subscribe(snapshot => {
@@ -64,7 +65,30 @@ return workouts;
       });
       const workouts = of(data)
     return workouts;
+    } */
+
+    //cachedVersion
+    getWorkouts(): Observable<any[]> {
+      if (this.cachedWorkouts.length > 0) {
+        return of(this.cachedWorkouts);
+      } else {
+        const collection = this.afs.collection<any[]>('workouts');
+        return collection.get().pipe(
+          map(snapshot => {
+            const data : any[] = [];
+            snapshot.forEach((doc: any) => {
+              data.push(doc.data());
+            });
+            data.sort((a: any, b: any) => a.sort - b.sort);
+            this.cachedWorkouts = data; // cache the data
+            return data;
+          })
+        );
+      }
     }
+
+
+
     //single
     getWorkoutFromFirestore(collectionName: string, documentId: string): Observable<any> {
       return this.afs.collection(collectionName).doc(documentId)

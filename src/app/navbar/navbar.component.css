@@ -10,6 +10,10 @@ li:hover{
     background-color: #030d20;
     border-radius: 50px;
 }
+span:hover{
+  background-color: #030d20;
+  border-radius: 50px;
+}
 .vertical{
     writing-mode: vertical-rl;
     text-orientation: mixed;
@@ -29,16 +33,18 @@ img{
     background:
     linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000) border-box;
     border: 1px solid transparent;
+    filter: drop-shadow(0px 0px 50px #b22cff);
+
 }
-.color-change-5x {
+/* .color-change-5x {
 	-webkit-animation: color-change-5x 8s linear infinite alternate both;
 	        animation: color-change-5x 8s linear infinite alternate both;
-}
+} */
 .wobble-hor-bottom {
 	-webkit-animation: wobble-hor-bottom 2s  both;
 	        animation: wobble-hor-bottom 2s  both;
 }
-@-webkit-keyframes color-change-5x {
+/* @-webkit-keyframes color-change-5x {
     0% {
         filter: drop-shadow(0px 0px 50px #19dcea);
     }
@@ -73,7 +79,7 @@ img{
     100% {
         filter: drop-shadow(0px 0px 50px #3bd80d);
     }
-  }
+  } */
   @-webkit-keyframes wobble-hor-bottom {
     0%,
     100% {

@@ -6,7 +6,7 @@
     <span class="tags" *ngFor="let tag of filter">{{tag}}</span>
   </div>
   </div>
-  <div class="flex gap-4 flex-wrap justify-center " *ngIf="arrOfany && arrOfany.length > 0;else other_content">
+  <div class="flex gap-4 flex-wrap justify-center " *ngIf="list;else other_content">
   <div
     *ngFor="let meal of arrOfany"
     class="flex flex-col mb-3 list cursor-pointer"

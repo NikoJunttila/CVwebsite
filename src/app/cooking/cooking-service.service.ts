@@ -13,6 +13,8 @@ import { doc, getDoc } from "firebase/firestore";
 export class CookingService {
   constructor(private afs: AngularFirestore){}
   private filters: any[] = [];
+  private cachedMeals: any[] = [];
+
 
   add(filter: string[]) {
     this.filters = filter;
@@ -36,7 +38,7 @@ export class CookingService {
     }) 
     }
 //all recipes
-    getRecipes(): Observable<any[]>{
+/*     getRecipes(): Observable<any[]>{
       let data : any = [];
       const collection = this.afs.collection<any[]>('recipes');
       collection.get().subscribe(snapshot => {
@@ -46,8 +48,30 @@ export class CookingService {
       });
       const mealz = of(data)
     return mealz;
+    } */
+    //cached versio
+    getRecipes(): Observable<any[]> {
+      if (this.cachedMeals.length > 0) {
+        return of(this.cachedMeals);
+      } else {
+        const collection = this.afs.collection<any[]>('recipes');
+        return collection.get().pipe(
+          map(snapshot => {
+            const data : any[] = [];
+            snapshot.forEach((doc: any) => {
+              data.push(doc.data());
+            });
+            data.sort((a: any, b: any) => b.rating - a.rating);
+            this.cachedMeals = data; // cache the data
+            return data;
+          })
+        );
+      }
     }
-    
+
+
+
+
 
   private subject = new Subject<any>();
 
