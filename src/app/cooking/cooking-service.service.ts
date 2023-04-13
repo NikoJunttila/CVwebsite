@@ -98,6 +98,12 @@ export class CookingService {
 
   //single meal recipe
   getDataFromFirestore(collectionName: string, documentId: string): Observable<any> {
+    //cached
+    if(this.cachedMeals.length > 0){
+      const foundObject = this.cachedMeals.find((obj) => obj.id == documentId);
+      return of(foundObject)
+    } else {
+      //if loading directly on recipe
     return this.afs.collection(collectionName).doc(documentId)
       .snapshotChanges()
       .pipe(
@@ -110,4 +116,6 @@ export class CookingService {
         })
       );
   }
+}
+
 }
