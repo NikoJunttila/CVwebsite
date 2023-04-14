@@ -3,7 +3,7 @@ import { Observable, of, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { cooking } from './interfaces';
 import { AngularFirestore,AngularFirestoreDocument,AngularFirestoreCollection } from '@angular/fire/compat/firestore';
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, Timestamp } from "firebase/firestore";
 
 
 
@@ -28,6 +28,7 @@ export class CookingService {
   }
 
   addRecipe(meal:any){
+    this.afs.collection("lastUpdate").doc("dates").set({date: new Date()})
     this.afs.doc("/recipes/"+ meal.id).set(meal)
     .then(() => {
         alert(`added ${meal.name}`)
@@ -50,9 +51,37 @@ export class CookingService {
     return mealz;
     } */
     //cached versio
-    getRecipes(): Observable<any[]> {
-      if (this.cachedMeals.length > 0) {
-        return of(this.cachedMeals);
+   getRecipes(): Observable<any[]> {
+      const cacheKey = 'cachedMeals';
+      let cachedData = JSON.parse(localStorage.getItem(cacheKey) || "[]") ;
+      if (cachedData.length > 0) {
+      //date from firestore
+      const date =  this.afs.collection("lastUpdate").doc("dates")
+        .get()
+        .pipe(
+          map(doc => {
+            const dateData = doc.data() as { date: Timestamp };
+            return dateData.date
+          })
+        );
+        //last cache update time
+        const cacheSaveDate = JSON.parse(localStorage.getItem('cacheSaveDate') || '[]');
+
+        const dateSub : any = date.subscribe(dateValue => {
+        const jsDate = new Date(cacheSaveDate)
+        const firestoreDate = new Date(dateValue.seconds * 1000 + dateValue.nanoseconds / 1000000)
+        if (jsDate.getTime() < firestoreDate.getTime()) {
+          cachedData = this.updateCacheData().subscribe(data => {
+            //remove maybe soon idk legit tbh
+          localStorage.setItem("cacheSaveDate",JSON.stringify(new Date()))
+          localStorage.setItem(cacheKey, JSON.stringify(data));
+         })
+        } else {
+          this.cachedMeals = cachedData
+         dateSub.unsubscribe()
+        }
+        });
+        return of(cachedData);
       } else {
         const collection = this.afs.collection<any[]>('recipes');
         return collection.get().pipe(
@@ -63,13 +92,30 @@ export class CookingService {
             });
             data.sort((a: any, b: any) => b.rating - a.rating);
             this.cachedMeals = data; // cache the data
+            localStorage.setItem("cacheSaveDate",JSON.stringify(new Date()))
+            localStorage.setItem(cacheKey, JSON.stringify(data));
             return data;
           })
         );
       }
     }
 
-
+ updateCacheData(){
+  const collection = this.afs.collection<any[]>('recipes');
+  return collection.get().pipe(
+    map(snapshot => {
+      const data : any[] = [];
+      snapshot.forEach((doc: any) => {
+        data.push(doc.data());
+      });
+      data.sort((a: any, b: any) => b.rating - a.rating);
+      this.cachedMeals = data; // cache the data
+      localStorage.setItem("cacheSaveDate",JSON.stringify(new Date()))
+      localStorage.setItem("cachedMeals", JSON.stringify(data));
+      return data;
+    })
+  );
+ }
 
 
 

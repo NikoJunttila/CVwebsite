@@ -9,6 +9,8 @@ import { info } from './info/exercises';
 import { AngularFirestore,AngularFirestoreDocument,AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
+import { Timestamp } from "firebase/firestore";
+
 
 
 @Injectable({
@@ -19,7 +21,8 @@ export class GymService {
   private cachedWorkouts: any[] = [];
   constructor(private afs: AngularFirestore){}
 
-  addWorkout(workout:any){ 
+  addWorkout(workout:any){
+    this.afs.collection("lastUpdate").doc("dates").set({date: new Date()}) 
     this.afs.doc("/workouts/"+ workout.id).set(workout)
     .then(() => {
         alert(`added ${workout.name}`)
@@ -69,8 +72,33 @@ return workouts;
 
     //cachedVersion
     getWorkouts(): Observable<any[]> {
-      if (this.cachedWorkouts.length > 0) {
-        return of(this.cachedWorkouts);
+      let cachedData = JSON.parse(localStorage.getItem("cacheWorkouts") || "[]") ;
+      if (cachedData.length > 0) {
+        const date =  this.afs.collection("lastUpdate").doc("dates")
+        .get()
+        .pipe(
+          map(doc => {
+            const dateData = doc.data() as { date: Timestamp };
+            return dateData.date
+          })
+        );
+        //last cache update time
+        const cacheSaveDate = JSON.parse(localStorage.getItem('cacheSaveDate') || '[]');
+
+        const dateSub : any = date.subscribe(dateValue => {
+        const jsDate = new Date(cacheSaveDate)
+        const firestoreDate = new Date(dateValue.seconds * 1000 + dateValue.nanoseconds / 1000000)
+        if (jsDate.getTime() < firestoreDate.getTime()) {
+          cachedData = this.updateCacheData().subscribe(data => {
+                        //remove maybe soon idk legit tbh
+          localStorage.setItem("cacheSaveDate",JSON.stringify(new Date()))
+          localStorage.setItem("cacheWorkouts", JSON.stringify(data));
+         })
+        } else {
+         dateSub.unsubscribe()
+        }
+        });
+        return of(cachedData);
       } else {
         const collection = this.afs.collection<any[]>('workouts');
         return collection.get().pipe(
@@ -81,12 +109,28 @@ return workouts;
             });
             data.sort((a: any, b: any) => a.sort - b.sort);
             this.cachedWorkouts = data; // cache the data
+            localStorage.setItem("cacheSaveDate",JSON.stringify(new Date()))
+            localStorage.setItem("cacheWorkouts", JSON.stringify(data));
             return data;
           })
         );
       }
     }
-
+    updateCacheData(){
+      const collection = this.afs.collection<any[]>('workouts');
+      return collection.get().pipe(
+        map(snapshot => {
+          const data : any[] = [];
+          snapshot.forEach((doc: any) => {
+            data.push(doc.data());
+          });
+          data.sort((a: any, b: any) => a.sort - b.sort);
+          localStorage.setItem("cacheSaveDate",JSON.stringify(new Date()))
+          localStorage.setItem("cacheWorkouts", JSON.stringify(data));
+          return data;
+        })
+      );
+     }
 
 
     //single
