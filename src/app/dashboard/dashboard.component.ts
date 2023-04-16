@@ -66,10 +66,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.aproxTimeAtGym()
 
   }
-  test2(){
-    console.log(this.newArr)
-    this.aproxTimeAtGym()
-  }
+resetArr(){
+  this.newArr = this.done;
+}
 
   goBack(){
     this.location.back()
@@ -139,10 +138,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
 
 sortLatestFirst(){
-  this.done.sort((a:any, b:any) => b.date - a.date) 
+  this.newArr.sort((a:any, b:any) => b.date - a.date) 
 }
 sortOldestFirst(){
-  this.done.sort((a:any, b:any) => a.date - b.date)
+  this.newArr.sort((a:any, b:any) => a.date - b.date)
 }
 aproxTimeAtGym(){
   let total : number = 0

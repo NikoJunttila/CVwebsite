@@ -53,7 +53,11 @@
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-date-range-picker #picker></mat-date-range-picker>
       </mat-form-field><br>
+      <div class="flex justify-center gap-3">
       <button class="py-2 border-2 border-solid border-cyan-400 w-5/6 max-w-[200px] rounded bg-[#093644]" (click)="searchItems()"><span>filter</span></button>
+      <button class="material-icons py-2 border-2 border-solid border-cyan-400 w-[60px] rounded bg-[#093644]" (click)="resetArr()">restart_alt</button>
+    </div>
+
 </div>
 
 <div class="flex justify-center">
@@ -104,6 +108,5 @@
     <button routerLink="/settings/recipe">add recipes</button>
     <button  routerLink="/settings">idk yet</button>
     <button (click)="searchItems()">test</button>
-    <button (click)="test2()">test2</button>
 </div>  
 </section>
