@@ -12,6 +12,8 @@ import { tap } from 'rxjs/operators';
 
 
 
+
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -41,6 +43,34 @@ export class DashboardComponent implements OnInit, OnDestroy {
   imgURL : string = ""
   profImages : any[] = []
   prevIndex : number = -1
+
+  fromDate : Date | undefined
+  toDate : Date | undefined
+  newArr : any = [];
+
+  searchItems() {
+    if (!this.fromDate || !this.toDate) {
+      this.messageService.add("choose 2 dates","error")
+      this.newArr = this.done;
+      return this.done;
+    }
+    
+    this.newArr = this.done.filter((item : any) => {
+    const date = item.date.toMillis()
+      const from = this.fromDate?.getTime();
+      const to = this.toDate?.getTime();
+      console.log((!from || date >= from) && (!to || date <= to))
+ 
+      return (!from || date >= from) && (!to || date <= to);
+    })
+    this.aproxTimeAtGym()
+
+  }
+  test2(){
+    console.log(this.newArr)
+    this.aproxTimeAtGym()
+  }
+
   goBack(){
     this.location.back()
   }
@@ -64,27 +94,23 @@ export class DashboardComponent implements OnInit, OnDestroy {
                 this.imgURL = data.photoURL
               })
           }
-          this.gymService.getCompletedWorkouts(this.emailLower).pipe(
+    this.gymService.getCompletedWorkouts(this.emailLower).pipe(
             tap(donez => {
               this.done = donez;
+              this.newArr = donez;
             })
           ).subscribe(() => {
-
-            this.runAfterDoneSet();
+            setTimeout(() => {
+              this.aproxTimeAtGym();
+            }, 1000);
           });
-
         });
 
-        this.getProfImgs().subscribe(imgs => {
+    this.getProfImgs().subscribe(imgs => {
           this.profImages = imgs
         })
   }
   
-  runAfterDoneSet() {
-setTimeout(() => {
-  this.aproxTimeAtGym();
-}, 1000);
-  }
 
   updateProfileImage(newImage: string) {
   
@@ -119,13 +145,13 @@ sortOldestFirst(){
   this.done.sort((a:any, b:any) => a.date - b.date)
 }
 aproxTimeAtGym(){
- let total : number = 0
-  this.done.forEach((element:any) => {
+  let total : number = 0
+  this.newArr.forEach((element:any) => {
    total +=  element.aproxTime
   }); 
-  this.avg = Math.floor(total/this.done.length) 
   const hours = Math.floor(total / 60) 
   const minutes = total % 60
+  this.avg = Math.floor(total/this.newArr.length) 
   this.timeSpentHours = hours
   this.timeSpentMinutes = minutes
 }

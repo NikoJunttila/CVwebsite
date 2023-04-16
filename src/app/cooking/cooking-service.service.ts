@@ -72,9 +72,7 @@ export class CookingService {
         const firestoreDate = new Date(dateValue.seconds * 1000 + dateValue.nanoseconds / 1000000)
         if (jsDate.getTime() < firestoreDate.getTime()) {
           cachedData = this.updateCacheData().subscribe(data => {
-            //remove maybe soon idk legit tbh
-          localStorage.setItem("cacheSaveDate",JSON.stringify(new Date()))
-          localStorage.setItem(cacheKey, JSON.stringify(data));
+
          })
         } else {
           this.cachedMeals = cachedData

@@ -42,7 +42,20 @@
     <h3 *ngIf="done.length === 0">you haven't saved any workouts yet.<br />once you do they will show here</h3>
  <span>total time spent aprox:<br />{{timeSpentHours}} hours {{ timeSpentMinutes }} minutes </span>
  <p>Avg time: {{avg}} minutes</p>
+ <p>workouts done: {{newArr.length}}</p>
+ 
+      <mat-form-field appearance="fill">
+        <mat-label>Enter a date range</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+          <input  class="text-black" [(ngModel)]="fromDate" matStartDate placeholder="Start date">
+          <input class="text-black" [(ngModel)]="toDate" matEndDate placeholder="End date">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field><br>
+      <button class="py-2 border-2 border-solid border-cyan-400 w-5/6 max-w-[200px] rounded bg-[#093644]" (click)="searchItems()"><span>filter</span></button>
 </div>
+
 <div class="flex justify-center">
 <div class="holder ml-1">
   <div class="flex items-center">
@@ -58,7 +71,7 @@
       <div class="content">
         <li
           class="list-none cursor-pointer"
-          *ngFor="let workout of done; index as i"
+          *ngFor="let workout of newArr; index as i"
         >
           <span (click)="showFull(i)">
             <div class="flex h-full hover:bg-[#2c765255] borderStuff">
@@ -90,6 +103,7 @@
   <div class="flex gap-6 mt-5" *ngIf='(user | async)?.accountType == "admin"'>
     <button routerLink="/settings/recipe">add recipes</button>
     <button  routerLink="/settings">idk yet</button>
-    <button (click)="runAfterDoneSet()">test</button>
+    <button (click)="searchItems()">test</button>
+    <button (click)="test2()">test2</button>
 </div>  
 </section>

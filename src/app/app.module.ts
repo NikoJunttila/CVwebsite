@@ -31,6 +31,11 @@ import {MatCardModule} from "@angular/material/card";
 import {MatInputModule} from "@angular/material/input";
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+
+
+
 import { MessageComponentComponent } from './message-component/message-component.component';
 
 
@@ -59,12 +64,15 @@ import { MessageComponentComponent } from './message-component/message-component
     MatButtonModule,
     MatCardModule,
     MatMenuModule,
+    MatDatepickerModule,
     MatProgressSpinnerModule,
     MatInputModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireDatabaseModule,
     AngularFireStorageModule,
+    MatNativeDateModule,
+
 
 
   ],
