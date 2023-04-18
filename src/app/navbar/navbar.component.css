@@ -8,8 +8,7 @@ li{
 }
 li:hover{
     background-color: #030d20;
-    border-radius: 50px;
-}
+} 
 span:hover{
   background-color: #030d20;
   border-radius: 50px;
