@@ -79,7 +79,7 @@
         >
           <span (click)="showFull(i)">
             <div class="flex h-full hover:bg-[#2c765255] borderStuff">
-              <span class="bg-blue-900 w-[3ch] min-w-[3ch] text-center"
+              <span class="bg-blue-900 w-[3ch] min-w-[3ch] grid place-items-center"
                 >{{ i + 1 }}.</span
               >
                <span class="ml-1"> {{ workout.day }} {{ workout.date.toDate() | date:'d/M/yy'  }}<span *ngIf="workout.notes">**</span></span>
