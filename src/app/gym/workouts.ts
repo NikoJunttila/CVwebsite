@@ -40,6 +40,7 @@ export interface EXERCISES {
 export interface quote {
     text? : string;
     author?: string;
+    image?: string;
 }
 export interface guide {
     name: string;

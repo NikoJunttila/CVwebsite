@@ -13,17 +13,17 @@ p{
 }
 .img{
     flex-basis: 100%;
+ background-size: cover;
+ background-repeat: no-repeat;
+ background-position: center center;
+}
+.fadedBlack{
     background:
     /* top, transparent black, faked with gradient */ 
     linear-gradient(
       rgba(0, 0, 0, 0.7), 
       rgba(0, 0, 0, 0.7)
-    ),
-    /* bottom, image */
-    url("https://p4.wallpaperbetter.com/wallpaper/521/478/475/bodybuilding-computer-backgrounds-wallpaper-preview.jpg");
- background-size: cover;
- background-repeat: no-repeat;
- background-position: center center;
+    )
 }
 @media(max-width:600px){ 
 q{
