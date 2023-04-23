@@ -1,7 +1,6 @@
 .wrapper{
     min-height: 100vh;
-    --tw-bg-opacity: 1;
-    background-color: rgb(51 65 85 / var(--tw-bg-opacity));
-    color:antiquewhite;
+    background-color: #E5D9B6;
+    color:black;
     padding-top: 64px;
 }

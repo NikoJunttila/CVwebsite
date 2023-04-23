@@ -5,7 +5,7 @@ export const quotes : quote[] = [
     {text:"Push harder than yesterday if you want a different tomorrow.",author:"Russell Simmons",image:"https://firebasestorage.googleapis.com/v0/b/portfolio-5756d.appspot.com/o/quoteImgs%2F3.jpg?alt=media&token=e8d56f52-fada-4257-8cce-8c76b7c31622"},
     {text:"Motivation is what gets you started. Habit is what keeps you going.",author:"Jim Ryun",image:"https://firebasestorage.googleapis.com/v0/b/portfolio-5756d.appspot.com/o/quoteImgs%2F4.jpg?alt=media&token=338c004c-3bca-4190-b0e4-fc95f23c6f4b"},
     {text:"When you hit failure, your workout has just begun.",author:"Ronnie Coleman",image:"https://firebasestorage.googleapis.com/v0/b/portfolio-5756d.appspot.com/o/quoteImgs%2F5.webp?alt=media&token=a39595fd-02e2-465a-af0c-27a61f9fdf89"},
-    {text:"The secret of getting ahead is getting started.",author:"Mark Twain",image:"https://firebasestorage.googleapis.com/v0/b/portfolio-5756d.appspot.com/o/quoteImgs%2F6.jpg?alt=media&token=010fa5b2-8b38-4bb3-a338-49d0d564dc16"},
+    {text:"The secret of getting ahead is getting started.",author:"Mark Twain",image:"https://firebasestorage.googleapis.com/v0/b/portfolio-5756d.appspot.com/o/quoteImgs%2F8.jpg?alt=media&token=5c886d3d-3a8c-4f2b-9ec1-ea9eba1a1305"},
     {text:"You can either suffer the pain of discipline or the pain of regret.",author:"Jim Rohn",image:"https://firebasestorage.googleapis.com/v0/b/portfolio-5756d.appspot.com/o/quoteImgs%2F7.jpg?alt=media&token=a95a5772-81ee-4baa-b20c-b3f08e8cc35c"},
     {text:"When it comes to eating right and exercising, there is no 'I'll start tomorrow'.",author:"VL Allineare",image:"https://firebasestorage.googleapis.com/v0/b/portfolio-5756d.appspot.com/o/quoteImgs%2F8.jpg?alt=media&token=5c886d3d-3a8c-4f2b-9ec1-ea9eba1a1305"},
     {text:"It always seems impossible until it is done",author:"Nelson Mandela",image:"https://firebasestorage.googleapis.com/v0/b/portfolio-5756d.appspot.com/o/quoteImgs%2F9.jpg?alt=media&token=053c0712-5eba-4582-b765-33fbcde4b844"},
@@ -26,8 +26,8 @@ export const quotes : quote[] = [
     {text:"There's only one certainty in life. A strong man stands above and conquers all!",author:"Vegeta",image:"https://firebasestorage.googleapis.com/v0/b/portfolio-5756d.appspot.com/o/quoteImgs%2F24.jpg?alt=media&token=404f8228-9472-4f38-bb08-406f6f03d64d"},
     {text:"The true power of us human beings is that we can change ourselves on our own",author:"Saitama",image:"https://firebasestorage.googleapis.com/v0/b/portfolio-5756d.appspot.com/o/quoteImgs%2F25.webp?alt=media&token=28755b99-b10c-4885-a4b8-29fa49b94bc7"},
     {text:"A dropout will beat a genius through hard work.",author:"Rock Lee",image:"https://firebasestorage.googleapis.com/v0/b/portfolio-5756d.appspot.com/o/quoteImgs%2F26.jpg?alt=media&token=6366ba78-5e28-4d5a-aa58-3bc0c58df4f9"},
-    {text:"My motto is to be stronger than yesterday, if I have to I'll be stronger than half a day ago, even a minute ago!",author:"Rock Lee",image:"https://firebasestorage.googleapis.com/v0/b/portfolio-5756d.appspot.com/o/quoteImgs%2F27.jpg?alt=media&token=a3f51a34-6a99-4b9c-a9f5-a64ab8905fd0"},
-    {text:"In society, those who don't have many abilities, tend to complain more.",author:"Kakashi Hatake",image:"https://firebasestorage.googleapis.com/v0/b/portfolio-5756d.appspot.com/o/quoteImgs%2F28.jpg?alt=media&token=d255781c-482e-42f8-b900-9638befc6d80"},
+    {text:"My motto is to be stronger than yesterday, if I have to I'll be stronger than half a day ago, even a minute ago!",author:"Rock Lee",image:"https://firebasestorage.googleapis.com/v0/b/portfolio-5756d.appspot.com/o/quoteImgs%2F26.jpg?alt=media&token=6366ba78-5e28-4d5a-aa58-3bc0c58df4f9"},
+    {text:"In society, those who don't have many abilities, tend to complain more.",author:"Kakashi Hatake",image:"https://firebasestorage.googleapis.com/v0/b/portfolio-5756d.appspot.com/o/quoteImgs%2Fkakashi.jpg?alt=media&token=abb05230-52a1-45ff-a782-b9748986d77a"},
     
 ]
 

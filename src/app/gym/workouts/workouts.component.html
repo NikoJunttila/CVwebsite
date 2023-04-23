@@ -7,7 +7,7 @@
             <p class="text">{{plan.description}}</p>
             <button type="button" routerLink="personal/{{plan.id}}" class="glow-on-hover mt-auto mb-2">Show more</button>
         </div>     
-   <div *ngFor="let plan of plans" class="grid-ish bg-slate-600">
+   <div *ngFor="let plan of plans" class="grid-ish">
         <h2 class="">{{plan.name}}</h2>
         <p class="text-sm">{{plan.days}} days/week</p>
         <p class="text">{{plan.description}}</p>

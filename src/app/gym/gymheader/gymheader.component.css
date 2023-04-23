@@ -1,6 +1,10 @@
 .header{
 min-height: 50vh;
 } 
+
+.customOutline{
+    outline: 2px solid #E86A33;
+}
 .text{
     flex-basis: 100%;
     margin-top: auto;
@@ -11,12 +15,6 @@ font-size: 1rem;
 p{
     margin-right: 5px;
 }
-.img{
-    flex-basis: 100%;
- background-size: cover;
- background-repeat: no-repeat;
- background-position: center center;
-}
 .fadedBlack{
     background:
     /* top, transparent black, faked with gradient */ 
@@ -25,12 +23,15 @@ p{
       rgba(0, 0, 0, 0.7)
     )
 }
+q{
+    font-size: 1.3rem;
+}
 @media(max-width:600px){ 
 q{
-    font-size: 1.2rem;
+    font-size: 0.9rem;
     line-height: 1.5rem;
 }
-span{
-    font-size: 1.2rem;
+p{
+    font-size: 1rem;
 }
 }

@@ -1,3 +1,9 @@
+p{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+h2{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
 .gridder{
 display: grid;
 grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -21,9 +27,12 @@ text-align: center;
   border-radius: 15px;
   min-height: 250px;
   overflow: hidden;
+  outline: 2px solid #E86A33;
+  background-color: #A4BE7B;
+  
 }
 .grid-ish:hover{
-  background: rgb(7, 15, 56);
+  background: #285430;
  
 }
 @media (max-width: 1000px){
@@ -49,7 +58,7 @@ text-align: center;
   border: none;
   outline: none;
   color: #fff;
-  background: #111;
+  background-color: #A4BE7B;
   cursor: pointer;
   position: relative;
   z-index: 0;
@@ -94,7 +103,7 @@ text-align: center;
   position: absolute;
   width: 100%;
   height: 100%;
-  background: #111;
+  background-color: #E86A33;
   left: 0;
   top: 0;
   border-radius: 10px;

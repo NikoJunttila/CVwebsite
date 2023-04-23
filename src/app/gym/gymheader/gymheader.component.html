@@ -13,10 +13,14 @@
         </div>
       </div>
     </div>
-    <div style="background-image: url({{quote?.image}});" class="img flex justify-center items-center">
-        <div class="text-2xl ml-2 mr-2 text-white fadedBlack">
+    <div class="relative flex justify-center items-center">
+       <img class="min-h-full customOutline max-h-[85vh]" src="{{quote?.image}}" alt="quote" >
+      
+      <div class=" max-h-[50%] max-w-[80%] text-white absolute left-0 top-0 right-0 bottom-0 m-auto ">
+        <div class="fadedBlack">
             <q>{{quote?.text}}</q>
 <p class="font-bold">-{{quote?.author}}</p>
+</div>
         </div>
     </div>
 </section>
