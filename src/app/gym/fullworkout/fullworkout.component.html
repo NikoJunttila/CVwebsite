@@ -1,16 +1,16 @@
-<section class="coolerthanme text-white flex flex-col items-center pb-2">
-    <div class="mt-16 text-center size">
+<main class="coolerthanme text-white flex flex-col items-center pb-2">
+    <section class="mt-16 text-center size">
 <h1 class="text-5xl mt-2 mb-3"> {{workout?.name}}</h1>
 <h3>{{workout?.description}}</h3>
 <button class="mt-2 mb-1 mybtn material-icons-outlined" (click)="goBack()">arrow_back</button>
 <h5 class="mt-5">click to start a workout</h5>
 <ul  *ngFor="let plan of workout?.plans;index as j ">
-    <div routerLink="WeGoJim" (click)="setWorkout(plan)"  class="card">
+    <div routerLink="WeGoJim" (click)="setWorkout(plan)"  class="card bg-[#A4BE7B]">
     <h3 class="text-lg">day {{j+1}}: {{plan.day}}</h3>
     <li *ngFor="let exercise of plan.exercises; let i = index">
         {{i + 1}}. {{exercise.exercise}}
     </li>
 </div>
 </ul>
-</div>
 </section>
+</main>

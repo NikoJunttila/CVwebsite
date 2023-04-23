@@ -28,7 +28,7 @@ ngOnInit(): void {
 setWorkout(workoutNew:any){
 localStorage.setItem('workout2', JSON.stringify(workoutNew));
 localStorage.setItem('initWorkout2', JSON.stringify(workoutNew));
-sessionStorage.removeItem("myDate2")
+localStorage.removeItem("myDate2")
 }
 goBack(): void {
   this.location.back();

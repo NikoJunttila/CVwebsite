@@ -1,25 +1,25 @@
 .coolerthanme{
     min-height: 100vh;
-    --tw-bg-opacity: 1;
-    background-color: rgb(51 65 85 / var(--tw-bg-opacity));
-    color:antiquewhite;
+    background-color: #E5D9B6;
+    color:black;
 }
 .size{
     max-width: 95%;
 }
+div{
+    outline: 2px solid #E86A33;
+    color:black;
+}
+div:hover{
+    background: #77924c;
+}
 ul{
-    border: 2px solid rgb(0, 0, 0);
     margin-top: 10px;
-    background-color: rgb(0, 0, 37);
     cursor: pointer;
-    color: antiquewhite;
     border-radius: 5px;
 }
-ul:hover{
-    background-color: rgb(0, 0, 0);
-}
 .mybtn{
-    background: #111;
+    background: #E86A33;
     border-radius: 5px;
     padding: 7px 20px;
 }
