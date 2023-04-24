@@ -9,11 +9,12 @@
     .timercontainer{
         width: 90%; 
         max-width: 500px;
-        border: 2px solid rgb(72, 71, 71);
+        border: 2px solid #E86A33;
         display: flex;
         flex-direction: column;
         align-items: center;
         position: relative;
+        background-color: #A4BE7B;
     }
     .timer{
         display: flex;
@@ -33,14 +34,14 @@
     }
     .almostDone{
         background-color: #E86A33;
-        color: black;
+        border: 2px solid #A4BE7B !important;
     }
     .workoutcontainer{
         margin-top: 70px;
     }
     
     .workout{
-        border: 1px solid rgb(72, 71, 71);
+        border: 1px solid #E86A33;
         padding: 5px 5px;
         display: flex;
         align-items: center;
@@ -62,7 +63,8 @@
         justify-content: flex-start;
     }
     input{
-        background-color: #29323c;
+        background-color: #A4BE7B;
+        color: black;
     }
     input[type=text]{
         max-width: 5ch;
@@ -111,7 +113,8 @@
     }
     textarea{
         max-width: 90vw;
-        background-color: #29323c;
+        background-color: #A4BE7B;
+        color: black;
     }
     .color-7 {
         background: rgb(4,6,43);
