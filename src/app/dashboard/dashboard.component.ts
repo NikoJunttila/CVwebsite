@@ -58,8 +58,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.newArr = this.done.filter((item : any) => {
     const date = item.date.toMillis()
       const from = this.fromDate?.getTime();
-      const to = this.toDate?.getTime();
-      console.log((!from || date >= from) && (!to || date <= to))
+      let to  = this.toDate?.getTime();
+      if(to){
+        to += 86400001
+      }
  
       return (!from || date >= from) && (!to || date <= to);
     })
