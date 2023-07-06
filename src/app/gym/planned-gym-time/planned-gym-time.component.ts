@@ -55,10 +55,10 @@ testeri(){
   const diffInMs = Math.abs(startedTime - date)
   const diffInMinutes = Math.floor(diffInMs / 60000)
     if(20 <= diffInMinutes && diffInMinutes < 240){
-      this.workoutz!.aproxTime = diffInMinutes + 10
+      this.workoutz!.aproxTime = diffInMinutes
     }
      this.gymService.addCompletedWorkout(this.userLower,this.workoutz)
-     this.messageService.add("saved workout","success")
+     this.messageService.add(`trained ${diffInMinutes} min 💪`,"success")
     this.reset()
     this.showTextArea = false
     this.showAdd = false

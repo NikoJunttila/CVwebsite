@@ -36,7 +36,7 @@ addWorkoutForNormies(workout:any,emailLower:string){
   this.afs.collection('users').doc(emailLower).collection('addedWorkouts').doc(`${workout.id}`).set(workout);
   this.afs.doc("/workoutsPersonal/"+ workout.id).set(workout)
   .then(() => {
-      alert(`added ${workout.name}`)
+      console.log("added workout")
   })
    .catch(error => {
       console.log(error)

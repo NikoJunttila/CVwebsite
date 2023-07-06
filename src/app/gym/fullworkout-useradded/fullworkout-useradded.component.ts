@@ -4,6 +4,11 @@ import { Workouts } from '../workouts';
 import { GymService } from '../gym.service';
 import { Location } from '@angular/common';
 import { Subscription } from 'rxjs';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+import { Observable, of } from 'rxjs';
+import { MessageService } from 'src/app/services/message.service';
+
 
 @Component({
   selector: 'app-fullworkout-useradded',
@@ -11,18 +16,37 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./fullworkout-useradded.component.css']
 })
 export class FullworkoutUseraddedComponent  implements OnInit, OnDestroy {
-  constructor (private route:ActivatedRoute, private gymService : GymService,private location: Location){}
-
+  constructor (private route:ActivatedRoute, private gymService : GymService,private location: Location, private messageService:MessageService,public afAuth: AngularFireAuth, private firestore: AngularFirestore){
+    this.user = null as any;
+  }
   private subscription!: Subscription;
-  
-  workout : Workouts | undefined 
-  
+  private subscription2!: Subscription;
+  workout : Workouts | undefined
+  editMode : boolean = false
+  emailLower : string = ""
+  user: Observable<any>;   
+
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.subscription = this.gymService.getWorkoutFromFirestore('workoutsPersonal', `${id}`)
     .subscribe(data => {
       this.workout = data;
     })
+    this.subscription2 = this.afAuth.authState.subscribe(user => {
+      if (user) {
+        this.emailLower = user.email?.toLowerCase() as string;
+        this.user = this.firestore.collection('users').doc(this.emailLower).valueChanges();
+      }})
+  }
+  toggleEdit(){
+    if(this.emailLower == this.workout!.madeBy)
+    this.editMode = !this.editMode;
+    else
+    this.messageService.add("not made by you","error")
+  }
+  saveWorkout(){
+    this.gymService.addWorkoutForNormies(this.workout,this.emailLower)
+    this.messageService.add("updated workout","success")
   }
   setWorkout(workoutNew:any){
   localStorage.setItem('workout2', JSON.stringify(workoutNew));
@@ -35,6 +59,7 @@ export class FullworkoutUseraddedComponent  implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.subscription){
       this.subscription.unsubscribe()
+      this.subscription2.unsubscribe()
     }
   }
 }

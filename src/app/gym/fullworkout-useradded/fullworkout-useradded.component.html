@@ -1,16 +1,54 @@
-<section class="coolerthanme text-white flex flex-col items-center">
-    <div class="mt-16 text-center size">
-<h1 class="text-5xl mt-2 mb-3"> {{workout?.name}}</h1>
-<h3>{{workout?.description}}</h3>
-<button class="mt-2 mb-1 mybtn material-icons-outlined" (click)="goBack()">arrow_back</button>
-<h5 class="mt-5">click to start a workout</h5>
-<ul  *ngFor="let plan of workout?.plans;index as j ">
-    <div routerLink="/gym/desc/1/WeGoJim" (click)="setWorkout(plan)"  class="card">
-    <h3 class="text-lg">day {{j+1}}: {{plan.day}}</h3>
-    <li *ngFor="let exercise of plan.exercises; let i = index">
-        {{i + 1}}. {{exercise.exercise}}
-    </li>
-</div>
-</ul>
-</div>
-</section>
+<main class="coolerthanme text-white flex flex-col items-center pb-2">
+  <section class="mt-16 text-center size">
+    <h1 class="text-5xl mt-2 mb-3">{{ workout?.name }}</h1>
+    <h3>{{ workout?.description }}</h3>
+    <button class="mt-2 mb-1 mybtn material-icons-outlined" (click)="goBack()">
+      arrow_back
+    </button>
+    <h5 (click)="toggleEdit()" class="mt-5">Edit exercises <sup>only creator can do this*</sup></h5>
+    <ul *ngFor="let plan of workout?.plans; index as j">
+      <div
+        routerLink="/gym/desc/1/WeGoJim"
+        (click)="setWorkout(plan)"
+        class="card bg-[#A4BE7B] div"
+        *ngIf="!editMode; else editing"
+      >
+        <h3 class="text-lg">day {{ j + 1 }}: {{ plan.day }}</h3>
+        <li *ngFor="let exercise of plan.exercises; let i = index">
+          {{ i + 1 }}. {{ exercise.exercise }}
+        </li>
+      </div>
+      <ng-template #editing>
+        <div class="editBox">
+            <div class="flex justify-center items-center material-icons-outlined gap-4 text-4xl">
+                <button (click)="saveWorkout()">save</button>
+                <button (click)="toggleEdit()">undo</button>
+            </div>
+          <h3 class="text-lg">day {{ j + 1 }}: {{ plan.day }}</h3>
+          <li *ngFor="let exercise of plan.exercises; let i = index">
+            <textarea
+              class="min-h-full"
+              cols="14"
+              [(ngModel)]="exercise.exercise"
+            ></textarea>
+            <div class="flex flex-col items-center pb-4">
+              <span class="text-base"
+                >reps:</span> <input type="text" [(ngModel)]="exercise.reps"
+              />
+              <span class="text-base"
+                >sets:</span> <input type="number" [(ngModel)]="exercise.sets"
+              />
+              <span class="text-base"
+              >weight(kg):</span>
+              <input
+              type="number"
+              placeholder="100"
+              [(ngModel)]="exercise.weight"
+              />
+            </div>
+          </li>
+        </div>
+      </ng-template>
+    </ul>
+  </section>
+</main>

@@ -6,11 +6,11 @@
 .size{
     max-width: 95%;
 }
-div{
+.div{
     outline: 2px solid #E86A33;
     color:black;
 }
-div:hover{
+.div:hover{
     background: #77924c;
 }
 ul{

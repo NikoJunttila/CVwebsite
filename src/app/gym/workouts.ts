@@ -4,6 +4,7 @@ export interface Workouts {
     days : string;
     id : number;
     plans : singleWorkout[];
+    madeBy? : string;
 }
 export interface singleWorkout {
     notes? : string;
