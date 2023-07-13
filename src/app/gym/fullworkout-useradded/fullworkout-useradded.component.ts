@@ -26,6 +26,10 @@ export class FullworkoutUseraddedComponent  implements OnInit, OnDestroy {
   emailLower : string = ""
   user: Observable<any>;   
 
+  tester(){
+    console.log(this.workout)
+  }
+
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.subscription = this.gymService.getWorkoutFromFirestore('workoutsPersonal', `${id}`)
@@ -47,11 +51,21 @@ export class FullworkoutUseraddedComponent  implements OnInit, OnDestroy {
   saveWorkout(){
     this.gymService.addWorkoutForNormies(this.workout,this.emailLower)
     this.messageService.add("updated workout","success")
+    this.editMode = !this.editMode;
   }
-  setWorkout(workoutNew:any){
+  setWorkout(workoutNew:any,index:number){
   localStorage.setItem('workout2', JSON.stringify(workoutNew));
   localStorage.setItem('initWorkout2', JSON.stringify(workoutNew));
   sessionStorage.removeItem("myDate2")
+  localStorage.removeItem("updateThis")
+  if(this.emailLower == this.workout!.madeBy){
+    const updateWorkout = {
+      email: this.workout!.madeBy,
+      id: this.workout!.id,
+      index: index
+    }
+    localStorage.setItem('updateThis', JSON.stringify(updateWorkout));
+  }
   }
   goBack(): void {
     this.location.back();

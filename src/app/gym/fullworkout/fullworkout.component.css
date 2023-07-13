@@ -13,6 +13,12 @@
 .div:hover{
     background: #77924c;
 }
+.outliner{
+    outline: 2px solid #77924c
+}
+.outliner:hover{
+    outline: 2px solid #E86A33
+}
 ul{
     margin-top: 10px;
     cursor: pointer;

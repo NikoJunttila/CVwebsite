@@ -27,6 +27,7 @@ export class PlannedGymTimeComponent implements OnInit, OnDestroy {
   showAdd : boolean = false
   showTextArea : boolean = false
   startedTotalTimer : boolean = false
+  updater : any
 
 optionalStartTime(){
   const currentDate = new Date();
@@ -59,13 +60,34 @@ testeri(){
     }
      this.gymService.addCompletedWorkout(this.userLower,this.workoutz)
      this.messageService.add(`trained ${diffInMinutes} min 💪`,"success")
-    this.reset()
-    this.showTextArea = false
-    this.showAdd = false
-    this.startedTotalTimer = false
-    localStorage.removeItem("myDate2")
-  }
-
+     this.showTextArea = false
+     this.showAdd = false
+     this.startedTotalTimer = false
+     localStorage.removeItem("myDate2")
+     if(Object.keys(this.updater).length !== 0){
+      let updatedExercises : any = this.workoutz
+      updatedExercises.date = ""
+      updatedExercises.exercises = this.workoutz!.exercises.map((exercise : any) => ({
+         ...exercise,
+         done: false,
+         setsDone: 0
+        }));
+        this.gymService.getWorkoutFromFirestore('workoutsPersonal', `${this.updater.id}`)
+        .subscribe(data => {
+          const updatedObject = {
+            ...data,
+            plans: [
+              ...data.plans.slice(0, this.updater.index), // Copy the plans before the desired index
+              updatedExercises, // Update the plan at the desired index
+              ...data.plans.slice(this.updater.index + 1) // Copy the plans after the desired index
+            ]
+          };
+          this.gymService.addWorkoutForNormies(updatedObject,this.updater.email)
+        })
+        
+      }
+    }
+    
   loopReps(){
     let total : number = 0
     this.workoutz?.exercises?.forEach((element:any) => {
@@ -76,12 +98,12 @@ testeri(){
     }
   }
 
-
   ngOnInit(): void {
     const check = JSON.parse(localStorage.getItem('myDate2') || '{}');
     if(Object.keys(check).length !== 0){
       this.startedTotalTimer = true
     }
+    this.updater = JSON.parse(localStorage.getItem('updateThis') || '{}');
     this.workoutz = JSON.parse(localStorage.getItem('workout2') || '{}');
     this.seconds = this.seconds < 10 ? "0" + this.seconds : this.seconds
     this.playAudio = localStorage.getItem("audio") || 'play'

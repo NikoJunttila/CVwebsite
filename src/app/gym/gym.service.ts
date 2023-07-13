@@ -6,10 +6,10 @@ import { map } from 'rxjs/operators';
 import { guide } from './workouts';
 import { info } from './info/exercises';
 
-import { AngularFirestore,AngularFirestoreDocument,AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { AngularFirestore,AngularFirestoreDocument,AngularFirestoreCollection, } from '@angular/fire/compat/firestore';
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
-import { Timestamp } from "firebase/firestore";
+import { Timestamp, arrayRemove,updateDoc  } from "firebase/firestore";
 
 
 
@@ -43,6 +43,7 @@ addWorkoutForNormies(workout:any,emailLower:string){
       alert(error)
   }) 
 }
+
 
 getPersonalWorkouts(userEmail : string): Observable<any[]>{
   let data : any = [];

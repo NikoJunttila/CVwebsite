@@ -46,16 +46,17 @@ copyWorkout(){
   const randomNum : number = Math.floor(Math.random() * (99999 - 11111) + 11111 )
   this.workout.madeBy = this.emailLower
 this.workout.id = randomNum
+const custom = "(custom)"
+this.workout.name = this.workout.name.concat(" ", custom)
 this.gymService.addWorkoutForNormies(this.workout,this.emailLower)
-setTimeout(() => {
   this.router.navigate([`/gym/personal/${randomNum}`])
-}, 1000);
 } 
 
 setWorkout(workoutNew:any){
 localStorage.setItem('workout2', JSON.stringify(workoutNew));
 localStorage.setItem('initWorkout2', JSON.stringify(workoutNew));
 localStorage.removeItem("myDate2")
+localStorage.removeItem("updateThis")
 }
 goBack(): void {
   this.location.back();
