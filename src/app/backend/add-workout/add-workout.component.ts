@@ -49,6 +49,7 @@ workout = this.fb.group({
   description: [''],
   days: [''],
   id:[],
+  madeBy:"",
   plans: this.fb.array([
     this.fb.group({
       aproxTime: [60],
@@ -102,16 +103,17 @@ const planGroup = new FormGroup({
 this.plans.push(planGroup)
 }
 onSubmit() {
-  console.log(this.workout)
-  const randomNum : any = Math.floor(Math.random() * (99999 - 11111) + 11111 )
+  const randomNum : any = Math.floor(Math.random() * (9999999 - 11111) + 11111 )
 this.workout.value.id = randomNum
+this.workout.value.madeBy = this.emailLower
 this.gym.addWorkoutForNormies(this.workout.value,this.emailLower)  
 this.workout.reset()
 }
 onAdminSubmit() {
-  console.log(this.workout)
-  const randomNum : any = Math.floor(Math.random() * (99999 - 11111) + 11111 )
+  console.log(this.emailLower)
+  const randomNum : any = Math.floor(Math.random() * (9999999 - 11111) + 11111 )
 this.workout.value.id = randomNum
+this.workout.value.madeBy = this.emailLower
 this.gym.addWorkout(this.workout.value)  
 this.workout.reset()
 }
