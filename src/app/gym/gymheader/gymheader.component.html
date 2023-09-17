@@ -13,11 +13,11 @@
         </div>
       </div>
     </div>
-    <div class="relative flex justify-center items-center">
+    <div (click)="random()" class="relative flex justify-center items-center">
        <img class="min-h-full max-w-[50vw] customOutline max-h-[85vh]" src="{{quote?.image}}" alt="quote" >
       
       <div class=" max-h-[50%] max-w-[80%] text-white absolute left-0 top-0 right-0 bottom-0 m-auto ">
-        <div class="fadedBlack">
+        <div class="fadedBlack -translate-y-5">
             <q>{{quote?.text}}</q>
 <p class="font-bold">-{{quote?.author}}</p>
 </div>

@@ -11,7 +11,7 @@ export const quotes : quote[] = [
     {text:"It always seems impossible until it is done",author:"Nelson Mandela",image:"https://firebasestorage.googleapis.com/v0/b/portfolio-5756d.appspot.com/o/quoteImgs%2F9.jpg?alt=media&token=053c0712-5eba-4582-b765-33fbcde4b844"},
     {text:"Some people want it to happen, some wish it would happen, others make it happen.",author:"Michael Jordan",image:"https://firebasestorage.googleapis.com/v0/b/portfolio-5756d.appspot.com/o/quoteImgs%2F10.webp?alt=media&token=17adfa2d-d6c5-4bde-b42b-cd479b9801d9"},
     {text:"The successful warrior is the average man, with laser-like focus.",author:"Bruce Lee",image:"https://firebasestorage.googleapis.com/v0/b/portfolio-5756d.appspot.com/o/quoteImgs%2F11.jpg?alt=media&token=e6e3b662-2b95-45ee-bb63-5ef9df51e30b"},
-    {text:"No man has the right to be an amateur in the matter of physical training. It is a shame for a man to grow old without seeing the beauty and strength of which his body is capable.",author:"Socrates",image:"https://firebasestorage.googleapis.com/v0/b/portfolio-5756d.appspot.com/o/quoteImgs%2F12.jpg?alt=media&token=842f8833-cc14-454c-8b2c-06f65e742246"},
+    {text:"It is a shame for a man to grow old without seeing the beauty and strength of which his body is capable.",author:"Socrates",image:"https://firebasestorage.googleapis.com/v0/b/portfolio-5756d.appspot.com/o/quoteImgs%2F12.jpg?alt=media&token=842f8833-cc14-454c-8b2c-06f65e742246"},
     {text:"The difference between a novice and a master is that a master has failed more times than a novice had tried.",author:"Koro-Sensei",image:"https://firebasestorage.googleapis.com/v0/b/portfolio-5756d.appspot.com/o/quoteImgs%2F13.jpg?alt=media&token=44ab2ad1-ff79-406f-9cb8-bc3bbb856e58"},
     {text:"If you don't like the hand that fate's dealt you with, fight for a new one.",author:"Naruto Uzumaki",image:"https://firebasestorage.googleapis.com/v0/b/portfolio-5756d.appspot.com/o/quoteImgs%2F14.jpg?alt=media&token=3e73fa3e-9446-4b37-84ea-9bd7af29804f"},
     {text:"You've got two legs and a heartbeat. What's stopping you?”",author:"Inuyasha",image:"https://firebasestorage.googleapis.com/v0/b/portfolio-5756d.appspot.com/o/quoteImgs%2F15.webp?alt=media&token=b395cae7-2cde-4b08-b9b9-fd7bc06ceadc"},
@@ -30,4 +30,3 @@ export const quotes : quote[] = [
     {text:"In society, those who don't have many abilities, tend to complain more.",author:"Kakashi Hatake",image:"https://firebasestorage.googleapis.com/v0/b/portfolio-5756d.appspot.com/o/quoteImgs%2Fkakashi.jpg?alt=media&token=abb05230-52a1-45ff-a782-b9748986d77a"},
     
 ]
-
