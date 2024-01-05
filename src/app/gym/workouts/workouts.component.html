@@ -1,6 +1,6 @@
 <section class="pb-4">
     <div *ngIf="plans.length > 1; else other_content" class="gridder ml-2 mt-5">
-        <div *ngFor="let plan of userPlans" class="grid-ish bg-[#1A237E]">
+        <div *ngFor="let plan of userPlans" class="grid-ish madebg">
             <h3>you've added this</h3>
             <h2 class="">{{plan.name}}</h2>
             <p class="text-sm">{{plan.days}} days/week</p>

@@ -1,13 +1,14 @@
 <main class="coolerthanme text-white flex flex-col items-center pb-2">
   <section class="mt-16 text-center size">
     <div *ngIf="!editMode; else editingName">
-    <h1 (click)="tester()" class="text-5xl mt-2 mb-3">{{ workout?.name }}</h1>
+    <h1 class="text-5xl mt-2 mb-3">{{ workout?.name }}</h1>
     <h3 >{{ workout?.description }}</h3>
   </div>
   <ng-template  #editingName>
 <div class="flex flex-col">
     <input [(ngModel)]="workout!.name" contenteditable="true" class="text-5xl mt-2 mb-3 text-center" />
     <textarea [(ngModel)]="workout!.description" class="min-h-fit" rows="7">{{ workout?.description }}</textarea>
+    <button (click)="deleteWorkout()" class="btn hover:bg-black bg-gray-800 mt-1">Delete</button>
   </div>
   </ng-template>
     <button class="mt-2 mb-1 mybtn material-icons-outlined" (click)="goBack()">
@@ -59,5 +60,8 @@
         </div>
       </ng-template>
     </ul>
+    <div  (click)="copyWorkout()" *ngIf="(user | async)" class="h-[100px] bg-[#E86A33] mt-3 rounded flex justify-center items-center hover:bg-[#77924c] outliner">
+      <p> copy workout and edit it.</p>
+   </div>
   </section>
 </main>

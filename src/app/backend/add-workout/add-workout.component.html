@@ -1,4 +1,4 @@
-<section class="mt-[64px] bg-gray-800 flex flex-col justify-center items-center text-white gap-4">
+<section class="mt-[64px] pb-5 bg-gray-800 flex flex-col justify-center items-center text-white gap-4">
         <form class="flex-col flex justify-center items-center gap-4" [formGroup]="workout" (ngSubmit)="onSubmit()" >
           <div class="flex flex-col border-4 border-dotted border-slate-700">
            <label>
@@ -87,7 +87,7 @@
               </div>
             </div>
             <button type="button" class="btn-gradient-2 p-3" (click)="addPlan()">next day</button>
-            <button type="submit" [disabled]="!workout.valid" class="bigger">submit</button>
+            <button type="submit" [disabled]="!workout.valid" class="btn bigger">submit</button>
             <div class="flex gap-6 mt-5" *ngIf='(user | async)?.accountType == "admin"'>
               <button (click)="onAdminSubmit()" type="button">admin secret share all workout button</button>
             </div>

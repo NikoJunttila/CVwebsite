@@ -9,9 +9,8 @@ section{
 }
 
 .bigger{
-    padding: 10px 0;
+    padding: 10px !important;
     background-color: darkgreen;
-    margin-top: 1rem;
 }
 .bigger:disabled{
  background-color: darkred;   

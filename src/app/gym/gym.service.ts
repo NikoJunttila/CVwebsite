@@ -5,11 +5,11 @@ import { rlyDunno } from './workouts';
 import { map } from 'rxjs/operators';
 import { guide } from './workouts';
 import { info } from './info/exercises';
-
+import { Router } from '@angular/router';
 import { AngularFirestore,AngularFirestoreDocument,AngularFirestoreCollection, } from '@angular/fire/compat/firestore';
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
-import { Timestamp, arrayRemove,updateDoc  } from "firebase/firestore";
+import { Timestamp, arrayRemove,updateDoc, doc, deleteDoc  } from "firebase/firestore";
 
 
 
@@ -19,7 +19,7 @@ import { Timestamp, arrayRemove,updateDoc  } from "firebase/firestore";
 export class GymService {
 
   private cachedWorkouts: any[] = [];
-  constructor(private afs: AngularFirestore){}
+  constructor(private afs: AngularFirestore,private router: Router){}
 
   addWorkout(workout:any){
     this.afs.collection("lastUpdate").doc("dates").set({date: new Date()}) 
@@ -32,6 +32,11 @@ export class GymService {
         alert(error)
     }) 
     }
+async deleteWorkout(id:string,emailLower:string){
+  await this.afs.collection("users").doc(emailLower).collection("addedWorkouts").doc(id).delete()
+  //await this.afs.collection("workoutsPersonal").doc(id).delete()
+  this.router.navigate(["/gym"]);
+}
 addWorkoutForNormies(workout:any,emailLower:string){
   this.afs.collection('users').doc(emailLower).collection('addedWorkouts').doc(`${workout.id}`).set(workout);
   this.afs.doc("/workoutsPersonal/"+ workout.id).set(workout)
