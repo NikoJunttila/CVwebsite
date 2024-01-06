@@ -4,8 +4,6 @@ import { meals } from '../meals';
 import { CookingService } from '../cooking-service.service';
 import { Subscription } from 'rxjs';
 
-
-
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -25,7 +23,7 @@ export class ListComponent implements OnInit, OnDestroy {
   list : any[] | undefined
   filter : any = []
   arrOfany : any
-  show : boolean = true
+  show : boolean = false
   ngOnInit(): void {
       this.getList() 
      this.getFilter() 

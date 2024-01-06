@@ -14,7 +14,7 @@
     <button class="mt-2 mb-1 mybtn material-icons-outlined" (click)="goBack()">
       arrow_back
     </button>
-    <h5 (click)="toggleEdit()" class="mt-5 hover:bg-[#A4BE7B]">Edit exercises <sup>only creator can do this*</sup></h5>
+    <h5 (click)="toggleEdit()" class="my-2 hover:bg-[#A4BE7B] cursor-pointer rounded-md">Click here to edit <sup>only creator can do this*</sup></h5>
     <ul *ngFor="let plan of workout?.plans; index as j">
       <div
         routerLink="/gym/desc/1/WeGoJim"
@@ -28,39 +28,41 @@
         </li>
       </div>
       <ng-template #editing>
-        <div class="editBox border border-solid border-orange-500">
+        <div  class="editBox border border-solid border-orange-500">
             <div class="flex justify-center items-center material-icons-outlined gap-4 text-4xl">
                 <button class="hover:bg-[#A4BE7B] rounded" (click)="saveWorkout()">save</button>
                 <button class="hover:bg-[#A4BE7B] rounded" (click)="toggleEdit()">undo</button>
             </div>
           <h3 class="text-lg">day {{ j + 1 }}: {{ plan.day }}</h3>
-          <li *ngFor="let exercise of plan.exercises; let i = index">
-            <textarea
+          <div class="example-list" cdkDropList (cdkDropListDropped)="drop($event,j)">
+            <li class="borderBottom example-box" *ngFor="let exercise of plan.exercises; let i = index" cdkDrag>
+              <textarea
               class="min-h-full smallerInputs"
               cols="14"
               [(ngModel)]="exercise.exercise"
-            ></textarea>
-            <div class="flex flex-col items-center pb-4">
-              <span class="text-base"
+              ></textarea>
+              <div class="flex flex-col items-center">
+                <span class="text-base"
                 >reps:</span> <input class="smallerInputs" type="text" [(ngModel)]="exercise.reps"
-              />
-              <span class="text-base"
+                />
+                <span class="text-base"
                 >sets:</span> <input class="smallerInputs" type="number" [(ngModel)]="exercise.sets"
-              />
-              <span class="text-base"
-              >weight(kg):</span>
-              <input
-              class="smallerInputs"
-              type="number"
-              placeholder="100"
-              [(ngModel)]="exercise.weight"
-              />
-            </div>
-          </li>
-        </div>
+                />
+                <span class="text-base"
+                >weight(kg):</span>
+                <input
+                class="smallerInputs"
+                type="number"
+                placeholder="100"
+                [(ngModel)]="exercise.weight"
+                />
+              </div>
+            </li>
+          </div>
+          </div>
       </ng-template>
     </ul>
-    <div  (click)="copyWorkout()" *ngIf="(user | async)" class="h-[100px] bg-[#E86A33] mt-3 rounded flex justify-center items-center hover:bg-[#77924c] outliner">
+    <div  (click)="copyWorkout()" *ngIf="(user | async)" class="h-[100px] bg-[#E86A33] mt-3 rounded flex justify-center items-center hover:bg-[#77924c] outliner cursor-pointer">
       <p> copy workout and edit it.</p>
    </div>
   </section>

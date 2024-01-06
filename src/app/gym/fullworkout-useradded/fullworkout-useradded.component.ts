@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Workouts } from '../workouts';
+import { Workouts, singleWorkout } from '../workouts';
 import { GymService } from '../gym.service';
 import { Location } from '@angular/common';
 import { Subscription } from 'rxjs';
@@ -12,12 +12,14 @@ import {
 import { Observable, of } from 'rxjs';
 import { MessageService } from 'src/app/services/message.service';
 import { Router } from '@angular/router';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
 
 @Component({
   selector: 'app-fullworkout-useradded',
   templateUrl: './fullworkout-useradded.component.html',
   styleUrls: ['./fullworkout-useradded.component.css'],
+  
 })
 export class FullworkoutUseraddedComponent implements OnInit, OnDestroy {
   constructor(
@@ -34,10 +36,14 @@ export class FullworkoutUseraddedComponent implements OnInit, OnDestroy {
   }
   private subscription!: Subscription;
   private subscription2!: Subscription;
-  workout: any | undefined;
+  workout: Workouts | undefined;
   editMode: boolean = false;
   emailLower: string = '';
   user: Observable<any>;
+
+  drop(event: CdkDragDrop<any[]>, index : number) {
+   moveItemInArray(this.workout!.plans[index].exercises, event.previousIndex, event.currentIndex);
+  }
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
@@ -57,7 +63,7 @@ export class FullworkoutUseraddedComponent implements OnInit, OnDestroy {
     });
   }
   deleteWorkout(){
-    if (this.emailLower !== this.workout.madeBy){
+    if (this.emailLower !== this.workout!.madeBy!){
       return
     }
     if (confirm("Are you sure you want to delete this workout?") == true){
@@ -69,7 +75,7 @@ export class FullworkoutUseraddedComponent implements OnInit, OnDestroy {
     }
   }
   toggleEdit() {
-    if (this.emailLower == this.workout!.madeBy) this.editMode = !this.editMode;
+    if (this.emailLower == this.workout!.madeBy!) this.editMode = !this.editMode;
     else this.messageService.add('not made by you', 'error');
   }
   saveWorkout() {
@@ -82,7 +88,7 @@ export class FullworkoutUseraddedComponent implements OnInit, OnDestroy {
     localStorage.setItem('initWorkout2', JSON.stringify(workoutNew));
     sessionStorage.removeItem('myDate2');
     localStorage.removeItem('updateThis');
-    if (this.emailLower == this.workout!.madeBy) {
+    if (this.emailLower == this.workout!.madeBy!) {
       const updateWorkout = {
         email: this.workout!.madeBy,
         id: this.workout!.id,
@@ -98,10 +104,10 @@ export class FullworkoutUseraddedComponent implements OnInit, OnDestroy {
     const randomNum: number = Math.floor(
       Math.random() * (99999 - 11111) + 11111
     );
-    this.workout.madeBy = this.emailLower;
-    this.workout.id = randomNum;
-    const custom = '(custom)';
-    this.workout.name = this.workout.name.concat(' ', custom);
+    this.workout!.madeBy = this.emailLower;
+    this.workout!.id = randomNum;
+    const custom : string = '(custom)';
+    this.workout!.name! = this.workout!.name!.concat(' ', custom);
     this.gymService.addWorkoutForNormies(this.workout, this.emailLower);
     this.router.navigate([`/gym/personal/${randomNum}`]);
   }

@@ -38,82 +38,86 @@
         </div>
       </div>
     </div>
-    <ul
+    <div cdkDropList (cdkDropListDropped)="drop($event)">
+
+      <ul
       class="ml-3 mr-3"
       *ngFor="let workout of workoutz?.exercises; index as i"
-    >
+      cdkDrag
+      >
       <div class="relative" *ngIf="!workout.editing; else editing">
         <li
-          class="mt-2 workout"
-          *ngIf="!workout.done"
-          [@fadeOutOnLeave]
-          [class.almostDone]="
+        class="mt-2 workout"
+        *ngIf="!workout.done"
+        [@fadeOutOnLeave]
+        [class.almostDone]="
             0 < workout?.setsDone! && workout?.setsDone! < workout?.sets!
-          "
+            "
           [class.done]="workout?.sets! <= workout?.setsDone!"
-        >
+          >
           <span
-            routerLink="/gym/info/{{ workout.exercise }}"
-            class="overlinesoon cursor-pointer text-blue-700"
-            >{{ workout.exercise | uppercase }} {{ workout.sets }}x{{
-              workout.reps
-            }}
+          routerLink="/gym/info/{{ workout.exercise }}"
+          class="overlinesoon cursor-pointer text-blue-700"
+          >{{ workout.exercise | uppercase }} {{ workout.sets }}x{{
+            workout.reps
+          }}
             <span *ngIf="workout.weight">{{ workout.weight }}kg</span>
           </span>
           <span>Done: {{ workout.setsDone }}/{{ workout.sets }}</span>
           <div class="flex justify-end">
             <button
-              class="material-icons-outlined cursor-pointer mr-5"
-              (click)="counterPlus(workout)"
-              *ngIf="workout?.sets! > workout?.setsDone!"
+            class="material-icons-outlined cursor-pointer mr-5"
+            (click)="counterPlus(workout)"
+            *ngIf="workout?.sets! > workout?.setsDone!"
             >
-              add_circle
-            </button>
-            <button
-              class="material-icons-outlined cursor-pointer mr-5"
-              (click)="setDone(workout)"
-              *ngIf="workout?.sets! <= workout?.setsDone!"
-            >
-              delete
-            </button>
-            <button
-              (click)="onExerciseEdit(i)"
-              class="material-icons-outlined cursor-pointer"
-            >
-              edit
-            </button>
-          </div>
-        </li>
-      </div>
-      <ng-template #editing>
-        <div class="editBox">
-          <textarea
-            class="min-h-full"
-            cols="14"
-            [(ngModel)]="workout.exercise"
-          ></textarea>
-          <div class="grid">
-            <span class="text-base"
-              >reps: <input type="text" [(ngModel)]="workout.reps"
-            /></span>
-            <span class="text-base"
-              >sets: <input type="number" [(ngModel)]="workout.sets"
-            /></span>
-          </div>
-          <span class="text-base"
-            >weight(kg):
-            <input type="number" placeholder="100" [(ngModel)]="workout.weight"
-          /></span>
-          <button
-            (click)="onExerciseSave(i)"
-            class="mr-auto material-icons-outlined cursor-pointer"
-          >
-            save
+            add_circle
           </button>
-        </div>
-      </ng-template>
-    </ul>
-  </div>
+          <button
+          class="material-icons-outlined cursor-pointer mr-5"
+          (click)="setDone(workout)"
+          *ngIf="workout?.sets! <= workout?.setsDone!"
+          >
+          delete
+        </button>
+        <button
+        (click)="onExerciseEdit(i)"
+        class="material-icons-outlined cursor-pointer"
+        >
+        edit
+      </button>
+    </div>
+  </li>
+</div>
+<ng-template #editing>
+  <div class="editBox">
+    <textarea
+    class="min-h-full"
+    cols="14"
+    [(ngModel)]="workout.exercise"
+    ></textarea>
+    <div class="grid">
+      <span class="text-base"
+      >reps: <input type="text" [(ngModel)]="workout.reps"
+      /></span>
+      <span class="text-base"
+      >sets: <input type="number" [(ngModel)]="workout.sets"
+      /></span>
+    </div>
+    <span class="text-base"
+    >weight(kg):
+    <input type="number" placeholder="100" [(ngModel)]="workout.weight"
+    /></span>
+    <button
+    (click)="onExerciseSave(i)"
+    class="mr-auto material-icons-outlined cursor-pointer"
+    >
+    save
+  </button>
+</div>
+</ng-template>
+</ul>
+</div>
+</div>
   <div class="flex flex-col items-center mt-1 mb-1">
     <div class="flex justify-center">
       <span>add notes or extra training done today</span>

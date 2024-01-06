@@ -8,6 +8,8 @@ import { GymService } from '../gym.service';
 import { AngularFirestore,AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { MessageService } from 'src/app/services/message.service';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+
 @Component({
   selector: 'app-planned-gym-time',
   templateUrl: './planned-gym-time.component.html',
@@ -28,6 +30,10 @@ export class PlannedGymTimeComponent implements OnInit, OnDestroy {
   showTextArea : boolean = false
   startedTotalTimer : boolean = false
   updater : any
+
+  drop(event: CdkDragDrop<any[]>) {
+    moveItemInArray(this.workoutz!.exercises, event.previousIndex, event.currentIndex);
+   }
 
 optionalStartTime(){
   const currentDate = new Date();
