@@ -43,9 +43,8 @@
       <ul
       class="ml-3 mr-3"
       *ngFor="let workout of workoutz?.exercises; index as i"
-      cdkDrag
       >
-      <div class="relative" *ngIf="!workout.editing; else editing">
+      <div cdkDrag cdkDragDisabled class="relative" *ngIf="!workout.editing; else editing">
         <li
         class="mt-2 workout"
         *ngIf="!workout.done"
@@ -89,7 +88,7 @@
   </li>
 </div>
 <ng-template #editing>
-  <div class="editBox">
+  <div cdkDrag class="editBox">
     <textarea
     class="min-h-full"
     cols="14"
