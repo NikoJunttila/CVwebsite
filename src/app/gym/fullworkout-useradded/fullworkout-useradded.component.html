@@ -56,9 +56,13 @@
                 placeholder="100"
                 [(ngModel)]="exercise.weight"
                 />
+                <button  class="material-icons-outlined my-1 hover:scale-110" (click)="removeExercise(j,i)">delete</button>
               </div>
             </li>
           </div>
+          <button class="btn bg-[#e34b0a] mb-2" (click)="addWorkout(j)">
+            add exercise +
+          </button>
           </div>
       </ng-template>
     </ul>

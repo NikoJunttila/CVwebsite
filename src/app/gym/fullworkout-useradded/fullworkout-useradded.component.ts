@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Workouts, singleWorkout } from '../workouts';
+import { Workouts, dunno, singleWorkout } from '../workouts';
 import { GymService } from '../gym.service';
 import { Location } from '@angular/common';
 import { Subscription } from 'rxjs';
@@ -45,6 +45,23 @@ export class FullworkoutUseraddedComponent implements OnInit, OnDestroy {
    moveItemInArray(this.workout!.plans[index].exercises, event.previousIndex, event.currentIndex);
   }
 
+  addWorkout(index : number){
+    const newObj : dunno = {
+      sets: 3,
+      reps: "10",
+      exercise: "new",
+      setsDone: 0,
+      done: false,
+      weight: 50,
+      editing: false,
+    }
+    this.workout?.plans[index].exercises.push(newObj)
+  }
+  removeExercise(index : number, index2: number){
+    if (confirm("Are you sure you want to delete this exercise?") == true){
+    this.workout?.plans[index].exercises.splice(index2,1)
+    }
+  }
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.subscription = this.gymService
