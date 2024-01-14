@@ -117,7 +117,7 @@
 </ul>
 </div>
 </div>
-  <div class="flex flex-col items-center mt-1 mb-1">
+  <div class="flex flex-col items-center mt-1 h-fit">
     <div class="flex justify-center">
       <span>add notes or extra training done today</span>
       <button
@@ -139,6 +139,13 @@
     </textarea
     ><br />
   </div>
+  <button
+  *ngIf="userLower.length > 1 && showAdd"
+  class="color-7"
+  (click)="setAsCompleted()"
+>
+  Save workout
+</button>
   <div class="timercontainer">
     <div class="timer">
       <div class="pr-5 min-w-[150px]">
@@ -187,13 +194,6 @@
       </button>
     </div>
   </div>
-  <button
-    *ngIf="userLower.length > 1 && showAdd"
-    class="color-7"
-    (click)="setAsCompleted()"
-  >
-    Save workout
-  </button>
   <button
     class="bg-[#E86A33] rounded-xl p-4 my-2 hover:bg-[#7e3212]"
     (click)="reset()"
