@@ -55,6 +55,7 @@
 input,textarea{
     background-color: #A4BE7B;
     border-radius: 5px;
+    padding: 2px;
 }
 .smallerInputs{
     max-width: 180px;
