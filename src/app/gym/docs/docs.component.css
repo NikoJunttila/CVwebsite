@@ -1,0 +1,10 @@
+.body{
+        min-height: 100vh;
+        background-color: #E5D9B6;
+        color:black;
+        padding-top: 64px;
+}
+img{
+    max-width: 100vw;
+    border-radius: 15px;
+}

@@ -13,6 +13,7 @@ import { PlannedGymTimeComponent } from './planned-gym-time/planned-gym-time.com
 import { InfoComponent } from './info/info.component';
 import { FullworkoutUseraddedComponent } from './fullworkout-useradded/fullworkout-useradded.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { DocsComponent } from './docs/docs.component';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     PlannedGymTimeComponent,
     InfoComponent,
     FullworkoutUseraddedComponent,
+    DocsComponent,
   ],
   imports: [
     CommonModule,
