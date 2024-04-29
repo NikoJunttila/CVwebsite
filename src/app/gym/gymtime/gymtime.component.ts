@@ -8,6 +8,7 @@ import { GymService } from '../gym.service';
 import { AngularFirestore,AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { MessageService } from 'src/app/services/message.service';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 @Component({
   selector: 'app-gymtime',
   templateUrl: './gymtime.component.html',
@@ -34,7 +35,9 @@ optionalStartTime(){
   this.startedTotalTimer = true
   this.messageService.add("train hard 💪","success")
 }
-
+drop(event: CdkDragDrop<any[]>) {
+  moveItemInArray(this.workoutz!.exercises, event.previousIndex, event.currentIndex);
+ }
 testeri(){
   this.showTextArea = !this.showTextArea
 }
@@ -121,6 +124,8 @@ testeri(){
     this.workoutz = JSON.parse(localStorage.getItem('initWorkout') || '{}');
     localStorage.setItem('workout', JSON.stringify(this.workoutz));
     this.showAdd = false
+    this.startedTotalTimer = false
+    localStorage.removeItem('myDate2');
   }
  
   startTimer() {

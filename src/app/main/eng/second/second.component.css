@@ -192,7 +192,7 @@ h3{
     opacity: 1;
   }
 
-#item-2:target ~ .item-2, #item-3:target ~ .item-3, #item-4:target ~ .item-4, #item-5:target ~ .item-5 {
+#item-2:target ~ .item-2, #item-3:target ~ .item-3, #item-4:target ~ .item-4, #item-5:target ~ .item-5,  #item-6:target ~ .item-6 {
     z-index: 3;
     opacity: 1;
   }

@@ -149,6 +149,7 @@ testeri(){
     this.workoutz = JSON.parse(localStorage.getItem('initWorkout2') || '{}');
     localStorage.setItem('workout2', JSON.stringify(this.workoutz));
     this.showAdd = false
+    localStorage.removeItem("myDate2")
   }
  
   startTimer() {

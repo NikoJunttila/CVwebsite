@@ -103,7 +103,7 @@ export class FullworkoutUseraddedComponent implements OnInit, OnDestroy {
   setWorkout(workoutNew: any, index: number) {
     localStorage.setItem('workout2', JSON.stringify(workoutNew));
     localStorage.setItem('initWorkout2', JSON.stringify(workoutNew));
-    sessionStorage.removeItem('myDate2');
+    localStorage.removeItem('myDate2');
     localStorage.removeItem('updateThis');
     if (this.emailLower == this.workout!.madeBy!) {
       const updateWorkout = {

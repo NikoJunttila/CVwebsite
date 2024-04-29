@@ -72,7 +72,7 @@ export class MakerComponent implements OnInit{
     this.router.navigate(['/gym/lightweight']);
     localStorage.setItem('workout', JSON.stringify(this.fullWorkout));
     localStorage.setItem('initWorkout', JSON.stringify(this.fullWorkout));
-    sessionStorage.removeItem("myDate2")
+    localStorage.removeItem("myDate2")
   }
   }
   addNew() {
