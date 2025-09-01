@@ -18,3 +18,6 @@ export const environment = {
     measurementId: "G-XXXXXXX" // optional, only if analytics was enabled
   }
 };
+
+npm run build
+firebase deploy
